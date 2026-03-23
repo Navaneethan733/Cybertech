@@ -51,6 +51,10 @@
     .inc-title{font-family:var(--font-head);font-size:.84rem;font-weight:700;color:var(--c-text);margin-bottom:3px}
     .inc-client{font-size:.74rem;color:var(--c-text-3)}
     .inc-time{font-size:.72rem;color:var(--c-text-3);white-space:nowrap;margin-left:auto;padding-left:10px}
+    @media (max-width: 767px) {
+      .dash-topbar { padding: 16px !important; flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; height: auto !important; }
+      .dash-topbar-actions { width: 100%; justify-content: flex-start !important; flex-wrap: wrap !important; }
+    }
   </style>
 </head>
 <body>
@@ -66,42 +70,239 @@
       <div class="loader-text">INITIALIZING SECURE CONNECTION... <span class="loader-pct">0%</span></div>
     </div>
   </div>
-  <div class="body-overlay dash-overlay" id="dashOverlay"></div>
+  <div class="body-overlay"></div>
 
   
-  <aside class="dash-sidebar" id="dashSidebar">
-    <div class="dash-sidebar-logo"><a href="index.html"><img src="images/logos/logo-2.webp" alt="STACKLY"/></a></div>
-    <nav class="dash-nav">
-      <span class="dash-nav-label">Overview</span>
-      <a class="dash-nav-item" href="admin-alerts.html"><i class="fa-solid fa-bell"></i> Alerts <span class="badge-count">17</span></a>
-      <span class="dash-nav-label">Clients</span>
-      <a class="dash-nav-item" href="admin-clients.html"><i class="fa-solid fa-building"></i> All Clients</a>
-      <a class="dash-nav-item" href="admin-onboarding.html"><i class="fa-solid fa-user-plus"></i> Onboarding <span class="badge-count">3</span></a>
-      <a class="dash-nav-item" href="admin-contracts.html"><i class="fa-solid fa-file-contract"></i> Contracts</a>
-      <span class="dash-nav-label">Operations</span>
-      <a class="dash-nav-item" href="admin-team.html"><i class="fa-solid fa-users"></i> Analyst Team</a>
-      <a class="dash-nav-item" href="admin-tickets.html"><i class="fa-solid fa-ticket"></i> Tickets <span class="badge-count">8</span></a>
-      <a class="dash-nav-item" href="admin-engagements.html"><i class="fa-solid fa-calendar"></i> Engagements</a>
-      <a class="dash-nav-item" href="admin-incidents.html"><i class="fa-solid fa-fire"></i> Active Incidents <span class="badge-count">2</span></a>
-      <span class="dash-nav-label">Intelligence</span>
-      <a class="dash-nav-item" href="admin-threat-monitor.html"><i class="fa-solid fa-eye"></i> Threat Monitor</a>
-      <a class="dash-nav-item" href="admin-analytics.html"><i class="fa-solid fa-chart-line"></i> Analytics</a>
-      <a class="dash-nav-item" href="admin-report-builder.html"><i class="fa-solid fa-file-shield"></i> Report Builder</a>
-      <span class="dash-nav-label">Admin</span>
-      <a class="dash-nav-item" href="admin-revenue.html"><i class="fa-solid fa-chart-column"></i> Revenue</a>
-      <a class="dash-nav-item" href="admin-settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
-      <a class="dash-nav-item" href="admin-audit-log.html"><i class="fa-solid fa-shield-halved"></i> Audit Log</a>
-      <a class="dash-nav-item" href="index.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
-    </nav>
-    <div class="dash-sidebar-footer">
-      <img class="dash-sidebar-avatar" src="images/team/team-1-big.webp" alt="Admin"/>
-      <div><span class="dash-sidebar-user-name" id="profileNameSidebar">Eade Marren</span><span class="dash-sidebar-user-role">CEO · Super Admin</span></div>
+  <div class="tj-offcanvas-area d-none d-lg-block">
+    <div class="hamburger_bg"></div>
+    <div class="hamburger_wrapper">
+      <div class="hamburger_inner">
+        <div class="hamburger_top d-flex align-items-center justify-content-between">
+          <div class="hamburger_logo">
+            <a class="mobile_logo" href="index.html"><img src="images/logos/logo-2.webp" alt="STACKLY Logo" /></a>
+          </div>
+          <div class="hamburger_close">
+            <button class="hamburger_close_btn" aria-label="Close menu"><i class="fa-solid fa-times"></i></button>
+          </div>
+        </div>
+
+        <div class="offcanvas-text">
+          <p>Developing personalized customer journeys to increase satisfaction &amp; loyalty — recognized by industry leaders.</p>
+        </div>
+
+        <div class="hamburger-search-area">
+          <h5 class="hamburger-title">Search Now!</h5>
+          <div class="hamburger_search">
+            <form action="index.html" method="get">
+              <button type="submit"><i class="fa-solid fa-search"></i></button>
+              <input type="search" autocomplete="off" placeholder="Search here..." name="s" />
+            </form>
+          </div>
+        </div>
+
+        <div class="hamburger-infos">
+          <h5 class="hamburger-title">Contact Info</h5>
+          <div class="contact-info">
+            <div class="contact-item"><span class="subtitle">Phone</span><a class="contact-link" href="tel:9876543210">9876543210</a></div>
+            <div class="contact-item"><span class="subtitle">Email</span><a class="contact-link" href="mailto:info@stackly.com">info@stackly.com</a></div>
+            <div class="contact-item"><span class="subtitle">Location</span><span class="contact-link">Salem, Tamilnadu, India</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hamburger-socials">
+        <h5 class="hamburger-title">Follow Us</h5>
+        <div class="social-links style-3">
+          <ul>
+            <li><a href="https://www.facebook.com/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="https://x.com/" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a></li>
+            <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-  </aside>
+  </div>
 
-  <button class="dash-sidebar-toggle" id="dashToggle" aria-label="Toggle sidebar"><i class="fa-solid fa-bars"></i></button>
+  
+  <div class="hamburger-area d-lg-none">
+    <div class="hamburger_bg"></div>
+    <div class="hamburger_wrapper">
+      <div class="hamburger_inner">
+        <div class="hamburger_top d-flex align-items-center justify-content-between">
+          <div class="hamburger_logo">
+            <a class="mobile_logo" href="index.html"><img src="images/logos/logo-2.webp" alt="STACKLY Logo" /></a>
+          </div>
+          <div class="hamburger_close">
+            <button class="hamburger_close_btn" aria-label="Close menu"><i class="fa-solid fa-times"></i></button>
+          </div>
+        </div>
 
-  <div class="dash-main">
+        <nav class="hamburger_menu">
+          <ul class="mean-nav-list" style="list-style:none;padding:0;">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Login</a></li>
+          </ul>
+        </nav>
+
+        <div class="hamburger-infos">
+          <h5 class="hamburger-title">Contact Info</h5>
+          <div class="contact-info">
+            <div class="contact-item"><span class="subtitle">Phone</span><a class="contact-link" href="tel:9876543210">9876543210</a></div>
+            <div class="contact-item"><span class="subtitle">Email</span><a class="contact-link" href="mailto:info@stackly.com">info@stackly.com</a></div>
+            <div class="contact-item"><span class="subtitle">Location</span><span class="contact-link">Salem, Tamilnadu, India</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hamburger-socials">
+        <h5 class="hamburger-title">Follow Us</h5>
+        <div class="social-links style-3">
+          <ul>
+            <li><a href="https://www.facebook.com/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="https://x.com/" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a></li>
+            <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  
+  <header class="header-area header-3 section-gap-x ">
+
+    
+    <div class="header-top">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="header-top-content">
+              <p class="topbar-text">
+                <i class="fa-solid fa-shield-halved"></i>
+                Recognized for Excellence —
+                <a href="login.html">Login</a>
+              </p>
+              <div class="header-info">
+                <div class="info-item">
+                  <span><i class="fa-solid fa-location-dot"></i></span>
+                  <a href="#">Find a Location!</a>
+                </div>
+                <div class="info-item">
+                  <span><i class="fa-solid fa-phone"></i></span>
+                  <a href="tel:9876543210">9876543210</a>
+                </div>
+                <div class="info-item">
+                  <div class="social-links style-2">
+                    <ul>
+                      <li><a href="https://www.facebook.com/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>
+                      <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></li>
+                      <li><a href="https://x.com/" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a></li>
+                      <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="header-wrapper">
+
+            
+            <div class="site_logo">
+              <a class="logo" href="index.html"><img src="images/logos/logo.webp" alt="STACKLY" width="544" height="152" /></a>
+            </div>
+
+            
+            <div class="menu-area d-none d-lg-inline-flex align-items-center">
+              <nav class="mainmenu">
+                <ul>
+                  <li class="current-menu-ancestor">
+                    <a href="index.html">Home</a>
+                  </li>
+                  <li>
+                    <a href="about.html">About</a>
+                  </li>
+                  <li>
+                    <a href="services.html">Services</a>
+                  </li>
+                  <li>
+                    <a href="blog.html">Blog</a>
+                  </li>
+                  <li><a href="contact.html">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+
+            
+            <div class="header-right-item d-none d-lg-inline-flex">
+              <div class="header-button">
+                <a class="tj-primary-btn" href="login.html">
+                  <span class="btn-text"><span>Login</span></span>
+                  <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+              </div>
+            </div>
+
+            
+            <div class="menu_bar mobile_menu_bar d-lg-none" aria-label="Open mobile menu">
+              <span></span><span></span><span></span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  
+  <header class="header-area header-3 section-gap-x header-duplicate header-sticky">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="header-wrapper">
+            <div class="site_logo">
+              <a class="logo" href="index.html"><img src="images/logos/logo.webp" alt="STACKLY" width="544" height="152" /></a>
+            </div>
+            <div class="menu-area d-none d-lg-inline-flex align-items-center">
+              <nav class="mainmenu">
+                <ul>
+                  <li class="current-menu-ancestor"><a href="index.html">Home</a></li>
+                  <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class="header-right-item d-none d-lg-inline-flex">
+              <div class="header-button">
+                <a class="tj-primary-btn" href="contact.html">
+                  <span class="btn-text"><span>Let's Talk</span></span>
+                  <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+              </div>
+            </div>
+            <div class="menu_bar mobile_menu_bar d-lg-none"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="dash-main" style="margin-left: 0;">
     <header class="dash-topbar">
       <div><div class="dash-topbar-title">Admin Overview</div><div style="font-size:.75rem;color:var(--c-text-3);font-family:var(--font-head)" id="profileNameTopbar">STACKLY Command Center — Monday, March 22, 2026</div></div>
       <div class="dash-topbar-actions">
