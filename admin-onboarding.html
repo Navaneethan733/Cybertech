@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Admin Panel — STACKLY Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/pages.css"/>
+  <style>
+    body{cursor:auto}
+    .creative-cursor,.creative-cursor-ring,.creative-scroll-progress{display:none}
+    /* Admin sidebar — slightly different accent for differentiation */
+    .dash-sidebar{background:#0f2028}
+    .dash-nav-item.active{background:var(--c-accent)}
+    .dash-stat-card.revenue::before{background:#059669}
+    .dash-stat-card.clients::before{background:var(--c-accent)}
+    .dash-stat-card.incidents::before{background:#dc2626}
+    .dash-stat-card.analysts::before{background:#7c3aed}
+    .mini-chart{display:flex;align-items:flex-end;gap:4px;height:40px}
+    .mini-bar{flex:1;border-radius:2px 2px 0 0;background:var(--c-accent-bg);min-width:0;transition:background .25s}
+    .mini-bar:hover{background:var(--c-accent)}
+    .mini-bar.accent{background:var(--c-accent)}
+    .client-row{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--c-border);transition:background .22s}
+    .client-row:last-child{border-bottom:none}
+    .client-row:hover{background:var(--c-bg)}
+    .client-logo-placeholder{width:36px;height:36px;border-radius:var(--r-sm);background:var(--c-accent-bg);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:.75rem;font-weight:800;color:var(--c-accent);flex-shrink:0}
+    .analyst-item{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--c-border)}
+    .analyst-item:last-child{border-bottom:none}
+    .analyst-status{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+    .analyst-status.online{background:#059669}
+    .analyst-status.busy{background:#d97706}
+    .analyst-status.offline{background:var(--c-border-dk)}
+    .kpi-widget{background:#fff;border:1.5px solid var(--c-border);border-radius:var(--r-xl);padding:20px;display:flex;align-items:center;gap:16px;transition:border-color .3s,transform .3s var(--ease-out)}
+    .kpi-widget:hover{border-color:var(--c-accent);transform:translateX(4px)}
+    .kpi-icon{width:48px;height:48px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+    .kpi-icon.teal{background:var(--c-accent-bg);color:var(--c-accent)}
+    .kpi-icon.green{background:#d1fae5;color:#059669}
+    .kpi-icon.purple{background:#ede9fe;color:#7c3aed}
+    .kpi-icon.red{background:#fee2e2;color:#dc2626}
+    .kpi-num{font-family:var(--font-display);font-size:1.4rem;font-weight:800;color:var(--c-text);line-height:1}
+    .kpi-label{font-family:var(--font-head);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--c-text-3)}
+    .kpi-change{font-family:var(--font-head);font-size:.72rem;font-weight:700}
+    .up-green{color:#059669}.down-red{color:#dc2626}
+    .incident-row{display:flex;align-items:flex-start;gap:12px;padding:14px 20px;border-bottom:1px solid var(--c-border)}
+    .incident-row:last-child{border-bottom:none}
+    .inc-id{font-family:var(--font-head);font-size:.68rem;font-weight:700;color:var(--c-text-3);margin-bottom:3px}
+    .inc-title{font-family:var(--font-head);font-size:.84rem;font-weight:700;color:var(--c-text);margin-bottom:3px}
+    .inc-client{font-size:.74rem;color:var(--c-text-3)}
+    .inc-time{font-size:.72rem;color:var(--c-text-3);white-space:nowrap;margin-left:auto;padding-left:10px}
+  </style>
+</head>
+<body>
+  
+  
+  
+  <div id="cyber-preloader" class="cyber-preloader">
+    <div class="loader-content">
+      <div class="cyber-logo-glitch" data-text="STACKLY">STACKLY</div>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar"></div>
+      </div>
+      <div class="loader-text">INITIALIZING SECURE CONNECTION... <span class="loader-pct">0%</span></div>
+    </div>
+  </div>
+  <div class="body-overlay dash-overlay" id="dashOverlay"></div>
+
+  
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar-logo"><a href="index.html"><img src="images/logos/logo-2.webp" alt="STACKLY"/></a></div>
+    <nav class="dash-nav">
+      <span class="dash-nav-label">Overview</span>
+      <a class="dash-nav-item" href="admin-alerts.html"><i class="fa-solid fa-bell"></i> Alerts <span class="badge-count">17</span></a>
+      <span class="dash-nav-label">Clients</span>
+      <a class="dash-nav-item" href="admin-clients.html"><i class="fa-solid fa-building"></i> All Clients</a>
+      <a class="dash-nav-item active" href="admin-onboarding.html"><i class="fa-solid fa-user-plus"></i> Onboarding <span class="badge-count">3</span></a>
+      <a class="dash-nav-item" href="admin-contracts.html"><i class="fa-solid fa-file-contract"></i> Contracts</a>
+      <span class="dash-nav-label">Operations</span>
+      <a class="dash-nav-item" href="admin-team.html"><i class="fa-solid fa-users"></i> Analyst Team</a>
+      <a class="dash-nav-item" href="admin-tickets.html"><i class="fa-solid fa-ticket"></i> Tickets <span class="badge-count">8</span></a>
+      <a class="dash-nav-item" href="admin-engagements.html"><i class="fa-solid fa-calendar"></i> Engagements</a>
+      <a class="dash-nav-item" href="admin-incidents.html"><i class="fa-solid fa-fire"></i> Active Incidents <span class="badge-count">2</span></a>
+      <span class="dash-nav-label">Intelligence</span>
+      <a class="dash-nav-item" href="admin-threat-monitor.html"><i class="fa-solid fa-eye"></i> Threat Monitor</a>
+      <a class="dash-nav-item" href="admin-analytics.html"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+      <a class="dash-nav-item" href="admin-report-builder.html"><i class="fa-solid fa-file-shield"></i> Report Builder</a>
+      <span class="dash-nav-label">Admin</span>
+      <a class="dash-nav-item" href="admin-revenue.html"><i class="fa-solid fa-chart-column"></i> Revenue</a>
+      <a class="dash-nav-item" href="admin-settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+      <a class="dash-nav-item" href="admin-audit-log.html"><i class="fa-solid fa-shield-halved"></i> Audit Log</a>
+      <a class="dash-nav-item" href="index.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+    </nav>
+    <div class="dash-sidebar-footer">
+      <img class="dash-sidebar-avatar" src="images/team/team-1-big.webp" alt="Admin"/>
+      <div><span class="dash-sidebar-user-name" id="profileNameSidebar">Eade Marren</span><span class="dash-sidebar-user-role">CEO · Super Admin</span></div>
+    </div>
+  </aside>
+
+  <button class="dash-sidebar-toggle" id="dashToggle" aria-label="Toggle sidebar"><i class="fa-solid fa-bars"></i></button>
+
+  <div class="dash-main">
+    <header class="dash-topbar">
+      <div><div class="dash-topbar-title">Admin Overview</div><div style="font-size:.75rem;color:var(--c-text-3);font-family:var(--font-head)" id="profileNameTopbar">STACKLY Command Center — Monday, March 22, 2026</div></div>
+      <div class="dash-topbar-actions">
+        <a class="tj-primary-btn" href="dashboard-user.html" style="padding:8px 16px;font-size:.78rem"><span class="btn-text"><span>Client View</span></span><span class="btn-icon"><i class="fa-solid fa-eye"></i></span></a>
+        <button class="dash-icon-btn"><i class="fa-solid fa-bell"></i><div class="notif-dot"></div></button>
+        <img src="images/team/team-1-big.webp" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--c-border);cursor:pointer;object-position:top" alt="Admin"/>
+      </div>
+    </header>
+
+    <div class="dash-content" style="display:flex;align-items:center;justify-content:center;min-height:60vh;">
+      <div style="text-align:center;background:var(--c-surface);padding:40px;border-radius:var(--r-xl);border:1px solid var(--c-border);width:100%;max-width:600px;box-shadow:var(--shadow-md);">
+        <i class="fa-solid fa-person-digging" style="font-size:3rem;color:var(--c-accent);margin-bottom:20px;"></i>
+        <h2 style="font-family:var(--font-display);color:var(--c-text);margin-bottom:10px;">Client Onboarding</h2>
+        <p style="color:var(--c-text2);margin-bottom:0;">This module is currently being configured for your environment. Check back soon.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginId = localStorage.getItem('loginId');
+      if (loginId) {
+        // Simple extraction: use the part before the @ symbol if it's an email
+        const rawName = loginId.includes('@') ? loginId.split('@')[0] : loginId;
+        // Capitalize the first letter
+        const formattedName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
+        
+        const sidebarName = document.getElementById('profileNameSidebar');
+        if (sidebarName) sidebarName.textContent = formattedName;
+        
+        const topbarName = document.getElementById('profileNameTopbar');
+        if (topbarName) topbarName.innerHTML = `Welcome back, Admin ${formattedName} &mdash; STACKLY Command Center`;
+      }
+    });
+  </script>
+  <script>
+    const toggle = document.getElementById('dashToggle');
+    const sidebar = document.getElementById('dashSidebar');
+    const overlay = document.getElementById('dashOverlay');
+    if(toggle&&sidebar&&overlay){
+      toggle.addEventListener('click',()=>{sidebar.classList.toggle('open');overlay.classList.toggle('active');document.body.style.overflow=sidebar.classList.contains('open')?'hidden':'';});
+      overlay.addEventListener('click',()=>{sidebar.classList.remove('open');overlay.classList.remove('active');document.body.style.overflow='';});
+    }
+    // Progress bars animate on load
+    setTimeout(()=>{
+      document.querySelectorAll('.dash-progress-fill').forEach(bar=>{
+        const w=bar.style.width;bar.style.width='0';
+        setTimeout(()=>{bar.style.width=w;},200);
+      });
+    },300);
+    // Scroll reveal
+    const obs=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(!e.isIntersecting)return;
+        const el=e.target;
+        const delay=parseFloat(el.dataset.wowDelay||0)*1000;
+        setTimeout(()=>{el.style.animation='fadeInUp .6s cubic-bezier(0.16,1,0.3,1) both';},delay);
+        obs.unobserve(el);
+      });
+    },{threshold:.1});
+    document.querySelectorAll('.wow').forEach(el=>{el.style.opacity='0';obs.observe(el);});
+  </script>
+</body>
+</html>
