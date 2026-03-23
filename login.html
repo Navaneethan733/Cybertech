@@ -252,7 +252,7 @@
                   
                   <div id="login-tab" class="auth-form-content active">
                     <h3 class="form-heading">Welcome Back</h3>
-                    <form onsubmit="event.preventDefault(); var type = this.querySelector('select').value; var id = this.querySelector('input[type=\'text\']').value; localStorage.setItem('loginId', id); window.location.href = type === 'admin' ? '/admin-dashboard.html' : '/user-dashboard.html';">
+                    <form onsubmit="event.preventDefault(); var type = this.querySelector('select').value; var id = this.querySelector('input[type=\'text\']').value; localStorage.setItem('loginId', id); window.location.href = type === 'admin' ? 'admin-dashboard.html' : 'user-dashboard.html';">
                       <div class="form-field">
                         <label class="form-label">Account Type</label>
                         <select class="form-select-custom" required>
@@ -284,7 +284,7 @@
                   
                   <div id="signup-tab" class="auth-form-content">
                     <h3 class="form-heading">Create Account</h3>
-                    <form onsubmit="event.preventDefault(); var fname = this.querySelector('input[placeholder=\'First Name\']').value; localStorage.setItem('loginId', fname); window.location.href='/user-dashboard.html';">
+                    <form onsubmit="event.preventDefault(); var fname = this.querySelector('input[placeholder=\'First Name\']').value; localStorage.setItem('loginId', fname); window.location.href='user-dashboard.html';">
                       <div class="row g-3">
                         <div class="col-md-6 form-field">
                           <label class="form-label">First Name</label>
