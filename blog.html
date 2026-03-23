@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8"/>
+  <title>Blog — STACKLY Cyber Security</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.1.4/swiper-bundle.min.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/pages.css"/>
+  <style>
+    /* Featured post */
+    .featured-post{background:#fff;border:1.5px solid var(--c-border);border-radius:var(--r-xl);overflow:hidden;display:grid;grid-template-columns:55% 45%;transition:border-color .35s,transform .35s var(--ease-out),box-shadow .35s}
+    .featured-post:hover{border-color:var(--c-accent);transform:translateY(-4px);box-shadow:var(--shadow-md)}
+    .featured-post-img{overflow:hidden}
+    .featured-post-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease-out);min-height:320px}
+    .featured-post:hover .featured-post-img img{transform:scale(1.04)}
+    .featured-post-body{padding:36px 32px;display:flex;flex-direction:column;justify-content:center}
+    .featured-label{font-family:var(--font-head);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#fff;background:var(--c-accent);padding:4px 12px;border-radius:var(--r-pill);display:inline-flex;align-items:center;gap:5px;margin-bottom:14px;width:fit-content}
+    .featured-cat{font-family:var(--font-head);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--c-accent);background:var(--c-accent-bg);padding:3px 10px;border-radius:var(--r-pill);display:inline-block;margin-bottom:10px}
+    .featured-title{font-family:var(--font-display);font-size:1.5rem;font-weight:800;color:var(--c-text);line-height:1.25;margin-bottom:12px}
+    .featured-title a{color:inherit;transition:color .25s}.featured-title a:hover{color:var(--c-accent)}
+    .featured-meta{display:flex;align-items:center;gap:16px;font-family:var(--font-head);font-size:.75rem;font-weight:600;color:var(--c-text-3);margin-bottom:16px}
+    .featured-meta span{display:flex;align-items:center;gap:5px}
+    .featured-excerpt{font-size:.875rem;color:var(--c-text-2);line-height:1.78;margin-bottom:20px}
+    /* Sidebar */
+    .sidebar-widget{background:#fff;border:1.5px solid var(--c-border);border-radius:var(--r-xl);padding:24px;margin-bottom:20px}
+    .sidebar-widget-title{font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--c-text);margin-bottom:18px;padding-bottom:12px;border-bottom:1.5px solid var(--c-border);position:relative}
+    .sidebar-widget-title::after{content:'';position:absolute;bottom:-2px;left:0;width:28px;height:2px;background:var(--c-accent);border-radius:2px}
+    .sidebar-search{display:flex;background:var(--c-bg);border:1.5px solid var(--c-border);border-radius:var(--r-lg);overflow:hidden;transition:border-color .25s}
+    .sidebar-search:focus-within{border-color:var(--c-accent)}
+    .sidebar-search input{flex:1;background:transparent;border:none;outline:none;padding:11px 14px;font-family:var(--font-body);font-size:.86rem;color:var(--c-text)}
+    .sidebar-search button{background:var(--c-accent);border:none;padding:0 16px;color:#fff;cursor:pointer;transition:background .25s}
+    .sidebar-search button:hover{background:var(--c-accent-dk)}
+    .cat-item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:var(--r-md);font-family:var(--font-head);font-size:.84rem;font-weight:600;color:var(--c-text-2);cursor:pointer;transition:background .22s,color .22s}
+    .cat-item:hover{background:var(--c-accent-bg);color:var(--c-accent)}
+    .cat-item.active{background:var(--c-accent);color:#fff}
+    .cat-count{font-size:.7rem;font-weight:700;background:var(--c-border);color:var(--c-text-3);padding:2px 8px;border-radius:var(--r-pill);transition:background .22s,color .22s}
+    .cat-item:hover .cat-count{background:var(--c-accent-lt);color:var(--c-accent)}
+    .cat-item.active .cat-count{background:rgba(255,255,255,.25);color:#fff}
+    .recent-post{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--c-border)}
+    .recent-post:last-child{border-bottom:none;padding-bottom:0}
+    .recent-post-img{width:60px;height:60px;border-radius:var(--r-md);object-fit:cover;flex-shrink:0;transition:transform .3s}
+    .recent-post:hover .recent-post-img{transform:scale(1.05)}
+    .recent-post-title{font-family:var(--font-display);font-size:.85rem;font-weight:700;color:var(--c-text);line-height:1.3;margin-bottom:4px}
+    .recent-post-title a{color:inherit;transition:color .22s}.recent-post-title a:hover{color:var(--c-accent)}
+    .recent-post-date{font-family:var(--font-head);font-size:.68rem;font-weight:600;color:var(--c-text-3);display:flex;align-items:center;gap:4px}
+    .tag-cloud{display:flex;flex-wrap:wrap;gap:8px}
+    /* Newsletter box */
+    .nl-widget{background:var(--c-accent);border-radius:var(--r-xl);padding:24px;text-align:center}
+    .nl-widget-title{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:8px}
+    .nl-widget-desc{font-size:.82rem;color:rgba(255,255,255,.82);margin-bottom:16px}
+    .nl-form{display:flex;flex-direction:column;gap:8px}
+    .nl-input{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);border-radius:var(--r-lg);padding:11px 14px;font-family:var(--font-body);font-size:.86rem;color:#fff;outline:none;transition:border-color .25s}
+    .nl-input:focus{border-color:#fff}.nl-input::placeholder{color:rgba(255,255,255,.5)}
+    .nl-btn{background:#fff;border:none;border-radius:var(--r-lg);padding:11px;font-family:var(--font-head);font-size:.82rem;font-weight:700;color:var(--c-accent);cursor:pointer;transition:background .25s,color .25s}
+    .nl-btn:hover{background:var(--c-accent-dk);color:#fff}
+    /* Filter tabs */
+    .filter-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+    .filter-tab{font-family:var(--font-head);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:7px 18px;border-radius:var(--r-pill);border:1.5px solid var(--c-border);background:#fff;color:var(--c-text-2);cursor:pointer;transition:background .25s,border-color .25s,color .25s}
+    .filter-tab:hover,.filter-tab.active{background:var(--c-accent);border-color:var(--c-accent);color:#fff}
+    @media(max-width:991px){.featured-post{grid-template-columns:1fr}}
+    @media(max-width:767px){.featured-post-body{padding:22px 18px}.featured-title{font-size:1.2rem}}
+  </style>
+</head>
+<body>
+
+  
+  
+  
+  <div id="cyber-preloader" class="cyber-preloader">
+    <div class="loader-content">
+      <div class="cyber-logo-glitch" data-text="STACKLY">STACKLY</div>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar"></div>
+      </div>
+      <div class="loader-text">INITIALIZING SECURE CONNECTION... <span class="loader-pct">0%</span></div>
+    </div>
+  </div>
+  <div class="creative-scroll-progress"></div>
+  <div class="creative-cursor"></div>
+  <div class="creative-cursor-ring"></div>
+  <div id="tj-back-to-top" style="opacity:0;transform:scale(0.7);pointer-events:none;"><span id="tj-back-to-top-percentage">↑</span></div>
+  
+  <div class="body-overlay"></div>
+
+  
+  <div class="tj-offcanvas-area d-none d-lg-block">
+    <div class="hamburger_bg"></div>
+    <div class="hamburger_wrapper">
+      <div class="hamburger_inner">
+        <div class="hamburger_top d-flex align-items-center justify-content-between">
+          <div class="hamburger_logo">
+            <a class="mobile_logo" href="/"><img src="/images/logos/logo-2.webp" alt="STACKLY Logo" /></a>
+          </div>
+          <div class="hamburger_close">
+            <button class="hamburger_close_btn" aria-label="Close menu"><i class="fa-solid fa-times"></i></button>
+          </div>
+        </div>
+
+        <div class="offcanvas-text">
+          <p>Developing personalized customer journeys to increase satisfaction &amp; loyalty — recognized by industry leaders.</p>
+        </div>
+
+        <div class="hamburger-search-area">
+          <h5 class="hamburger-title">Search Now!</h5>
+          <div class="hamburger_search">
+            <form action="/" method="get">
+              <button type="submit"><i class="fa-solid fa-search"></i></button>
+              <input type="search" autocomplete="off" placeholder="Search here..." name="s" />
+            </form>
+          </div>
+        </div>
+
+        <div class="hamburger-infos">
+          <h5 class="hamburger-title">Contact Info</h5>
+          <div class="contact-info">
+            <div class="contact-item"><span class="subtitle">Phone</span><a class="contact-link" href="tel:9876543210">9876543210</a></div>
+            <div class="contact-item"><span class="subtitle">Email</span><a class="contact-link" href="mailto:info@stackly.com">info@stackly.com</a></div>
+            <div class="contact-item"><span class="subtitle">Location</span><span class="contact-link">Salem, Tamilnadu, India</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hamburger-socials">
+        <h5 class="hamburger-title">Follow Us</h5>
+        <div class="social-links style-3">
+          <ul>
+            <li><a href="https://www.facebook.com/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="https://x.com/" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a></li>
+            <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="hamburger-area d-lg-none">
+    <div class="hamburger_bg"></div>
+    <div class="hamburger_wrapper">
+      <div class="hamburger_inner">
+        <div class="hamburger_top d-flex align-items-center justify-content-between">
+          <div class="hamburger_logo">
+            <a class="mobile_logo" href="/"><img src="/images/logos/logo-2.webp" alt="STACKLY Logo" /></a>
+          </div>
+          <div class="hamburger_close">
+            <button class="hamburger_close_btn" aria-label="Close menu"><i class="fa-solid fa-times"></i></button>
+          </div>
+        </div>
+
+        <nav class="hamburger_menu">
+          <ul class="mean-nav-list" style="list-style:none;padding:0;">
+            <li><a href="/">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="hamburger-infos">
+          <h5 class="hamburger-title">Contact Info</h5>
+          <div class="contact-info">
+            <div class="contact-item"><span class="subtitle">Phone</span><a class="contact-link" href="tel:9876543210">9876543210</a></div>
+            <div class="contact-item"><span class="subtitle">Email</span><a class="contact-link" href="mailto:info@stackly.com">info@stackly.com</a></div>
+            <div class="contact-item"><span class="subtitle">Location</span><span class="contact-link">Salem, Tamilnadu, India</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hamburger-socials">
+        <h5 class="hamburger-title">Follow Us</h5>
+        <div class="social-links style-3">
+          <ul>
+            <li><a href="https://www.facebook.com/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="https://x.com/" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a></li>
+            <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  
+  <header class="header-area header-3 section-gap-x header-absolute">
+
+    
+    <div class="header-top">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="header-top-content">
+              <p class="topbar-text">
+                <i class="fa-solid fa-shield-halved"></i>
+                Recognized for Excellence —
+                <a href="login.html">Login</a>
+              </p>
+              <div class="header-info">
+                <div class="info-item">
+                  <span><i class="fa-solid fa-location-dot"></i></span>
+                  <a href="#">Find a Location!</a>
+                </div>
+                <div class="info-item">
+                  <span><i class="fa-solid fa-phone"></i></span>
+                  <a href="tel:9876543210">9876543210</a>
+                </div>
+                <div class="info-item">
+                  <div class="social-links style-2">
+                    <ul>
+                      <li><a href="https://www.facebook.com/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>
+                      <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></li>
+                      <li><a href="https://x.com/" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a></li>
+                      <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="header-wrapper">
+
+            
+            <div class="site_logo">
+              <a class="logo" href="/"><img src="/images/logos/logo.webp" alt="STACKLY" width="544" height="152" /></a>
+            </div>
+
+            
+            <div class="menu-area d-none d-lg-inline-flex align-items-center">
+              <nav class="mainmenu">
+                <ul>
+                  <li>
+                    <a href="/">Home</a>
+                  </li>
+                  <li>
+                    <a href="about.html">About</a>
+                  </li>
+                  <li>
+                    <a href="services.html">Services</a>
+                  </li>
+                  <li class="current-menu-ancestor">
+                    <a href="blog.html">Blog</a>
+                  </li>
+                  <li><a href="contact.html">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+
+            
+            <div class="header-right-item d-none d-lg-inline-flex">
+              <div class="header-button">
+                <a class="tj-primary-btn" href="login.html">
+                  <span class="btn-text"><span>Login</span></span>
+                  <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+              </div>
+            </div>
+
+            
+            <div class="menu_bar mobile_menu_bar d-lg-none" aria-label="Open mobile menu">
+              <span></span><span></span><span></span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  
+  <header class="header-area header-3 section-gap-x header-duplicate header-sticky">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="header-wrapper">
+            <div class="site_logo">
+              <a class="logo" href="/"><img src="/images/logos/logo.webp" alt="STACKLY" width="544" height="152" /></a>
+            </div>
+            <div class="menu-area d-none d-lg-inline-flex align-items-center">
+              <nav class="mainmenu">
+                <ul>
+                  <li>
+                    <a href="/">Home</a></li>
+                  <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class="header-right-item d-none d-lg-inline-flex">
+              <div class="header-button">
+                <a class="tj-primary-btn" href="contact.html">
+                  <span class="btn-text"><span>Let's Talk</span></span>
+                  <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+              </div>
+            </div>
+            <div class="menu_bar mobile_menu_bar d-lg-none"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+    <section class="page-hero">
+      <div class="container">
+        <div class="row align-items-center gy-4">
+          <div class="col-lg-7 wow fadeInUp" data-wow-delay=".1s">
+            <div class="page-hero-badge"><i class="fa-solid fa-newspaper"></i> Security Blog</div>
+            <h1 class="page-hero-title"><span class="title-anim">Threat Intelligence, Research & Security Insights</span></h1>
+            <p class="page-hero-desc">In-depth analysis, vulnerability disclosures, industry trends, and actionable guidance from STACKLY's research team and senior analysts.</p>
+            <div class="breadcrumb-bar"><a href="index.html">Home</a><span class="sep">/</span><span class="current">Blog</span></div>
+          </div>
+          <div class="col-lg-5 wow fadeInRight" data-wow-delay=".2s">
+            <div class="row g-3">
+              <div class="col-6"><div class="hero-stat-card"><div class="hero-stat-num">240+</div><div class="hero-stat-label">Articles</div></div></div>
+              <div class="col-6"><div class="hero-stat-card accent-card"><div class="hero-stat-num white">12</div><div class="hero-stat-label">New Monthly</div></div></div>
+              <div class="col-6"><div class="hero-stat-card"><div class="hero-stat-num">50K+</div><div class="hero-stat-label">Monthly Readers</div></div></div>
+              <div class="col-6"><div class="hero-stat-card"><div class="hero-stat-num">8</div><div class="hero-stat-label">Expert Authors</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section-gap section-alt">
+      <div class="container">
+        <div class="row mb-4">
+          <div class="col-12 wow fadeInUp" data-wow-delay=".1s">
+            <span class="sub-title"><i class="fa-solid fa-box"></i> Featured Article</span>
+          </div>
+        </div>
+        <div class="featured-post wow fadeInUp" data-wow-delay=".2s">
+          <div class="featured-post-img"><img src="/images/blog/blog-6.webp" alt="Zero-Day Ransomware"/></div>
+          <div class="featured-post-body">
+            <div class="featured-label"><i class="fa-solid fa-star"></i> Editor's Pick</div>
+            <span class="featured-cat">Threat Intelligence</span>
+            <h2 class="featured-title"><a href="#">How AI-Powered Ransomware is Rewriting the Rules of Cyber Extortion in 2025</a></h2>
+            <div class="featured-meta">
+              <span><i class="fa-regular fa-user"></i> Eade Marren</span>
+              <span><i class="fa-regular fa-calendar"></i> Mar 15, 2025</span>
+              <span><i class="fa-regular fa-clock"></i> 12 min read</span>
+            </div>
+            <p class="featured-excerpt">Next-generation ransomware groups are now leveraging LLMs to craft hyper-personalized phishing lures, automate lateral movement, and dynamically adjust encryption strategies — rendering traditional defenses obsolete.</p>
+            <a class="text-btn" href="#"><span class="btn-text"><span>Read Full Article</span></span><span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section-gap section-light">
+      <div class="container">
+        <div class="row gy-5">
+          
+          <div class="col-lg-8">
+            <div class="wow fadeInUp" data-wow-delay=".1s">
+              <div class="filter-tabs">
+                <button class="filter-tab active">All Posts</button>
+                <button class="filter-tab">Threat Intel</button>
+                <button class="filter-tab">Pentesting</button>
+                <button class="filter-tab">Cloud Security</button>
+                <button class="filter-tab">Compliance</button>
+                <button class="filter-tab">Incident Response</button>
+              </div>
+            </div>
+            <div class="row g-4">
+              <div class="col-md-6 wow fadeInUp" data-wow-delay=".1s"><div class="blog-card"><div class="blog-card-thumb"><img src="/images/blog/blog-6.webp" alt=""/><span class="blog-card-cat">Pentesting</span><div class="blog-card-date"><span class="d">28</span><span class="m">JUL</span></div></div><div class="blog-card-body"><div class="blog-card-meta"><span><i class="fa-regular fa-user"></i> Kristin Watson</span><span><i class="fa-regular fa-clock"></i> 8 min</span></div><div class="blog-card-title"><a href="#">Top 10 OWASP Vulnerabilities Still Haunting Enterprise Applications in 2025</a></div><p class="blog-card-excerpt">Despite years of awareness campaigns, these critical flaws remain the most exploited entry points for attackers targeting web applications.</p><a class="text-btn" href="#"><span class="btn-text"><span>Read More</span></span><span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span></a></div></div></div>
+              <div class="col-md-6 wow fadeInUp" data-wow-delay=".15s"><div class="blog-card"><div class="blog-card-thumb"><img src="/images/blog/blog-7.webp" alt=""/><span class="blog-card-cat">Cloud Security</span><div class="blog-card-date"><span class="d">06</span><span class="m">NOV</span></div></div><div class="blog-card-body"><div class="blog-card-meta"><span><i class="fa-regular fa-user"></i> Savannah Nguyen</span><span><i class="fa-regular fa-clock"></i> 10 min</span></div><div class="blog-card-title"><a href="#">Zero-Trust in AWS: A Practical Implementation Guide for Security Teams</a></div><p class="blog-card-excerpt">Moving beyond the buzzword — concrete steps to implement zero-trust principles across your AWS environment using native controls.</p><a class="text-btn" href="#"><span class="btn-text"><span>Read More</span></span><span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span></a></div></div></div>
+              <div class="col-md-6 wow fadeInUp" data-wow-delay=".2s"><div class="blog-card"><div class="blog-card-thumb"><img src="/images/blog/blog-8.webp" alt=""/><span class="blog-card-cat">Compliance</span><div class="blog-card-date"><span class="d">24</span><span class="m">AUG</span></div></div><div class="blog-card-body"><div class="blog-card-meta"><span><i class="fa-regular fa-user"></i> Darlene Robertson</span><span><i class="fa-regular fa-clock"></i> 7 min</span></div><div class="blog-card-title"><a href="#">GDPR in 2025: What Changed and What Your Security Team Must Do Now</a></div><p class="blog-card-excerpt">Recent enforcement actions and updated guidance have shifted GDPR compliance requirements. Here's what matters for your security posture.</p><a class="text-btn" href="#"><span class="btn-text"><span>Read More</span></span><span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span></a></div></div></div>
+              <div class="col-md-6 wow fadeInUp" data-wow-delay=".25s"><div class="blog-card"><div class="blog-card-thumb"><img src="/images/blog/blog-6.webp" alt=""/><span class="blog-card-cat">Threat Intel</span><div class="blog-card-date"><span class="d">12</span><span class="m">SEP</span></div></div><div class="blog-card-body"><div class="blog-card-meta"><span><i class="fa-regular fa-user"></i> Eade Marren</span><span><i class="fa-regular fa-clock"></i> 15 min</span></div><div class="blog-card-title"><a href="#">APT38 Campaign Analysis: North Korean Hackers Targeting Financial Infrastructure</a></div><p class="blog-card-excerpt">A deep technical analysis of the latest campaign by the Lazarus Group subunit, including IOCs, TTPs, and detection strategies.</p><a class="text-btn" href="#"><span class="btn-text"><span>Read More</span></span><span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span></a></div></div></div>
+              <div class="col-md-6 wow fadeInUp" data-wow-delay=".1s"><div class="blog-card"><div class="blog-card-thumb"><img src="/images/blog/blog-7.webp" alt=""/><span class="blog-card-cat">Incident Response</span><div class="blog-card-date"><span class="d">03</span><span class="m">OCT</span></div></div><div class="blog-card-body"><div class="blog-card-meta"><span><i class="fa-regular fa-user"></i> Kristin Watson</span><span><i class="fa-regular fa-clock"></i> 9 min</span></div><div class="blog-card-title"><a href="#">Building a Cyber Incident Playbook That Actually Works Under Pressure</a></div><p class="blog-card-excerpt">Most incident response playbooks fail when tested. Here's how to design playbooks that hold up during real-world breach scenarios.</p><a class="text-btn" href="#"><span class="btn-text"><span>Read More</span></span><span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span></a></div></div></div>
+              <div class="col-md-6 wow fadeInUp" data-wow-delay=".15s"><div class="blog-card"><div class="blog-card-thumb"><img src="/images/blog/blog-8.webp" alt=""/><span class="blog-card-cat">Pentesting</span><div class="blog-card-date"><span class="d">19</span><span class="m">JAN</span></div></div><div class="blog-card-body"><div class="blog-card-meta"><span><i class="fa-regular fa-user"></i> Savannah Nguyen</span><span><i class="fa-regular fa-clock"></i> 11 min</span></div><div class="blog-card-title"><a href="#">Social Engineering in the Age of Deepfakes: Techniques You Need to Know</a></div><p class="blog-card-excerpt">AI-generated voice and video deepfakes have created a new class of social engineering attacks bypassing even trained security staff.</p><a class="text-btn" href="#"><span class="btn-text"><span>Read More</span></span><span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span></a></div></div></div>
+            </div>
+            <div class="pagination-wrap wow fadeInUp" data-wow-delay=".2s">
+              <button class="page-btn active">1</button>
+              <button class="page-btn">2</button>
+              <button class="page-btn">3</button>
+              <button class="page-btn">4</button>
+              <button class="page-btn">→</button>
+            </div>
+          </div>
+          
+          <div class="col-lg-4">
+            <div class="wow fadeInRight" data-wow-delay=".2s">
+              <div class="sidebar-widget">
+                <div class="sidebar-widget-title">Search</div>
+                <div class="sidebar-search"><input type="text" placeholder="Search articles…"/><button type="button"><i class="fa-solid fa-search"></i></button></div>
+              </div>
+              <div class="sidebar-widget">
+                <div class="sidebar-widget-title">Categories</div>
+                <div class="cat-item active"><span>All Posts</span><span class="cat-count">240</span></div>
+                <div class="cat-item"><span>Threat Intelligence</span><span class="cat-count">68</span></div>
+                <div class="cat-item"><span>Pentesting</span><span class="cat-count">52</span></div>
+                <div class="cat-item"><span>Cloud Security</span><span class="cat-count">44</span></div>
+                <div class="cat-item"><span>Compliance & GRC</span><span class="cat-count">36</span></div>
+                <div class="cat-item"><span>Incident Response</span><span class="cat-count">28</span></div>
+                <div class="cat-item"><span>Zero-Day Research</span><span class="cat-count">12</span></div>
+              </div>
+              <div class="sidebar-widget">
+                <div class="sidebar-widget-title">Recent Posts</div>
+                <div class="recent-post"><img class="recent-post-img" src="/images/blog/blog-6.webp" alt=""/><div><div class="recent-post-title"><a href="#">AI-Powered Ransomware Rewrites Extortion Rules</a></div><div class="recent-post-date"><i class="fa-regular fa-calendar"></i> Mar 15, 2025</div></div></div>
+                <div class="recent-post"><img class="recent-post-img" src="/images/blog/blog-7.webp" alt=""/><div><div class="recent-post-title"><a href="#">Zero-Trust AWS Implementation Guide</a></div><div class="recent-post-date"><i class="fa-regular fa-calendar"></i> Nov 06, 2024</div></div></div>
+                <div class="recent-post"><img class="recent-post-img" src="/images/blog/blog-8.webp" alt=""/><div><div class="recent-post-title"><a href="#">GDPR 2025 — What Changed & What Matters</a></div><div class="recent-post-date"><i class="fa-regular fa-calendar"></i> Aug 24, 2024</div></div></div>
+                <div class="recent-post"><img class="recent-post-img" src="/images/blog/blog-6.webp" alt=""/><div><div class="recent-post-title"><a href="#">APT38 Financial Infrastructure Campaign</a></div><div class="recent-post-date"><i class="fa-regular fa-calendar"></i> Sep 12, 2024</div></div></div>
+              </div>
+              <div class="sidebar-widget">
+                <div class="sidebar-widget-title">Popular Tags</div>
+                <div class="tag-cloud">
+                  <a class="tag-pill" href="#">Ransomware</a><a class="tag-pill" href="#">Zero-Day</a><a class="tag-pill" href="#">APT</a><a class="tag-pill" href="#">OWASP</a><a class="tag-pill" href="#">SOC</a><a class="tag-pill" href="#">SIEM</a><a class="tag-pill" href="#">GDPR</a><a class="tag-pill" href="#">Cloud</a><a class="tag-pill" href="#">Red Team</a><a class="tag-pill" href="#">Phishing</a><a class="tag-pill" href="#">IoC</a><a class="tag-pill" href="#">Zero Trust</a>
+                </div>
+              </div>
+              <div class="nl-widget">
+                <div class="nl-widget-title">Security Newsletter</div>
+                <p class="nl-widget-desc">Get weekly threat intelligence and security insights delivered to your inbox.</p>
+                <div class="nl-form"><input class="nl-input" type="email" placeholder="Your email address"/><button class="nl-btn">Subscribe Now</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section-gap section-alt">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-12 text-center wow fadeInUp" data-wow-delay=".1s">
+            <span class="sub-title"><i class="fa-solid fa-box"></i> Trending Topics</span>
+            <h2 class="sec-title">Most-Read Security Research This Month</h2>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".1s"><div class="feature-card"><div class="feature-card-icon"><i class="fa-solid fa-skull-crossbones"></i></div><div class="feature-card-title">Ransomware-as-a-Service Economy</div><p class="feature-card-desc">How RaaS platforms have industrialized ransomware, reducing barriers to entry and enabling a new wave of less-skilled threat actors.</p></div></div>
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".15s"><div class="feature-card"><div class="feature-card-icon"><i class="fa-solid fa-microchip"></i></div><div class="feature-card-title">Quantum Computing Threats</div><p class="feature-card-desc">Current public-key cryptography will be broken by quantum computers within a decade. What organizations must do today to prepare.</p></div></div>
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s"><div class="feature-card"><div class="feature-card-icon"><i class="fa-solid fa-robot"></i></div><div class="feature-card-title">AI in Adversarial Attacks</div><p class="feature-card-desc">LLMs are being weaponized to craft more convincing phishing, automate reconnaissance, and generate polymorphic malware at scale.</p></div></div>
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".25s"><div class="feature-card"><div class="feature-card-icon"><i class="fa-solid fa-link-slash"></i></div><div class="feature-card-title">Supply Chain Attacks</div><p class="feature-card-desc">Software supply chain compromises are the new high-value vector. SolarWinds set the template — here's how to defend against it.</p></div></div>
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".3s"><div class="feature-card"><div class="feature-card-icon"><i class="fa-solid fa-mobile-screen"></i></div><div class="feature-card-title">Mobile Device Exploitation</div><p class="feature-card-desc">Nation-state actors are increasingly targeting iOS and Android devices with zero-click exploits. MDM policies alone are insufficient.</p></div></div>
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".35s"><div class="feature-card"><div class="feature-card-icon"><i class="fa-solid fa-cloud-rain"></i></div><div class="feature-card-title">Cloud Misconfiguration Risks</div><p class="feature-card-desc">Over 80% of cloud security incidents stem from misconfiguration. CSPM tools and architectural review are your first line of defense.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section-gap section-light">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-12 text-center wow fadeInUp" data-wow-delay=".1s">
+            <span class="sub-title"><i class="fa-solid fa-box"></i> Expert Authors</span>
+            <h2 class="sec-title">Written by Security Practitioners, Not Marketers</h2>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay=".1s"><div style="background:#fff;border:1.5px solid var(--c-border);border-radius:var(--r-xl);padding:28px;text-align:center;transition:border-color .3s,transform .3s var(--ease-out);" onmouseover="this.style.borderColor='var(--c-accent)';this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='var(--c-border)';this.style.transform=''"><img src="/images/testimonial/client-1.webp" alt="Eade" style="width:72px;height:72px;border-radius:50%;object-fit:cover;margin:0 auto 14px;border:3px solid var(--c-accent-lt)"/><div style="font-family:var(--font-display);font-weight:700;color:var(--c-text);margin-bottom:4px">Eade Marren</div><div style="font-family:var(--font-head);font-size:.7rem;font-weight:600;color:var(--c-accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">CEO · 48 Articles</div><p style="font-size:.8rem;color:var(--c-text-2)">Threat intelligence, APT tracking, executive security strategy.</p></div></div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay=".15s"><div style="background:#fff;border:1.5px solid var(--c-border);border-radius:var(--r-xl);padding:28px;text-align:center;transition:border-color .3s,transform .3s var(--ease-out);" onmouseover="this.style.borderColor='var(--c-accent)';this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='var(--c-border)';this.style.transform=''"><img src="/images/testimonial/client-2.webp" alt="Savannah" style="width:72px;height:72px;border-radius:50%;object-fit:cover;margin:0 auto 14px;border:3px solid var(--c-accent-lt)"/><div style="font-family:var(--font-display);font-weight:700;color:var(--c-text);margin-bottom:4px">Savannah Nguyen</div><div style="font-family:var(--font-head);font-size:.7rem;font-weight:600;color:var(--c-accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">CTO · 62 Articles</div><p style="font-size:.8rem;color:var(--c-text-2)">Red team techniques, zero-day research, offensive security tooling.</p></div></div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay=".2s"><div style="background:#fff;border:1.5px solid var(--c-border);border-radius:var(--r-xl);padding:28px;text-align:center;transition:border-color .3s,transform .3s var(--ease-out);" onmouseover="this.style.borderColor='var(--c-accent)';this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='var(--c-border)';this.style.transform=''"><img src="/images/testimonial/client-3.webp" alt="Kristin" style="width:72px;height:72px;border-radius:50%;object-fit:cover;margin:0 auto 14px;border:3px solid var(--c-accent-lt)"/><div style="font-family:var(--font-display);font-weight:700;color:var(--c-text);margin-bottom:4px">Kristin Watson</div><div style="font-family:var(--font-head);font-size:.7rem;font-weight:600;color:var(--c-accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">VP Ops · 39 Articles</div><p style="font-size:.8rem;color:var(--c-text-2)">SOC operations, incident playbooks, analyst training methodologies.</p></div></div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay=".25s"><div style="background:#fff;border:1.5px solid var(--c-border);border-radius:var(--r-xl);padding:28px;text-align:center;transition:border-color .3s,transform .3s var(--ease-out);" onmouseover="this.style.borderColor='var(--c-accent)';this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='var(--c-border)';this.style.transform=''"><img src="/images/testimonial/client-4.webp" alt="Darlene" style="width:72px;height:72px;border-radius:50%;object-fit:cover;margin:0 auto 14px;border:3px solid var(--c-accent-lt)"/><div style="font-family:var(--font-display);font-weight:700;color:var(--c-text);margin-bottom:4px">Darlene Robertson</div><div style="font-family:var(--font-head);font-size:.7rem;font-weight:600;color:var(--c-accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">CRO · 31 Articles</div><p style="font-size:.8rem;color:var(--c-text-2)">Compliance, GRC frameworks, enterprise security program building.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section-gap section-alt">
+      <div class="container">
+        <div class="cta-strip-inner wow fadeInUp" data-wow-delay=".2s">
+          <div class="row align-items-center gy-4">
+            <div class="col-lg-7"><h2 class="cta-strip-title">Never Miss a Security Update</h2><p class="cta-strip-desc">Subscribe to our weekly threat intelligence digest — curated by our analysts, delivered every Monday morning.</p></div>
+            <div class="col-lg-5"><div class="d-flex gap-3 flex-wrap"><a class="tj-primary-btn btn-white" href="#"><span class="btn-text"><span>Subscribe Free</span></span><span class="btn-icon"><i class="fa-solid fa-envelope"></i></span></a><a class="tj-primary-btn btn-outline-white" href="contact.html"><span class="btn-text"><span>Talk to an Expert</span></span><span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span></a></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="tj-footer-section footer-3 section-gap-x">
+
+    
+    <div class="footer-main-area">
+      <div class="container">
+        <div class="row justify-content-between gy-5">
+
+          
+          <div class="col-xl-3 col-md-6">
+            <div class="footer-widget footer-col-1 wow fadeInUp" data-wow-delay=".1s">
+              <div class="footer-logo">
+                <a href="/"><img src="/images/logos/logo-2.webp" alt="STACKLY" /></a>
+              </div>
+              <div class="footer-text">
+                <p>STACKLY provides elite cybersecurity solutions, protecting global enterprises with advanced threat intelligence and proactive defense.</p>
+              </div>
+              <div class="social-links style-3">
+                <ul>
+                  <li><a href="https://www.facebook.com/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>
+                  <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></li>
+                  <li><a href="https://x.com/" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a></li>
+                  <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          
+          <div class="col-xl-3 col-md-6">
+            <div class="footer-widget footer-col-2 widget-nav-menu wow fadeInUp" data-wow-delay=".3s">
+              <h5 class="title">Services</h5>
+              <ul>
+                <li><a href="404.html">Pentesting</a></li>
+                <li><a href="404.html">SOC Monitoring</a></li>
+                <li><a href="404.html">Cloud Security</a></li>
+                <li><a href="404.html">Forensics</a></li>
+                <li><a href="404.html">Infrastructure</a></li>
+                <li><a href="404.html">Customer Experience</a></li>
+              </ul>
+            </div>
+          </div>
+
+          
+          <div class="col-xl-3 col-md-6">
+            <div class="footer-widget footer-col-3 widget-nav-menu wow fadeInUp" data-wow-delay=".5s">
+              <h5 class="title">Resources</h5>
+              <ul>
+                <li><a href="contact.html">Contact us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html">About us</a></li>
+                <li><a href="blog.html">Blog</a></li>
+              </ul>
+            </div>
+          </div>
+
+          
+          <div class="col-xl-3 col-md-6">
+            <div class="footer-widget widget-contact wow fadeInUp" data-wow-delay=".7s">
+              <h5 class="title">Our Office</h5>
+              <div class="footer-contact-info">
+                <div class="contact-item">
+                  <span>Salem, Tamilnadu, India.</span>
+                </div>
+                <div class="contact-item">
+                  <a href="tel:9876543210">P: 9876543210</a>
+                  <a href="mailto:info@stackly.com">M: info@stackly.com</a>
+                </div>
+                <div class="contact-item">
+                  <span><i class="fa-regular fa-clock"></i> Mon–Fri 10am–10pm</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="footer-bottom-area">
+      <div class="container">
+        <div class="row align-items-end gy-4">
+
+          <div class="col-lg-3">
+            <div class="award-logo-area wow fadeInUp" data-wow-delay=".3s">
+              <div class="award-logo"><img src="/images/footer/award-logo-white-1.webp" alt="Award 1" /></div>
+              <div class="award-logo"><img src="/images/footer/award-logo-white-2.webp" alt="Award 2" /></div>
+            </div>
+          </div>
+
+          <div class="col-lg-9">
+            <div class="footer-widget widget-subscribe-2 wow fadeInUp" data-wow-delay=".5s">
+              <h3 class="title">Subscribe to Our Newsletter.</h3>
+              <div class="subscribe-form">
+                <form action="#" novalidate>
+                  <input type="email" placeholder="Enter your email" name="email" required />
+                  <button type="submit" aria-label="Subscribe"><i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+                <label for="footer-agree">
+                  <input id="footer-agree" type="checkbox" required />
+                  Agree to our <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="tj-copyright-area-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="copyright-content-area">
+              <div class="copyright-text">
+                <p>© 2025 STACKLY. All rights reserved.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.1.4/swiper-bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

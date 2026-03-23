@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Client Portal — STACKLY Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/dashboard.css"/>
+  <style>
+    body{cursor:auto}
+    .creative-cursor,.creative-cursor-ring,.creative-scroll-progress{display:none}
+    .dash-stat-card.red::before{background:#dc2626}
+    .dash-stat-card.orange::before{background:#ea580c}
+    .dash-stat-card.green::before{background:#059669}
+    .risk-ring{position:relative;width:120px;height:120px;margin:0 auto 16px}
+    .risk-ring svg{transform:rotate(-90deg)}
+    .risk-ring-label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+    .risk-ring-num{font-family:var(--font-display);font-size:1.6rem;font-weight:800;color:var(--c-text)}
+    .risk-ring-text{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--c-text-3)}
+    .alert-item{display:flex;align-items:flex-start;gap:14px;padding:14px 20px;border-bottom:1px solid var(--c-border);transition:background .22s}
+    .alert-item:last-child{border-bottom:none}
+    .alert-item:hover{background:var(--c-bg)}
+    .alert-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px}
+    .alert-dot.critical{background:#dc2626}
+    .alert-dot.high{background:#ea580c}
+    .alert-dot.medium{background:#d97706}
+    .alert-dot.low{background:var(--c-accent)}
+    .alert-title{font-family:var(--font-head);font-size:.86rem;font-weight:700;color:var(--c-text);margin-bottom:3px}
+    .alert-meta{font-size:.74rem;color:var(--c-text-3);display:flex;align-items:center;gap:10px}
+    .report-item{display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid var(--c-border);transition:background .22s;cursor:pointer}
+    .report-item:last-child{border-bottom:none}
+    .report-item:hover{background:var(--c-bg)}
+    .report-icon{width:38px;height:38px;background:var(--c-accent-bg);border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;color:var(--c-accent);font-size:.9rem;flex-shrink:0}
+    .report-name{font-family:var(--font-head);font-size:.86rem;font-weight:700;color:var(--c-text)}
+    .report-date{font-size:.74rem;color:var(--c-text-3)}
+    .activity-item{display:flex;gap:12px;padding:12px 20px;border-bottom:1px solid var(--c-border);align-items:flex-start}
+    .activity-item:last-child{border-bottom:none}
+    .activity-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0}
+    .activity-icon.green{background:#d1fae5;color:#059669}
+    .activity-icon.red{background:#fee2e2;color:#dc2626}
+    .activity-icon.blue{background:#dbeafe;color:#2563eb}
+    .activity-icon.teal{background:var(--c-accent-bg);color:var(--c-accent)}
+    .activity-text{font-size:.83rem;color:var(--c-text-2);line-height:1.5}
+    .activity-text strong{color:var(--c-text);font-weight:700}
+    .activity-time{font-size:.7rem;color:var(--c-text-3);margin-top:2px;display:block}
+    .service-status-item{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--c-border)}
+    .service-status-item:last-child{border-bottom:none}
+    .status-dot-live{width:8px;height:8px;border-radius:50%;background:#059669;display:inline-block;margin-right:6px;animation:pulse-green 2s infinite}
+    @keyframes pulse-green{0%,100%{box-shadow:0 0 0 0 rgba(5,150,105,.4)}50%{box-shadow:0 0 0 6px rgba(5,150,105,0)}}
+  </style>
+</head>
+<body>
+  
+  
+  
+  <div id="cyber-preloader" class="cyber-preloader">
+    <div class="loader-content">
+      <div class="cyber-logo-glitch" data-text="STACKLY">STACKLY</div>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar"></div>
+      </div>
+      <div class="loader-text">INITIALIZING SECURE CONNECTION... <span class="loader-pct">0%</span></div>
+    </div>
+  </div>
+  <div class="body-overlay dash-overlay" id="dashOverlay"></div>
+  
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar-logo"><a href="index.html"><img src="/images/logos/logo-2.webp" alt="STACKLY"/></a></div>
+    <nav class="dash-nav">
+      <span class="dash-nav-label">Overview</span>
+      <a class="dash-nav-item active" href="dashboard-user.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+      <a class="dash-nav-item" href="#"><i class="fa-solid fa-bell"></i> Alerts <span class="badge-count">4</span></a>
+      <span class="dash-nav-label">Security</span>
+      <a class="dash-nav-item" href="#"><i class="fa-solid fa-shield-virus"></i> Vulnerability Scan</a>
+      <a class="dash-nav-item" href="#"><i class="fa-solid fa-eye"></i> SOC Monitoring</a>
+      <a class="dash-nav-item" href="#"><i class="fa-solid fa-fire"></i> Threat Feed</a>
+      <span class="dash-nav-label">Reports</span>
+      <a class="dash-nav-item" href="#"><i class="fa-solid fa-file-shield"></i> Reports</a>
+      <a class="dash-nav-item" href="#"><i class="fa-solid fa-chart-line"></i> Risk Trends</a>
+      <span class="dash-nav-label">Account</span>
+      <a class="dash-nav-item" href="#"><i class="fa-solid fa-ticket"></i> Support Tickets <span class="badge-count">2</span></a>
+      <a class="dash-nav-item" href="#"><i class="fa-solid fa-gear"></i> Settings</a>
+      <a class="dash-nav-item" href="index.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+    </nav>
+    <div class="dash-sidebar-footer">
+      <img class="dash-sidebar-avatar" src="/images/testimonial/client-1.webp" alt="User"/>
+      <div><span class="dash-sidebar-user-name" id="profileNameSidebar">John Martinez</span><span class="dash-sidebar-user-role">Security Lead · ACME Corp</span></div>
+    </div>
+  </aside>
+
+  
+  <button class="dash-sidebar-toggle" id="dashToggle" aria-label="Toggle sidebar"><i class="fa-solid fa-bars"></i></button>
+
+  
+  <div class="dash-main">
+    <header class="dash-topbar">
+      <div><div class="dash-topbar-title">Security Dashboard</div><div style="font-size:.75rem;color:var(--c-text-3);font-family:var(--font-head)" id="profileNameTopbar">Welcome back, John — Last login: Today 09:14 AM</div></div>
+      <div class="dash-topbar-actions">
+        <button class="dash-icon-btn" aria-label="Search"><i class="fa-solid fa-search"></i></button>
+        <button class="dash-icon-btn" aria-label="Notifications"><i class="fa-solid fa-bell"></i><div class="notif-dot"></div></button>
+        <button class="dash-icon-btn" aria-label="Messages"><i class="fa-solid fa-envelope"></i><div class="notif-dot"></div></button>
+        <img src="/images/testimonial/client-1.webp" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--c-border);cursor:pointer" alt="Profile"/>
+      </div>
+    </header>
+
+    <div class="dash-content">
+
+      
+      <div class="dash-stat-grid wow fadeInUp" data-wow-delay=".1s">
+        <div class="dash-stat-card red">
+          <div class="dash-stat-label">Critical Vulnerabilities</div>
+          <div class="dash-stat-value">3</div>
+          <div class="dash-stat-change down"><i class="fa-solid fa-triangle-exclamation"></i> Requires immediate action</div>
+        </div>
+        <div class="dash-stat-card orange">
+          <div class="dash-stat-label">High Severity Alerts</div>
+          <div class="dash-stat-value">12</div>
+          <div class="dash-stat-change down"><i class="fa-solid fa-arrow-up"></i> +4 since last week</div>
+        </div>
+        <div class="dash-stat-card green">
+          <div class="dash-stat-label">Assets Monitored</div>
+          <div class="dash-stat-value">1,847</div>
+          <div class="dash-stat-change up"><i class="fa-solid fa-arrow-up"></i> +23 added this month</div>
+        </div>
+        <div class="dash-stat-card">
+          <div class="dash-stat-label">Security Score</div>
+          <div class="dash-stat-value">78<span style="font-size:1.2rem;color:var(--c-text-3)">/100</span></div>
+          <div class="dash-stat-change up"><i class="fa-solid fa-arrow-up"></i> +5 pts from last scan</div>
+        </div>
+      </div>
+
+      
+      <div class="row g-4 mb-4">
+        <div class="col-xl-4 col-lg-5 wow fadeInLeft" data-wow-delay=".15s">
+          <div class="dash-card h-100">
+            <div class="dash-card-header"><div class="dash-card-title">Risk Overview</div><span class="dash-badge medium">Moderate Risk</span></div>
+            <div class="dash-card-body p-4">
+              <div class="risk-ring">
+                <svg width="120" height="120" viewBox="0 0 120 120">
+                  <circle cx="60" cy="60" r="52" fill="none" stroke="var(--c-border)" stroke-width="10"/>
+                  <circle cx="60" cy="60" r="52" fill="none" stroke="var(--c-accent)" stroke-width="10" stroke-dasharray="326.7" stroke-dashoffset="71.9" stroke-linecap="round"/>
+                </svg>
+                <div class="risk-ring-label"><div class="risk-ring-num">78</div><div class="risk-ring-text">Score</div></div>
+              </div>
+              <div class="row g-2 mt-2">
+                <div class="col-6"><div style="background:var(--c-bg);border-radius:var(--r-md);padding:12px;text-align:center"><div style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#dc2626;margin-bottom:4px">Critical</div><div style="font-family:var(--font-display);font-size:1.4rem;font-weight:800;color:var(--c-text)">3</div></div></div>
+                <div class="col-6"><div style="background:var(--c-bg);border-radius:var(--r-md);padding:12px;text-align:center"><div style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#ea580c;margin-bottom:4px">High</div><div style="font-family:var(--font-display);font-size:1.4rem;font-weight:800;color:var(--c-text)">12</div></div></div>
+                <div class="col-6"><div style="background:var(--c-bg);border-radius:var(--r-md);padding:12px;text-align:center"><div style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#d97706;margin-bottom:4px">Medium</div><div style="font-family:var(--font-display);font-size:1.4rem;font-weight:800;color:var(--c-text)">34</div></div></div>
+                <div class="col-6"><div style="background:var(--c-bg);border-radius:var(--r-md);padding:12px;text-align:center"><div style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--c-accent);margin-bottom:4px">Low</div><div style="font-family:var(--font-display);font-size:1.4rem;font-weight:800;color:var(--c-text)">87</div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-8 col-lg-7 wow fadeInRight" data-wow-delay=".15s">
+          <div class="dash-card h-100">
+            <div class="dash-card-header"><div class="dash-card-title">Active Alerts</div><a href="#" style="font-family:var(--font-head);font-size:.78rem;font-weight:700;color:var(--c-accent)">View All →</a></div>
+            <div class="dash-card-body">
+              <div class="alert-item"><div class="alert-dot critical"></div><div style="flex:1"><div class="alert-title">CVE-2025-1234 — Apache Log4j Critical RCE Detected</div><div class="alert-meta"><span>3 affected hosts</span><span>·</span><span>Detected 2h ago</span></div></div><span class="dash-badge critical">Critical</span></div>
+              <div class="alert-item"><div class="alert-dot critical"></div><div style="flex:1"><div class="alert-title">Brute-Force Attack on VPN Gateway — 847 attempts</div><div class="alert-meta"><span>10.0.0.45</span><span>·</span><span>Ongoing · 35m ago</span></div></div><span class="dash-badge critical">Critical</span></div>
+              <div class="alert-item"><div class="alert-dot high"></div><div style="flex:1"><div class="alert-title">Unpatched OpenSSL 3.0.x on 6 Production Servers</div><div class="alert-meta"><span>prod-web-01 through prod-web-06</span><span>·</span><span>5h ago</span></div></div><span class="dash-badge high">High</span></div>
+              <div class="alert-item"><div class="alert-dot high"></div><div style="flex:1"><div class="alert-title">Suspicious Outbound Traffic to Known C2 IP</div><div class="alert-meta"><span>10.0.0.112 → 185.220.x.x</span><span>·</span><span>1d ago</span></div></div><span class="dash-badge high">High</span></div>
+              <div class="alert-item"><div class="alert-dot medium"></div><div style="flex:1"><div class="alert-title">SSL Certificate Expiring in 14 Days</div><div class="alert-meta"><span>*.acmecorp.com</span><span>·</span><span>2d ago</span></div></div><span class="dash-badge medium">Medium</span></div>
+              <div class="alert-item"><div class="alert-dot low"></div><div style="flex:1"><div class="alert-title">Failed MFA Attempts — admin@acmecorp.com</div><div class="alert-meta"><span>5 failed attempts from 3 IPs</span><span>·</span><span>3d ago</span></div></div><span class="dash-badge low">Low</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="row g-4 mb-4">
+        <div class="col-lg-8 wow fadeInLeft" data-wow-delay=".2s">
+          <div class="dash-card">
+            <div class="dash-card-header"><div class="dash-card-title">Vulnerability Trend — Last 6 Months</div><div style="display:flex;gap:12px;font-family:var(--font-head);font-size:.72rem;font-weight:700"><span style="color:var(--c-accent)">● Open</span><span style="color:#059669">● Resolved</span></div></div>
+            <div class="dash-card-body p-4">
+              <div class="dash-chart-placeholder" style="height:200px">
+                <div class="dash-bar" style="height:65%"><div class="dash-bar-label">Oct</div></div>
+                <div class="dash-bar" style="height:80%"><div class="dash-bar-label">Nov</div></div>
+                <div class="dash-bar" style="height:55%"><div class="dash-bar-label">Dec</div></div>
+                <div class="dash-bar" style="height:90%"><div class="dash-bar-label">Jan</div></div>
+                <div class="dash-bar" style="height:70%"><div class="dash-bar-label">Feb</div></div>
+                <div class="dash-bar" style="height:78%;background:var(--c-accent)"><div class="dash-bar-label" style="color:var(--c-accent)">Mar</div></div>
+              </div>
+              <div class="row g-3 mt-3">
+                <div class="col-4"><div style="text-align:center"><div style="font-family:var(--font-display);font-size:1.4rem;font-weight:800;color:var(--c-text)">136</div><div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--c-text-3)">Total Found</div></div></div>
+                <div class="col-4"><div style="text-align:center"><div style="font-family:var(--font-display);font-size:1.4rem;font-weight:800;color:#059669">99</div><div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--c-text-3)">Resolved</div></div></div>
+                <div class="col-4"><div style="text-align:center"><div style="font-family:var(--font-display);font-size:1.4rem;font-weight:800;color:#dc2626">37</div><div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--c-text-3)">Open</div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 wow fadeInRight" data-wow-delay=".2s">
+          <div class="dash-card h-100">
+            <div class="dash-card-header"><div class="dash-card-title">Service Status</div></div>
+            <div class="dash-card-body">
+              <div class="service-status-item"><span style="font-family:var(--font-head);font-size:.84rem;font-weight:600;color:var(--c-text)"><span class="status-dot-live"></span>SOC Monitoring</span><span class="dash-badge success">Active</span></div>
+              <div class="service-status-item"><span style="font-family:var(--font-head);font-size:.84rem;font-weight:600;color:var(--c-text)"><span class="status-dot-live"></span>Vulnerability Scanner</span><span class="dash-badge success">Active</span></div>
+              <div class="service-status-item"><span style="font-family:var(--font-head);font-size:.84rem;font-weight:600;color:var(--c-text)"><span class="status-dot-live"></span>Threat Intelligence</span><span class="dash-badge success">Active</span></div>
+              <div class="service-status-item"><span style="font-family:var(--font-head);font-size:.84rem;font-weight:600;color:var(--c-text)"><span class="status-dot-live" style="background:#d97706;animation:none"></span>Pentest (Scheduled)</span><span class="dash-badge warning">Apr 15</span></div>
+              <div class="service-status-item"><span style="font-family:var(--font-head);font-size:.84rem;font-weight:600;color:var(--c-text-3)"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--c-border-dk);margin-right:6px"></span>Compliance Audit</span><span class="dash-badge info">Q2</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="row g-4 mb-4">
+        <div class="col-lg-6 wow fadeInLeft" data-wow-delay=".2s">
+          <div class="dash-card">
+            <div class="dash-card-header"><div class="dash-card-title">Recent Reports</div><a href="#" style="font-family:var(--font-head);font-size:.78rem;font-weight:700;color:var(--c-accent)">View All →</a></div>
+            <div class="dash-card-body">
+              <div class="report-item"><div class="report-icon"><i class="fa-solid fa-file-pdf"></i></div><div style="flex:1"><div class="report-name">Q1 2025 Security Assessment</div><div class="report-date">Mar 31, 2025 · PDF · 4.2 MB</div></div><button style="background:none;border:1.5px solid var(--c-border);border-radius:var(--r-sm);padding:5px 12px;font-family:var(--font-head);font-size:.72rem;font-weight:700;color:var(--c-text-2);cursor:pointer;transition:all .22s" onmouseover="this.style.borderColor='var(--c-accent)';this.style.color='var(--c-accent)'" onmouseout="this.style.borderColor='var(--c-border)';this.style.color='var(--c-text-2)'"><i class="fa-solid fa-download"></i></button></div>
+              <div class="report-item"><div class="report-icon"><i class="fa-solid fa-file-pdf"></i></div><div style="flex:1"><div class="report-name">February Pentest Report</div><div class="report-date">Feb 28, 2025 · PDF · 8.7 MB</div></div><button style="background:none;border:1.5px solid var(--c-border);border-radius:var(--r-sm);padding:5px 12px;font-family:var(--font-head);font-size:.72rem;font-weight:700;color:var(--c-text-2);cursor:pointer;transition:all .22s" onmouseover="this.style.borderColor='var(--c-accent)';this.style.color='var(--c-accent)'" onmouseout="this.style.borderColor='var(--c-border)';this.style.color='var(--c-text-2)'"><i class="fa-solid fa-download"></i></button></div>
+              <div class="report-item"><div class="report-icon"><i class="fa-solid fa-file-shield"></i></div><div style="flex:1"><div class="report-name">SOC Monthly Summary — Feb</div><div class="report-date">Mar 01, 2025 · PDF · 1.8 MB</div></div><button style="background:none;border:1.5px solid var(--c-border);border-radius:var(--r-sm);padding:5px 12px;font-family:var(--font-head);font-size:.72rem;font-weight:700;color:var(--c-text-2);cursor:pointer;transition:all .22s" onmouseover="this.style.borderColor='var(--c-accent)';this.style.color='var(--c-accent)'" onmouseout="this.style.borderColor='var(--c-border)';this.style.color='var(--c-text-2)'"><i class="fa-solid fa-download"></i></button></div>
+              <div class="report-item"><div class="report-icon"><i class="fa-solid fa-file-circle-check"></i></div><div style="flex:1"><div class="report-name">ISO 27001 Readiness Gap Analysis</div><div class="report-date">Jan 15, 2025 · PDF · 6.3 MB</div></div><button style="background:none;border:1.5px solid var(--c-border);border-radius:var(--r-sm);padding:5px 12px;font-family:var(--font-head);font-size:.72rem;font-weight:700;color:var(--c-text-2);cursor:pointer;transition:all .22s" onmouseover="this.style.borderColor='var(--c-accent)';this.style.color='var(--c-accent)'" onmouseout="this.style.borderColor='var(--c-border)';this.style.color='var(--c-text-2)'"><i class="fa-solid fa-download"></i></button></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 wow fadeInRight" data-wow-delay=".2s">
+          <div class="dash-card h-100">
+            <div class="dash-card-header"><div class="dash-card-title">Recent Activity</div></div>
+            <div class="dash-card-body">
+              <div class="activity-item"><div class="activity-icon red"><i class="fa-solid fa-triangle-exclamation"></i></div><div><p class="activity-text"><strong>Critical Alert Raised:</strong> CVE-2025-1234 detected on prod-api-01</p><span class="activity-time">2 hours ago by SOC Analyst Raj Kumar</span></div></div>
+              <div class="activity-item"><div class="activity-icon green"><i class="fa-solid fa-circle-check"></i></div><div><p class="activity-text"><strong>Vulnerability Closed:</strong> CVE-2024-9876 patched and verified on 3 servers</p><span class="activity-time">5 hours ago by your team</span></div></div>
+              <div class="activity-item"><div class="activity-icon teal"><i class="fa-solid fa-file-shield"></i></div><div><p class="activity-text"><strong>New Report Available:</strong> Q1 2025 Security Assessment ready for download</p><span class="activity-time">Yesterday at 4:30 PM</span></div></div>
+              <div class="activity-item"><div class="activity-icon blue"><i class="fa-solid fa-calendar"></i></div><div><p class="activity-text"><strong>Pentest Scheduled:</strong> Web application assessment confirmed for April 15–17</p><span class="activity-time">2 days ago</span></div></div>
+              <div class="activity-item"><div class="activity-icon green"><i class="fa-solid fa-shield-check"></i></div><div><p class="activity-text"><strong>Scan Completed:</strong> Monthly vulnerability scan — 1,847 assets scanned, 0 new critical</p><span class="activity-time">3 days ago</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="row g-4">
+        <div class="col-12 wow fadeInUp" data-wow-delay=".2s">
+          <div class="dash-card">
+            <div class="dash-card-header"><div class="dash-card-title">Asset Security Coverage</div><a class="tj-primary-btn" href="#" style="padding:8px 18px;font-size:.78rem"><span class="btn-text"><span>Add Asset</span></span><span class="btn-icon"><i class="fa-solid fa-plus"></i></span></a></div>
+            <div class="dash-card-body" style="overflow-x:auto">
+              <table class="dash-table">
+                <thead><tr><th>Asset Name</th><th>Type</th><th>Risk Level</th><th>Last Scan</th><th>Open Issues</th><th>Coverage</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>prod-web-01</strong><div style="font-size:.72rem;color:var(--c-text-3)">10.0.0.10</div></td><td>Web Server</td><td><span class="dash-badge critical">Critical</span></td><td>Today</td><td>3</td><td><div style="display:flex;align-items:center;gap:8px"><div class="dash-progress-bar" style="width:80px"><div class="dash-progress-fill" style="width:88%"></div></div><span style="font-size:.75rem;font-weight:700;color:var(--c-text)">88%</span></div></td><td><span class="dash-badge success">Active</span></td></tr>
+                  <tr><td><strong>prod-api-01</strong><div style="font-size:.72rem;color:var(--c-text-3)">10.0.0.20</div></td><td>API Gateway</td><td><span class="dash-badge critical">Critical</span></td><td>Today</td><td>1</td><td><div style="display:flex;align-items:center;gap:8px"><div class="dash-progress-bar" style="width:80px"><div class="dash-progress-fill" style="width:72%"></div></div><span style="font-size:.75rem;font-weight:700;color:var(--c-text)">72%</span></div></td><td><span class="dash-badge success">Active</span></td></tr>
+                  <tr><td><strong>db-primary</strong><div style="font-size:.72rem;color:var(--c-text-3)">10.0.1.10</div></td><td>Database</td><td><span class="dash-badge high">High</span></td><td>Yesterday</td><td>7</td><td><div style="display:flex;align-items:center;gap:8px"><div class="dash-progress-bar" style="width:80px"><div class="dash-progress-fill" style="width:95%"></div></div><span style="font-size:.75rem;font-weight:700;color:var(--c-text)">95%</span></div></td><td><span class="dash-badge success">Active</span></td></tr>
+                  <tr><td><strong>vpn-gateway</strong><div style="font-size:.72rem;color:var(--c-text-3)">203.0.113.10</div></td><td>Network</td><td><span class="dash-badge high">High</span></td><td>2d ago</td><td>2</td><td><div style="display:flex;align-items:center;gap:8px"><div class="dash-progress-bar" style="width:80px"><div class="dash-progress-fill red" style="width:60%"></div></div><span style="font-size:.75rem;font-weight:700;color:var(--c-text)">60%</span></div></td><td><span class="dash-badge warning">Attention</span></td></tr>
+                  <tr><td><strong>office-fw-01</strong><div style="font-size:.72rem;color:var(--c-text-3)">192.168.1.1</div></td><td>Firewall</td><td><span class="dash-badge medium">Medium</span></td><td>3d ago</td><td>4</td><td><div style="display:flex;align-items:center;gap:8px"><div class="dash-progress-bar" style="width:80px"><div class="dash-progress-fill" style="width:91%"></div></div><span style="font-size:.75rem;font-weight:700;color:var(--c-text)">91%</span></div></td><td><span class="dash-badge success">Active</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginId = localStorage.getItem('loginId');
+      if (loginId) {
+        // Simple extraction: use the part before the @ symbol if it's an email
+        const rawName = loginId.includes('@') ? loginId.split('@')[0] : loginId;
+        // Capitalize the first letter
+        const formattedName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
+        
+        const sidebarName = document.getElementById('profileNameSidebar');
+        if (sidebarName) sidebarName.textContent = formattedName;
+        
+        const topbarName = document.getElementById('profileNameTopbar');
+        if (topbarName) topbarName.innerHTML = `Welcome back, ${formattedName} &mdash; Last login: Today 09:14 AM`;
+      }
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Sidebar toggle for mobile
+    const toggle = document.getElementById('dashToggle');
+    const sidebar = document.getElementById('dashSidebar');
+    const overlay = document.getElementById('dashOverlay');
+    if(toggle && sidebar && overlay){
+      toggle.addEventListener('click', ()=>{
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('active');
+        document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
+      });
+      overlay.addEventListener('click', ()=>{
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    }
+    // Filter tabs
+    document.querySelectorAll('.filter-tab').forEach(tab=>{
+      tab.addEventListener('click',()=>{
+        document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+    // Progress bars animate on load
+    setTimeout(()=>{
+      document.querySelectorAll('.dash-progress-fill').forEach(bar=>{
+        const w = bar.style.width;
+        bar.style.width = '0';
+        setTimeout(()=>{ bar.style.width = w; }, 200);
+      });
+    }, 300);
+    // Scroll reveal
+    const obs = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(!e.isIntersecting) return;
+        const el = e.target;
+        const delay = parseFloat(el.dataset.wowDelay||0)*1000;
+        setTimeout(()=>{ el.style.animation='fadeInUp .6s cubic-bezier(0.16,1,0.3,1) both'; },delay);
+        obs.unobserve(el);
+      });
+    },{threshold:.1});
+    document.querySelectorAll('.wow').forEach(el=>{el.style.opacity='0';obs.observe(el);});
+  </script>
+</body>
+</html>

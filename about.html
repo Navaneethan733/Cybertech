@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>About — STACKLY Cyber Security</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.1.4/swiper-bundle.min.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/pages.css"/>
+  <style>
+    .value-card{background:#fff;border:1.5px solid var(--c-border);border-radius:var(--r-xl);padding:32px;height:100%;transition:border-color .35s,transform .35s var(--ease-out),box-shadow .35s,background .35s}
+    .value-card:hover{border-color:var(--c-accent);transform:translateY(-6px);box-shadow:var(--shadow-md);background:var(--c-accent)}
+    .value-card:hover .value-title,.value-card:hover .value-desc,.value-card:hover .val-icon{color:#fff}
+    .val-icon{width:56px;height:56px;background:var(--c-accent-bg);border:1.5px solid var(--c-accent-lt);border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--c-accent);margin-bottom:20px;transition:all .35s}
+    .value-title{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--c-text);margin-bottom:10px;transition:color .35s}
+    .value-desc{font-size:.86rem;color:var(--c-text-2);line-height:1.75;margin:0;transition:color .35s}
+    .team-card{background:#fff;border:1.5px solid var(--c-border);border-radius:var(--r-xl);overflow:hidden;transition:border-color .35s,transform .35s var(--ease-out),box-shadow .35s}
+    .team-card:hover{border-color:var(--c-accent);transform:translateY(-6px);box-shadow:var(--shadow-md)}
+    .team-card-img{height:260px;overflow:hidden}
+    .team-card-img img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .6s var(--ease-out)}
+    .team-card:hover .team-card-img img{transform:scale(1.06)}
+    .team-card-body{padding:20px 22px}
+    .tc-name{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--c-text);margin-bottom:3px}
+    .tc-role{font-family:var(--font-head);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--c-accent);margin-bottom:10px}
+    .tc-bio{font-size:.82rem;color:var(--c-text-2);line-height:1.7;margin-bottom:14px}
+    .award-item{background:#fff;border:1.5px solid var(--c-border);border-radius:var(--r-xl);padding:28px 20px;text-align:center;height:100%;transition:border-color .3s,transform .3s var(--ease-out),box-shadow .3s}
+    .award-item:hover{border-color:var(--c-accent);transform:translateY(-5px);box-shadow:var(--shadow-sm)}
+    .award-icon{width:60px;height:60px;background:var(--c-accent-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--c-accent);margin:0 auto 14px}
+    .award-name{font-family:var(--font-display);font-size:.95rem;font-weight:700;color:var(--c-text);margin-bottom:5px}
+    .award-org{font-size:.78rem;color:var(--c-text-3)}
+    .check-row{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#fff;border:1.5px solid var(--c-border);border-radius:var(--r-lg);margin-bottom:10px;transition:border-color .25s,transform .25s var(--ease-out)}
+    .check-row:hover{border-color:var(--c-accent);transform:translateX(4px)}
+    .check-row i{color:var(--c-accent);font-size:.9rem;flex-shrink:0}
+    .check-row-text{font-family:var(--font-head);font-size:.86rem;font-weight:700;color:var(--c-text)}
+  </style>
+</head>
+<body>
+  
+  
+  
+  <div id="cyber-preloader" class="cyber-preloader">
+    <div class="loader-content">
+      <div class="cyber-logo-glitch" data-text="STACKLY">STACKLY</div>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar"></div>
+      </div>
+      <div class="loader-text">INITIALIZING SECURE CONNECTION... <span class="loader-pct">0%</span></div>
+    </div>
+  </div>
+  <div class="creative-scroll-progress"></div>
+  <div class="creative-cursor"></div>
+  <div class="creative-cursor-ring"></div>
+  <div id="tj-back-to-top" style="opacity:0;transform:scale(0.7);pointer-events:none;"><span id="tj-back-to-top-percentage">↑</span></div>
+  
+  <div class="body-overlay"></div>
+
+  
+  <div class="tj-offcanvas-area d-none d-lg-block">
+    <div class="hamburger_bg"></div>
+    <div class="hamburger_wrapper">
+      <div class="hamburger_inner">
+        <div class="hamburger_top d-flex align-items-center justify-content-between">
+          <div class="hamburger_logo">
+            <a class="mobile_logo" href="/"><img src="/images/logos/logo-2.webp" alt="STACKLY Logo" /></a>
+          </div>
+          <div class="hamburger_close">
+            <button class="hamburger_close_btn" aria-label="Close menu"><i class="fa-solid fa-times"></i></button>
+          </div>
+        </div>
+
+        <div class="offcanvas-text">
+          <p>Developing personalized customer journeys to increase satisfaction &amp; loyalty — recognized by industry leaders.</p>
+        </div>
+
+        <div class="hamburger-search-area">
+          <h5 class="hamburger-title">Search Now!</h5>
+          <div class="hamburger_search">
+            <form action="/" method="get">
+              <button type="submit"><i class="fa-solid fa-search"></i></button>
+              <input type="search" autocomplete="off" placeholder="Search here..." name="s" />
+            </form>
+          </div>
+        </div>
+
+        <div class="hamburger-infos">
+          <h5 class="hamburger-title">Contact Info</h5>
+          <div class="contact-info">
+            <div class="contact-item"><span class="subtitle">Phone</span><a class="contact-link" href="tel:9876543210">9876543210</a></div>
+            <div class="contact-item"><span class="subtitle">Email</span><a class="contact-link" href="mailto:info@stackly.com">info@stackly.com</a></div>
+            <div class="contact-item"><span class="subtitle">Location</span><span class="contact-link">Salem, Tamilnadu, India</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hamburger-socials">
+        <h5 class="hamburger-title">Follow Us</h5>
+        <div class="social-links style-3">
+          <ul>
+            <li><a href="https://www.facebook.com/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="https://x.com/" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a></li>
+            <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="hamburger-area d-lg-none">
+    <div class="hamburger_bg"></div>
+    <div class="hamburger_wrapper">
+      <div class="hamburger_inner">
+        <div class="hamburger_top d-flex align-items-center justify-content-between">
+          <div class="hamburger_logo">
+            <a class="mobile_logo" href="/"><img src="/images/logos/logo-2.webp" alt="STACKLY Logo" /></a>
+          </div>
+          <div class="hamburger_close">
+            <button class="hamburger_close_btn" aria-label="Close menu"><i class="fa-solid fa-times"></i></button>
+          </div>
+        </div>
+
+        <nav class="hamburger_menu">
+          <ul class="mean-nav-list" style="list-style:none;padding:0;">
+            <li><a href="/">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="hamburger-infos">
+          <h5 class="hamburger-title">Contact Info</h5>
+          <div class="contact-info">
+            <div class="contact-item"><span class="subtitle">Phone</span><a class="contact-link" href="tel:9876543210">9876543210</a></div>
+            <div class="contact-item"><span class="subtitle">Email</span><a class="contact-link" href="mailto:info@stackly.com">info@stackly.com</a></div>
+            <div class="contact-item"><span class="subtitle">Location</span><span class="contact-link">Salem, Tamilnadu, India</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hamburger-socials">
+        <h5 class="hamburger-title">Follow Us</h5>
+        <div class="social-links style-3">
+          <ul>
+            <li><a href="https://www.facebook.com/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="https://x.com/" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a></li>
+            <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  
+  <header class="header-area header-3 section-gap-x header-absolute">
+
+    
+    <div class="header-top">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="header-top-content">
+              <p class="topbar-text">
+                <i class="fa-solid fa-shield-halved"></i>
+                Recognized for Excellence —
+                <a href="login.html">Login</a>
+              </p>
+              <div class="header-info">
+                <div class="info-item">
+                  <span><i class="fa-solid fa-location-dot"></i></span>
+                  <a href="#">Find a Location!</a>
+                </div>
+                <div class="info-item">
+                  <span><i class="fa-solid fa-phone"></i></span>
+                  <a href="tel:9876543210">9876543210</a>
+                </div>
+                <div class="info-item">
+                  <div class="social-links style-2">
+                    <ul>
+                      <li><a href="https://www.facebook.com/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>
+                      <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></li>
+                      <li><a href="https://x.com/" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a></li>
+                      <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="header-wrapper">
+
+            
+            <div class="site_logo">
+              <a class="logo" href="index.html"><img src="/images/logos/logo.webp" alt="STACKLY" width="544" height="152" /></a>
+            </div>
+
+            
+            <div class="menu-area d-none d-lg-inline-flex align-items-center">
+              <nav class="mainmenu">
+                <ul>
+                  <li>
+                    <a href="/">Home</a>
+                  </li>
+                  <li class="current-menu-ancestor">
+                    <a href="about.html">About</a>
+                  </li>
+                  <li>
+                    <a href="services.html">Services</a>
+                  </li>
+                  <li>
+                    <a href="blog.html">Blog</a>
+                  </li>
+                  <li><a href="contact.html">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+
+            
+            <div class="header-right-item d-none d-lg-inline-flex">
+              <div class="header-button">
+                <a class="tj-primary-btn" href="login.html">
+                  <span class="btn-text"><span>Login</span></span>
+                  <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+              </div>
+            </div>
+
+            
+            <div class="menu_bar mobile_menu_bar d-lg-none" aria-label="Open mobile menu">
+              <span></span><span></span><span></span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  
+  <header class="header-area header-3 section-gap-x header-duplicate header-sticky">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="header-wrapper">
+            <div class="site_logo">
+              <a class="logo" href="/"><img src="/images/logos/logo.webp" alt="STACKLY" width="544" height="152" /></a>
+            </div>
+            <div class="menu-area d-none d-lg-inline-flex align-items-center">
+              <nav class="mainmenu">
+                <ul>
+                  <li>
+                    <a href="/">Home</a></li>
+                  <li><a href="/about.html">About</a></li>
+            <li><a href="/service.html">Services</a></li>
+            <li><a href="/blog.html">Blog</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class="header-right-item d-none d-lg-inline-flex">
+              <div class="header-button">
+                <a class="tj-primary-btn" href="contact.html">
+                  <span class="btn-text"><span>Let's Talk</span></span>
+                  <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+              </div>
+            </div>
+            <div class="menu_bar mobile_menu_bar d-lg-none"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+    <section class="page-hero">
+      <div class="container">
+        <div class="row align-items-center gy-5">
+          <div class="col-lg-6 wow fadeInUp" data-wow-delay=".1s">
+            <div class="page-hero-badge"><i class="fa-solid fa-users"></i> About STACKLY</div>
+            <h1 class="page-hero-title"><span class="title-anim">Defending the Digital World Since 2008</span></h1>
+            <p class="page-hero-desc">STACKLY was built on one belief: every organization deserves world-class security. Today we protect 500+ clients across 40 countries with 120+ dedicated experts.</p>
+            <div class="breadcrumb-bar"><a href="index.html">Home</a><span class="sep">/</span><span class="current">About</span></div>
+          </div>
+          <div class="col-lg-6 wow fadeInRight" data-wow-delay=".25s">
+            <div class="row g-3">
+              <div class="col-6"><div class="hero-stat-card"><div class="hero-stat-num">500+</div><div class="hero-stat-label">Global Clients</div></div></div>
+              <div class="col-6"><div class="hero-stat-card accent-card"><div class="hero-stat-num white">40+</div><div class="hero-stat-label">Countries</div></div></div>
+              <div class="col-6"><div class="hero-stat-card accent-card"><div class="hero-stat-num white">17</div><div class="hero-stat-label">Years Experience</div></div></div>
+              <div class="col-6"><div class="hero-stat-card"><div class="hero-stat-num">120+</div><div class="hero-stat-label">Experts</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section-gap section-alt">
+      <div class="container">
+        <div class="row align-items-center gy-5">
+          <div class="col-lg-6 order-lg-2 wow fadeInRight" data-wow-delay=".2s">
+            <span class="sub-title"><i class="fa-solid fa-box"></i> Our Story</span>
+            <h2 class="sec-title" style="margin-bottom:18px">From a Two-Person Lab to a Global Cyber Force</h2>
+            <p style="color:var(--c-text-2);line-height:1.78;margin-bottom:14px">In 2008, Eade Marren and Savannah Nguyen left government intelligence with a clear mission: build a cybersecurity firm that treats clients as partners, not ticket numbers.</p>
+            <p style="color:var(--c-text-2);line-height:1.78;margin-bottom:28px">Starting in a San Francisco garage, they built STACKLY on three principles — deep technical expertise, proactive threat hunting, and radical transparency. Today, 120+ experts across 8 global offices carry that mission every day.</p>
+            <div class="row g-3">
+              <div class="col-sm-6"><div class="check-row"><i class="fa-solid fa-circle-check"></i><span class="check-row-text">Zero-trust architecture</span></div></div>
+              <div class="col-sm-6"><div class="check-row"><i class="fa-solid fa-circle-check"></i><span class="check-row-text">Client-first culture</span></div></div>
+              <div class="col-sm-6"><div class="check-row"><i class="fa-solid fa-circle-check"></i><span class="check-row-text">Radical transparency</span></div></div>
+              <div class="col-sm-6"><div class="check-row"><i class="fa-solid fa-circle-check"></i><span class="check-row-text">Research-driven defense</span></div></div>
+            </div>
+          </div>
+          <div class="col-lg-6 order-lg-1 wow fadeInLeft" data-wow-delay=".2s">
+            <div class="img-stack">
+              <img class="img-stack-main" src="/images/about/about-5.webp" alt="Our story" style="height:420px;object-fit:cover"/>
+              <img class="img-stack-accent" src="/images/team/team-1-big.webp" alt="Founders" style="height:200px"/>
+              <div class="img-stack-badge"><span class="img-stack-badge-num">2008</span><span class="img-stack-badge-label">Founded</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section-gap section-light">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-12 text-center wow fadeInUp" data-wow-delay=".1s">
+            <span class="sub-title"><i class="fa-solid fa-box"></i> Core Values</span>
+            <h2 class="sec-title">What We Stand For Every Day</h2>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".1s"><div class="value-card"><div class="val-icon"><i class="fa-solid fa-shield-halved"></i></div><div class="value-title">Security First, Always</div><p class="value-desc">We never compromise on security for deadlines, budgets, or convenience. Every decision is evaluated through a security lens first.</p></div></div>
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".15s"><div class="value-card"><div class="val-icon"><i class="fa-solid fa-eye"></i></div><div class="value-title">Radical Transparency</div><p class="value-desc">We share everything — findings, methodologies, mistakes. Our clients deserve complete visibility into how we protect them.</p></div></div>
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s"><div class="value-card"><div class="val-icon"><i class="fa-solid fa-lightbulb"></i></div><div class="value-title">Continuous Innovation</div><p class="value-desc">We invest 20% of capacity in R&D, staying ahead of emerging attack vectors and zero-days before they become news.</p></div></div>
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".25s"><div class="value-card"><div class="val-icon"><i class="fa-solid fa-handshake"></i></div><div class="value-title">Partnership Over Vendor</div><p class="value-desc">We embed as a true extension of your security team — a partner invested in your outcomes, not a vendor pushing licenses.</p></div></div>
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".3s"><div class="value-card"><div class="val-icon"><i class="fa-solid fa-globe"></i></div><div class="value-title">Global Responsibility</div><p class="value-desc">We contribute to open-source security tools and mentor the next generation of defenders through our academy program.</p></div></div>
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".35s"><div class="value-card"><div class="val-icon"><i class="fa-solid fa-bolt"></i></div><div class="value-title">Speed Without Compromise</div><p class="value-desc">Our 15-minute response SLA is a contractual commitment backed by globally distributed on-call teams and automated playbooks.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section-gap section-alt">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-12 text-center wow fadeInUp" data-wow-delay=".1s">
+            <span class="sub-title"><i class="fa-solid fa-box"></i> Leadership</span>
+            <h2 class="sec-title">The Minds Behind STACKLY</h2>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay=".1s"><div class="team-card"><div class="team-card-img"><img src="/images/team/team-1-big.webp" alt="Eade Marren"/></div><div class="team-card-body"><div class="tc-name">Eade Marren</div><div class="tc-role">CEO & Co-Founder</div><p class="tc-bio">Former NSA analyst. 20+ years securing Fortune 500s. Leads strategy and client partnerships.</p><div class="social-links"><ul><li><a href="https://www.linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a></li><li><a href="https://x.com/"><i class="fa-brands fa-x-twitter"></i></a></li></ul></div></div></div></div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay=".15s"><div class="team-card"><div class="team-card-img"><img src="/images/team/team-2-big.webp" alt="Savannah Nguyen"/></div><div class="team-card-body"><div class="tc-name">Savannah Nguyen</div><div class="tc-role">CTO & Co-Founder</div><p class="tc-bio">Previously at DARPA. Oversees all technical operations and our in-house red team research lab.</p><div class="social-links"><ul><li><a href="https://www.linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a></li><li><a href="https://x.com/"><i class="fa-brands fa-x-twitter"></i></a></li></ul></div></div></div></div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay=".2s"><div class="team-card"><div class="team-card-img"><img src="/images/team/team-3-big.webp" alt="Kristin Watson"/></div><div class="team-card-body"><div class="tc-name">Kristin Watson</div><div class="tc-role">VP Operations</div><p class="tc-bio">CISM & CISSP certified. Manages global SOC operations, SLAs, and analyst training worldwide.</p><div class="social-links"><ul><li><a href="https://www.linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a></li><li><a href="https://x.com/"><i class="fa-brands fa-x-twitter"></i></a></li></ul></div></div></div></div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay=".25s"><div class="team-card"><div class="team-card-img"><img src="/images/team/team-4-big.webp" alt="Darlene Robertson"/></div><div class="team-card-body"><div class="tc-name">Darlene Robertson</div><div class="tc-role">Chief Revenue Officer</div><p class="tc-bio">15 years in enterprise security sales. Drives global growth and strategic ecosystem partnerships.</p><div class="social-links"><ul><li><a href="https://www.linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a></li><li><a href="https://x.com/"><i class="fa-brands fa-x-twitter"></i></a></li></ul></div></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section-gap section-light">
+      <div class="container">
+        <div class="row gy-5">
+          <div class="col-lg-4 wow fadeInLeft" data-wow-delay=".2s">
+            <span class="sub-title"><i class="fa-solid fa-box"></i> Our Journey</span>
+            <h2 class="sec-title" style="margin-bottom:18px">17 Years Defending the Digital Frontier</h2>
+            <p style="color:var(--c-text-2);line-height:1.78">Every milestone has been driven by our mission — from a two-person startup to a global security force protecting 500+ organizations.</p>
+          </div>
+          <div class="col-lg-8 wow fadeInRight" data-wow-delay=".2s">
+            <div class="timeline">
+              <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">2008</div><div class="timeline-event-title">STACKLY Founded</div><p class="timeline-event-desc">Eade and Savannah launch STACKLY in San Francisco, focusing on manual penetration testing for mid-market clients.</p></div>
+              <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">2011</div><div class="timeline-event-title">24/7 SOC Operations Launch</div><p class="timeline-event-desc">Opened first Security Operations Center with 12 analysts, securing first Fortune 500 accounts on retainer.</p></div>
+              <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">2015</div><div class="timeline-event-title">Global Expansion & ISO 27001</div><p class="timeline-event-desc">Opened offices in London, Singapore, Dubai. Achieved ISO 27001 certification and crossed 100 enterprise clients.</p></div>
+              <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">2018</div><div class="timeline-event-title">AI Threat Detection Platform</div><p class="timeline-event-desc">Launched proprietary AI behavioral analytics engine, cutting mean time to detect (MTTD) by 78%.</p></div>
+              <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">2022</div><div class="timeline-event-title">500+ Client Milestone</div><p class="timeline-event-desc">Reached 500 active clients in 40 countries, with 120+ professionals across 8 offices.</p></div>
+              <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">2025</div><div class="timeline-event-title">Quantum-Safe Security Launch</div><p class="timeline-event-desc">Pioneered post-quantum cryptography assessments, helping enterprises future-proof against quantum computing threats.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section-gap section-alt">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-12 text-center wow fadeInUp" data-wow-delay=".1s">
+            <span class="sub-title"><i class="fa-solid fa-box"></i> Recognition</span>
+            <h2 class="sec-title">Industry Awards & Certifications</h2>
+          </div>
+        </div>
+        <div class="row g-4 mb-5">
+          <div class="col-lg-3 col-6 wow fadeInUp" data-wow-delay=".1s"><div class="award-item"><div class="award-icon"><i class="fa-solid fa-trophy"></i></div><div class="award-name">Gartner Magic Quadrant</div><div class="award-org">Leader 2023 & 2024</div></div></div>
+          <div class="col-lg-3 col-6 wow fadeInUp" data-wow-delay=".15s"><div class="award-item"><div class="award-icon"><i class="fa-solid fa-certificate"></i></div><div class="award-name">ISO 27001 Certified</div><div class="award-org">Since 2015 · Annually Audited</div></div></div>
+          <div class="col-lg-3 col-6 wow fadeInUp" data-wow-delay=".2s"><div class="award-item"><div class="award-icon"><i class="fa-solid fa-star"></i></div><div class="award-name">Forbes Best Cybersec</div><div class="award-org">Top 10 — 2024</div></div></div>
+          <div class="col-lg-3 col-6 wow fadeInUp" data-wow-delay=".25s"><div class="award-item"><div class="award-icon"><i class="fa-solid fa-shield-check"></i></div><div class="award-name">SOC 2 Type II</div><div class="award-org">Continuously Maintained</div></div></div>
+        </div>
+        <div class="cta-strip-inner wow fadeInUp" data-wow-delay=".2s">
+          <div class="row align-items-center gy-4">
+            <div class="col-lg-7"><h2 class="cta-strip-title">Join 500+ Organizations We Protect</h2><p class="cta-strip-desc">Start with a free security health check. No commitment, no cost — just clarity on your security posture.</p></div>
+            <div class="col-lg-5"><div class="d-flex gap-3 flex-wrap"><a class="tj-primary-btn btn-white" href="contact.html"><span class="btn-text"><span>Free Security Audit</span></span><span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span></a><a class="tj-primary-btn btn-outline-white" href="services.html"><span class="btn-text"><span>Our Services</span></span><span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span></a></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="tj-footer-section footer-3 section-gap-x">
+
+    
+    <div class="footer-main-area">
+      <div class="container">
+        <div class="row justify-content-between gy-5">
+
+          
+          <div class="col-xl-3 col-md-6">
+            <div class="footer-widget footer-col-1 wow fadeInUp" data-wow-delay=".1s">
+              <div class="footer-logo">
+                <a href="/"><img src="/images/logos/logo-2.webp" alt="STACKLY" /></a>
+              </div>
+              <div class="footer-text">
+                <p>STACKLY provides elite cybersecurity solutions, protecting global enterprises with advanced threat intelligence and proactive defense.</p>
+              </div>
+              <div class="social-links style-3">
+                <ul>
+                  <li><a href="https://www.facebook.com/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>
+                  <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></li>
+                  <li><a href="https://x.com/" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a></li>
+                  <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          
+         <div class="col-xl-3 col-md-6">
+            <div class="footer-widget footer-col-2 widget-nav-menu wow fadeInUp" data-wow-delay=".3s">
+              <h5 class="title">Services</h5>
+              <ul>
+                <li><a href="404.html">Pentesting</a></li>
+                <li><a href="404.html">SOC Monitoring</a></li>
+                <li><a href="404.html">Cloud Security</a></li>
+                <li><a href="404.html">Forensics</a></li>
+                <li><a href="404.html">Infrastructure</a></li>
+                <li><a href="404.html">Customer Experience</a></li>
+              </ul>
+            </div>
+          </div>
+
+          
+          <div class="col-xl-3 col-md-6">
+            <div class="footer-widget footer-col-3 widget-nav-menu wow fadeInUp" data-wow-delay=".5s">
+              <h5 class="title">Resources</h5>
+              <ul>
+                <li><a href="contact.html">Contact us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html">About us</a></li>
+                <li><a href="blog.html">Blog</a></li>
+              </ul>
+            </div>
+          </div>
+
+          
+          <div class="col-xl-3 col-md-6">
+            <div class="footer-widget widget-contact wow fadeInUp" data-wow-delay=".7s">
+              <h5 class="title">Our Office</h5>
+              <div class="footer-contact-info">
+                <div class="contact-item">
+                  <span>Salem, Tamilnadu, India.</span>
+                </div>
+                <div class="contact-item">
+                  <a href="tel:9876543210">P: 9876543210</a>
+                  <a href="mailto:info@stackly.com">M: info@stackly.com</a>
+                </div>
+                <div class="contact-item">
+                  <span><i class="fa-regular fa-clock"></i> Mon–Fri 10am–10pm</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="footer-bottom-area">
+      <div class="container">
+        <div class="row align-items-end gy-4">
+
+          <div class="col-lg-3">
+            <div class="award-logo-area wow fadeInUp" data-wow-delay=".3s">
+              <div class="award-logo"><img src="/images/footer/award-logo-white-1.webp" alt="Award 1" /></div>
+              <div class="award-logo"><img src="/images/footer/award-logo-white-2.webp" alt="Award 2" /></div>
+            </div>
+          </div>
+
+          <div class="col-lg-9">
+            <div class="footer-widget widget-subscribe-2 wow fadeInUp" data-wow-delay=".5s">
+              <h3 class="title">Subscribe to Our Newsletter.</h3>
+              <div class="subscribe-form">
+                <form action="#" novalidate>
+                  <input type="email" placeholder="Enter your email" name="email" required />
+                  <button type="submit" aria-label="Subscribe"><i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+                <label for="footer-agree">
+                  <input id="footer-agree" type="checkbox" required />
+                  Agree to our <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="tj-copyright-area-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="copyright-content-area">
+              <div class="copyright-text">
+                <p>© 2025 STACKLY. All rights reserved.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.1.4/swiper-bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

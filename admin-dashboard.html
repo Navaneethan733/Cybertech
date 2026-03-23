@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Admin Panel — STACKLY Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/pages.css"/>
+  <style>
+    body{cursor:auto}
+    .creative-cursor,.creative-cursor-ring,.creative-scroll-progress{display:none}
+    /* Admin sidebar — slightly different accent for differentiation */
+    .dash-sidebar{background:#0f2028}
+    .dash-nav-item.active{background:var(--c-accent)}
+    .dash-stat-card.revenue::before{background:#059669}
+    .dash-stat-card.clients::before{background:var(--c-accent)}
+    .dash-stat-card.incidents::before{background:#dc2626}
+    .dash-stat-card.analysts::before{background:#7c3aed}
+    .mini-chart{display:flex;align-items:flex-end;gap:4px;height:40px}
+    .mini-bar{flex:1;border-radius:2px 2px 0 0;background:var(--c-accent-bg);min-width:0;transition:background .25s}
+    .mini-bar:hover{background:var(--c-accent)}
+    .mini-bar.accent{background:var(--c-accent)}
+    .client-row{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--c-border);transition:background .22s}
+    .client-row:last-child{border-bottom:none}
+    .client-row:hover{background:var(--c-bg)}
+    .client-logo-placeholder{width:36px;height:36px;border-radius:var(--r-sm);background:var(--c-accent-bg);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:.75rem;font-weight:800;color:var(--c-accent);flex-shrink:0}
+    .analyst-item{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--c-border)}
+    .analyst-item:last-child{border-bottom:none}
+    .analyst-status{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+    .analyst-status.online{background:#059669}
+    .analyst-status.busy{background:#d97706}
+    .analyst-status.offline{background:var(--c-border-dk)}
+    .kpi-widget{background:#fff;border:1.5px solid var(--c-border);border-radius:var(--r-xl);padding:20px;display:flex;align-items:center;gap:16px;transition:border-color .3s,transform .3s var(--ease-out)}
+    .kpi-widget:hover{border-color:var(--c-accent);transform:translateX(4px)}
+    .kpi-icon{width:48px;height:48px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+    .kpi-icon.teal{background:var(--c-accent-bg);color:var(--c-accent)}
+    .kpi-icon.green{background:#d1fae5;color:#059669}
+    .kpi-icon.purple{background:#ede9fe;color:#7c3aed}
+    .kpi-icon.red{background:#fee2e2;color:#dc2626}
+    .kpi-num{font-family:var(--font-display);font-size:1.4rem;font-weight:800;color:var(--c-text);line-height:1}
+    .kpi-label{font-family:var(--font-head);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--c-text-3)}
+    .kpi-change{font-family:var(--font-head);font-size:.72rem;font-weight:700}
+    .up-green{color:#059669}.down-red{color:#dc2626}
+    .incident-row{display:flex;align-items:flex-start;gap:12px;padding:14px 20px;border-bottom:1px solid var(--c-border)}
+    .incident-row:last-child{border-bottom:none}
+    .inc-id{font-family:var(--font-head);font-size:.68rem;font-weight:700;color:var(--c-text-3);margin-bottom:3px}
+    .inc-title{font-family:var(--font-head);font-size:.84rem;font-weight:700;color:var(--c-text);margin-bottom:3px}
+    .inc-client{font-size:.74rem;color:var(--c-text-3)}
+    .inc-time{font-size:.72rem;color:var(--c-text-3);white-space:nowrap;margin-left:auto;padding-left:10px}
+  </style>
+</head>
+<body>
+  
+  
+  
+  <div id="cyber-preloader" class="cyber-preloader">
+    <div class="loader-content">
+      <div class="cyber-logo-glitch" data-text="STACKLY">STACKLY</div>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar"></div>
+      </div>
+      <div class="loader-text">INITIALIZING SECURE CONNECTION... <span class="loader-pct">0%</span></div>
+    </div>
+  </div>
+  <div class="body-overlay dash-overlay" id="dashOverlay"></div>
+
+  
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar-logo"><a href="index.html"><img src="/images/logos/logo-2.webp" alt="STACKLY"/></a></div>
+    <nav class="dash-nav">
+      <span class="dash-nav-label">Overview</span>
+      <a class="dash-nav-item active" href="dashboard-admin.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+      <a class="dash-nav-item" href="#"><i class="fa-solid fa-bell"></i> Alerts <span class="badge-count">17</span></a>
+      <span class="dash-nav-label">Clients</span>
+      <a class="dash-nav-item" href="#"><i class="fa-solid fa-building"></i> All Clients</a>
+      <a class="dash-nav-item" href="#"><i class="fa-solid fa-user-plus"></i> Onboarding <span class="badge-count">3</span></a>
+      <a class="dash-nav-item" href="#"><i class="fa-solid fa-file-contract"></i> Contracts</a>
+      <span class="dash-nav-label">Operations</span>
+      <a class="dash-nav-item" href="#"><i class="fa-solid fa-users"></i> Analyst Team</a>
+      <a class="dash-nav-item" href="#"><i class="fa-solid fa-ticket"></i> Tickets <span class="badge-count">8</span></a>
+      <a class="dash-nav-item" href="#"><i class="fa-solid fa-calendar"></i> Engagements</a>
+      <a class="dash-nav-item" href="#"><i class="fa-solid fa-fire"></i> Active Incidents <span class="badge-count">2</span></a>
+      <span class="dash-nav-label">Intelligence</span>
+      <a class="dash-nav-item" href="#"><i class="fa-solid fa-eye"></i> Threat Monitor</a>
+      <a class="dash-nav-item" href="#"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+      <a class="dash-nav-item" href="#"><i class="fa-solid fa-file-shield"></i> Report Builder</a>
+      <span class="dash-nav-label">Admin</span>
+      <a class="dash-nav-item" href="#"><i class="fa-solid fa-chart-column"></i> Revenue</a>
+      <a class="dash-nav-item" href="#"><i class="fa-solid fa-gear"></i> Settings</a>
+      <a class="dash-nav-item" href="#"><i class="fa-solid fa-shield-halved"></i> Audit Log</a>
+      <a class="dash-nav-item" href="index.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+    </nav>
+    <div class="dash-sidebar-footer">
+      <img class="dash-sidebar-avatar" src="/images/team/team-1-big.webp" alt="Admin"/>
+      <div><span class="dash-sidebar-user-name" id="profileNameSidebar">Eade Marren</span><span class="dash-sidebar-user-role">CEO · Super Admin</span></div>
+    </div>
+  </aside>
+
+  <button class="dash-sidebar-toggle" id="dashToggle" aria-label="Toggle sidebar"><i class="fa-solid fa-bars"></i></button>
+
+  <div class="dash-main">
+    <header class="dash-topbar">
+      <div><div class="dash-topbar-title">Admin Overview</div><div style="font-size:.75rem;color:var(--c-text-3);font-family:var(--font-head)" id="profileNameTopbar">STACKLY Command Center — Monday, March 22, 2026</div></div>
+      <div class="dash-topbar-actions">
+        <a class="tj-primary-btn" href="dashboard-user.html" style="padding:8px 16px;font-size:.78rem"><span class="btn-text"><span>Client View</span></span><span class="btn-icon"><i class="fa-solid fa-eye"></i></span></a>
+        <button class="dash-icon-btn"><i class="fa-solid fa-bell"></i><div class="notif-dot"></div></button>
+        <img src="/images/team/team-1-big.webp" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--c-border);cursor:pointer;object-position:top" alt="Admin"/>
+      </div>
+    </header>
+
+    <div class="dash-content">
+
+      
+      <div class="dash-stat-grid wow fadeInUp" data-wow-delay=".1s">
+        <div class="dash-stat-card revenue">
+          <div class="dash-stat-label">Monthly Revenue</div>
+          <div class="dash-stat-value">$842K</div>
+          <div class="dash-stat-change up"><i class="fa-solid fa-arrow-up"></i> +12.4% vs last month</div>
+          <div class="mini-chart mt-3"><div class="mini-bar" style="height:55%"></div><div class="mini-bar" style="height:70%"></div><div class="mini-bar" style="height:60%"></div><div class="mini-bar" style="height:80%"></div><div class="mini-bar" style="height:75%"></div><div class="mini-bar accent" style="height:90%"></div></div>
+        </div>
+        <div class="dash-stat-card clients">
+          <div class="dash-stat-label">Active Clients</div>
+          <div class="dash-stat-value">512</div>
+          <div class="dash-stat-change up"><i class="fa-solid fa-arrow-up"></i> +8 this month</div>
+          <div class="mini-chart mt-3"><div class="mini-bar" style="height:75%"></div><div class="mini-bar" style="height:78%"></div><div class="mini-bar" style="height:80%"></div><div class="mini-bar" style="height:85%"></div><div class="mini-bar" style="height:88%"></div><div class="mini-bar accent" style="height:92%"></div></div>
+        </div>
+        <div class="dash-stat-card incidents">
+          <div class="dash-stat-label">Active Incidents</div>
+          <div class="dash-stat-value">2</div>
+          <div class="dash-stat-change up"><i class="fa-solid fa-arrow-down"></i> -3 from yesterday</div>
+          <div style="margin-top:12px;display:flex;gap:8px"><span class="dash-badge critical">1 Critical</span><span class="dash-badge high">1 High</span></div>
+        </div>
+        <div class="dash-stat-card analysts">
+          <div class="dash-stat-label">Analysts on Shift</div>
+          <div class="dash-stat-value">18<span style="font-size:1.2rem;color:var(--c-text-3)">/24</span></div>
+          <div class="dash-stat-change up"><i class="fa-solid fa-circle" style="color:#059669;font-size:.6rem"></i> 6 available now</div>
+          <div class="mini-chart mt-3"><div class="mini-bar" style="height:80%"></div><div class="mini-bar" style="height:90%"></div><div class="mini-bar" style="height:75%"></div><div class="mini-bar" style="height:85%"></div><div class="mini-bar" style="height:88%"></div><div class="mini-bar accent" style="height:75%"></div></div>
+        </div>
+      </div>
+
+      
+      <div class="row g-3 mb-4 wow fadeInUp" data-wow-delay=".15s">
+        <div class="col-lg-3 col-md-6"><div class="kpi-widget"><div class="kpi-icon teal"><i class="fa-solid fa-file-shield"></i></div><div><div class="kpi-num">94</div><div class="kpi-label">Reports Delivered</div><div class="kpi-change up-green">↑ 8 this month</div></div></div></div>
+        <div class="col-lg-3 col-md-6"><div class="kpi-widget"><div class="kpi-icon green"><i class="fa-solid fa-bug"></i></div><div><div class="kpi-num">3,412</div><div class="kpi-label">Vulns Resolved</div><div class="kpi-change up-green">↑ 234 this month</div></div></div></div>
+        <div class="col-lg-3 col-md-6"><div class="kpi-widget"><div class="kpi-icon purple"><i class="fa-solid fa-clock"></i></div><div><div class="kpi-num">8.4m</div><div class="kpi-label">Avg Response Time</div><div class="kpi-change up-green">↓ 1.2m faster</div></div></div></div>
+        <div class="col-lg-3 col-md-6"><div class="kpi-widget"><div class="kpi-icon red"><i class="fa-solid fa-ticket"></i></div><div><div class="kpi-num">8</div><div class="kpi-label">Open Tickets</div><div class="kpi-change down-red">↑ 3 vs yesterday</div></div></div></div>
+      </div>
+
+      
+      <div class="row g-4 mb-4">
+        <div class="col-lg-7 wow fadeInLeft" data-wow-delay=".2s">
+          <div class="dash-card">
+            <div class="dash-card-header"><div class="dash-card-title">Active Incidents</div><a href="#" style="font-family:var(--font-head);font-size:.78rem;font-weight:700;color:var(--c-accent)">All Incidents →</a></div>
+            <div class="dash-card-body">
+              <div class="incident-row"><span class="dash-badge critical" style="flex-shrink:0">Critical</span><div style="flex:1"><div class="inc-id">INC-2025-0312</div><div class="inc-title">Ransomware Containment — ACME Corp</div><div class="inc-client">Analyst: Raj Kumar · Started 2h ago · Phase: Containment</div></div><div class="inc-time">2h ago</div></div>
+              <div class="incident-row"><span class="dash-badge high" style="flex-shrink:0">High</span><div style="flex:1"><div class="inc-id">INC-2025-0311</div><div class="inc-title">Data Exfiltration Investigation — TechVault Ltd</div><div class="inc-client">Analyst: Sara Kim · Started 6h ago · Phase: Forensics</div></div><div class="inc-time">6h ago</div></div>
+            </div>
+            
+            <div class="dash-card-header" style="margin-top:0;border-top:1.5px solid var(--c-border)"><div class="dash-card-title">Revenue — Last 6 Months</div></div>
+            <div class="dash-card-body p-4">
+              <div class="dash-chart-placeholder">
+                <div class="dash-bar" style="height:60%"><div class="dash-bar-label">Oct</div></div>
+                <div class="dash-bar" style="height:70%"><div class="dash-bar-label">Nov</div></div>
+                <div class="dash-bar" style="height:65%"><div class="dash-bar-label">Dec</div></div>
+                <div class="dash-bar" style="height:80%"><div class="dash-bar-label">Jan</div></div>
+                <div class="dash-bar" style="height:75%"><div class="dash-bar-label">Feb</div></div>
+                <div class="dash-bar" style="height:90%;background:var(--c-accent)"><div class="dash-bar-label" style="color:var(--c-accent)">Mar</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 wow fadeInRight" data-wow-delay=".2s">
+          <div class="dash-card h-100">
+            <div class="dash-card-header"><div class="dash-card-title">On-Shift Analysts</div><span class="dash-badge success">18 Online</span></div>
+            <div class="dash-card-body">
+              <div class="analyst-item"><div class="analyst-status online"></div><img src="/images/testimonial/client-1.webp" style="width:32px;height:32px;border-radius:50%;object-fit:cover" alt=""/><div style="flex:1"><div style="font-family:var(--font-head);font-size:.84rem;font-weight:700;color:var(--c-text)">Raj Kumar</div><div style="font-size:.72rem;color:var(--c-text-3)">Tier 3 · Incident Response</div></div><span class="dash-badge critical">INC Active</span></div>
+              <div class="analyst-item"><div class="analyst-status online"></div><img src="/images/testimonial/client-2.webp" style="width:32px;height:32px;border-radius:50%;object-fit:cover" alt=""/><div style="flex:1"><div style="font-family:var(--font-head);font-size:.84rem;font-weight:700;color:var(--c-text)">Sara Kim</div><div style="font-size:.72rem;color:var(--c-text-3)">Tier 3 · Forensics</div></div><span class="dash-badge high">INC Active</span></div>
+              <div class="analyst-item"><div class="analyst-status online"></div><img src="/images/testimonial/client-3.webp" style="width:32px;height:32px;border-radius:50%;object-fit:cover" alt=""/><div style="flex:1"><div style="font-family:var(--font-head);font-size:.84rem;font-weight:700;color:var(--c-text)">Marcus Chen</div><div style="font-size:.72rem;color:var(--c-text-3)">Tier 2 · SOC Monitoring</div></div><span class="dash-badge success">Available</span></div>
+              <div class="analyst-item"><div class="analyst-status busy"></div><img src="/images/testimonial/client-4.webp" style="width:32px;height:32px;border-radius:50%;object-fit:cover" alt=""/><div style="flex:1"><div style="font-family:var(--font-head);font-size:.84rem;font-weight:700;color:var(--c-text)">Aliya Petrova</div><div style="font-size:.72rem;color:var(--c-text-3)">Tier 2 · Threat Hunting</div></div><span class="dash-badge warning">Busy</span></div>
+              <div class="analyst-item"><div class="analyst-status online"></div><img src="/images/testimonial/client-1.webp" style="width:32px;height:32px;border-radius:50%;object-fit:cover" alt=""/><div style="flex:1"><div style="font-family:var(--font-head);font-size:.84rem;font-weight:700;color:var(--c-text)">Daniel Reyes</div><div style="font-size:.72rem;color:var(--c-text-3)">Tier 1 · Alert Triage</div></div><span class="dash-badge success">Available</span></div>
+              <div class="analyst-item"><div class="analyst-status offline"></div><img src="/images/testimonial/client-2.webp" style="width:32px;height:32px;border-radius:50%;object-fit:cover" alt=""/><div style="flex:1"><div style="font-family:var(--font-head);font-size:.84rem;font-weight:700;color:var(--c-text-3)">Leila Hassan</div><div style="font-size:.72rem;color:var(--c-text-3)">Tier 2 · Off Shift</div></div><span style="font-size:.72rem;color:var(--c-text-3)">Returns 18:00</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="row g-4 mb-4">
+        <div class="col-12 wow fadeInUp" data-wow-delay=".2s">
+          <div class="dash-card">
+            <div class="dash-card-header"><div class="dash-card-title">Client Overview</div><div style="display:flex;gap:10px"><button style="background:var(--c-bg);border:1.5px solid var(--c-border);border-radius:var(--r-md);padding:7px 14px;font-family:var(--font-head);font-size:.75rem;font-weight:700;color:var(--c-text-2);cursor:pointer">Filter</button><a class="tj-primary-btn" href="#" style="padding:8px 16px;font-size:.78rem"><span class="btn-text"><span>Add Client</span></span><span class="btn-icon"><i class="fa-solid fa-plus"></i></span></a></div></div>
+            <div style="overflow-x:auto">
+              <table class="dash-table">
+                <thead><tr><th>Client</th><th>Plan</th><th>MRR</th><th>Risk Score</th><th>Open Alerts</th><th>Analyst</th><th>Status</th><th>Action</th></tr></thead>
+                <tbody>
+                  <tr><td><div style="display:flex;align-items:center;gap:10px"><div class="client-logo-placeholder">AC</div><div><div style="font-family:var(--font-head);font-size:.84rem;font-weight:700;color:var(--c-text)">ACME Corp</div><div style="font-size:.72rem;color:var(--c-text-3)">512 assets</div></div></div></td><td>Enterprise</td><td style="font-weight:700;color:var(--c-text)">$18,400</td><td><div style="display:flex;align-items:center;gap:8px"><div class="dash-progress-bar" style="width:60px"><div class="dash-progress-fill red" style="width:22%"></div></div><span style="font-size:.75rem;font-weight:700;color:#dc2626">22</span></div></td><td><span class="dash-badge critical">2 Crit</span></td><td>Raj Kumar</td><td><span class="dash-badge critical">Incident</span></td><td><button style="font-size:.75rem;color:var(--c-accent);background:none;border:none;cursor:pointer;font-weight:700">View →</button></td></tr>
+                  <tr><td><div style="display:flex;align-items:center;gap:10px"><div class="client-logo-placeholder">TV</div><div><div style="font-family:var(--font-head);font-size:.84rem;font-weight:700;color:var(--c-text)">TechVault Ltd</div><div style="font-size:.72rem;color:var(--c-text-3)">234 assets</div></div></div></td><td>Professional</td><td style="font-weight:700;color:var(--c-text)">$6,800</td><td><div style="display:flex;align-items:center;gap:8px"><div class="dash-progress-bar" style="width:60px"><div class="dash-progress-fill orange" style="width:42%"></div></div><span style="font-size:.75rem;font-weight:700;color:#ea580c">42</span></div></td><td><span class="dash-badge high">1 High</span></td><td>Sara Kim</td><td><span class="dash-badge high">Incident</span></td><td><button style="font-size:.75rem;color:var(--c-accent);background:none;border:none;cursor:pointer;font-weight:700">View →</button></td></tr>
+                  <tr><td><div style="display:flex;align-items:center;gap:10px"><div class="client-logo-placeholder">GF</div><div><div style="font-family:var(--font-head);font-size:.84rem;font-weight:700;color:var(--c-text)">GlobalFinance SA</div><div style="font-size:.72rem;color:var(--c-text-3)">1,204 assets</div></div></div></td><td>Enterprise</td><td style="font-weight:700;color:var(--c-text)">$24,000</td><td><div style="display:flex;align-items:center;gap:8px"><div class="dash-progress-bar" style="width:60px"><div class="dash-progress-fill" style="width:72%"></div></div><span style="font-size:.75rem;font-weight:700;color:var(--c-accent)">72</span></div></td><td><span class="dash-badge low">3 Low</span></td><td>Marcus Chen</td><td><span class="dash-badge success">Healthy</span></td><td><button style="font-size:.75rem;color:var(--c-accent);background:none;border:none;cursor:pointer;font-weight:700">View →</button></td></tr>
+                  <tr><td><div style="display:flex;align-items:center;gap:10px"><div class="client-logo-placeholder">HP</div><div><div style="font-family:var(--font-head);font-size:.84rem;font-weight:700;color:var(--c-text)">HealthPlus Systems</div><div style="font-size:.72rem;color:var(--c-text-3)">388 assets</div></div></div></td><td>Professional</td><td style="font-weight:700;color:var(--c-text)">$6,800</td><td><div style="display:flex;align-items:center;gap:8px"><div class="dash-progress-bar" style="width:60px"><div class="dash-progress-fill" style="width:88%"></div></div><span style="font-size:.75rem;font-weight:700;color:var(--c-accent)">88</span></div></td><td><span class="dash-badge low">1 Low</span></td><td>Daniel Reyes</td><td><span class="dash-badge success">Healthy</span></td><td><button style="font-size:.75rem;color:var(--c-accent);background:none;border:none;cursor:pointer;font-weight:700">View →</button></td></tr>
+                  <tr><td><div style="display:flex;align-items:center;gap:10px"><div class="client-logo-placeholder">NS</div><div><div style="font-family:var(--font-head);font-size:.84rem;font-weight:700;color:var(--c-text)">NanoSec Startups</div><div style="font-size:.72rem;color:var(--c-text-3)">45 assets</div></div></div></td><td>Starter</td><td style="font-weight:700;color:var(--c-text)">$2,400</td><td><div style="display:flex;align-items:center;gap:8px"><div class="dash-progress-bar" style="width:60px"><div class="dash-progress-fill" style="width:58%"></div></div><span style="font-size:.75rem;font-weight:700;color:var(--c-accent)">58</span></div></td><td><span class="dash-badge medium">2 Med</span></td><td>Aliya Petrova</td><td><span class="dash-badge warning">Attention</span></td><td><button style="font-size:.75rem;color:var(--c-accent);background:none;border:none;cursor:pointer;font-weight:700">View →</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="row g-4">
+        <div class="col-lg-6 wow fadeInLeft" data-wow-delay=".2s">
+          <div class="dash-card h-100">
+            <div class="dash-card-header"><div class="dash-card-title">Open Support Tickets</div><a href="#" style="font-family:var(--font-head);font-size:.78rem;font-weight:700;color:var(--c-accent)">All Tickets →</a></div>
+            <div style="overflow-x:auto">
+              <table class="dash-table">
+                <thead><tr><th>ID</th><th>Client</th><th>Subject</th><th>Priority</th><th>Age</th></tr></thead>
+                <tbody>
+                  <tr><td style="font-weight:700;color:var(--c-text)">#TK-0891</td><td>ACME Corp</td><td style="max-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Request pentest re-scope</td><td><span class="dash-badge high">High</span></td><td>4h</td></tr>
+                  <tr><td style="font-weight:700;color:var(--c-text)">#TK-0890</td><td>TechVault</td><td style="max-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">IR report delivery ETA?</td><td><span class="dash-badge critical">Urgent</span></td><td>6h</td></tr>
+                  <tr><td style="font-weight:700;color:var(--c-text)">#TK-0887</td><td>HealthPlus</td><td style="max-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">HIPAA compliance question</td><td><span class="dash-badge medium">Medium</span></td><td>1d</td></tr>
+                  <tr><td style="font-weight:700;color:var(--c-text)">#TK-0883</td><td>NanoSec</td><td style="max-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Add 10 new assets to scan</td><td><span class="dash-badge low">Low</span></td><td>2d</td></tr>
+                  <tr><td style="font-weight:700;color:var(--c-text)">#TK-0880</td><td>GlobalFinance</td><td style="max-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Access report portal issue</td><td><span class="dash-badge medium">Medium</span></td><td>3d</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 wow fadeInRight" data-wow-delay=".2s">
+          <div class="dash-card h-100">
+            <div class="dash-card-header"><div class="dash-card-title">Client Onboarding Pipeline</div><span class="dash-badge info">3 In Progress</span></div>
+            <div class="dash-card-body p-4">
+              <div style="margin-bottom:20px">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="font-family:var(--font-head);font-size:.84rem;font-weight:700;color:var(--c-text)">MedTech Innovations</span><span style="font-size:.75rem;color:var(--c-text-3)">Step 3/5</span></div>
+                <div class="dash-progress-bar" style="height:8px"><div class="dash-progress-fill" style="width:60%"></div></div>
+                <div style="font-size:.72rem;color:var(--c-text-3);margin-top:4px">Asset discovery in progress · Enterprise Plan</div>
+              </div>
+              <div style="margin-bottom:20px">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="font-family:var(--font-head);font-size:.84rem;font-weight:700;color:var(--c-text)">RetailChain Group</span><span style="font-size:.75rem;color:var(--c-text-3)">Step 1/5</span></div>
+                <div class="dash-progress-bar" style="height:8px"><div class="dash-progress-fill orange" style="width:20%"></div></div>
+                <div style="font-size:.72rem;color:var(--c-text-3);margin-top:4px">Contract signed, kickoff call pending · Professional Plan</div>
+              </div>
+              <div style="margin-bottom:20px">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="font-family:var(--font-head);font-size:.84rem;font-weight:700;color:var(--c-text)">AeroDyne Systems</span><span style="font-size:.75rem;color:var(--c-text-3)">Step 4/5</span></div>
+                <div class="dash-progress-bar" style="height:8px"><div class="dash-progress-fill" style="width:80%"></div></div>
+                <div style="font-size:.72rem;color:var(--c-text-3);margin-top:4px">SOC integration testing · Enterprise Plan</div>
+              </div>
+              <div style="background:var(--c-accent-bg);border:1.5px solid var(--c-accent-lt);border-radius:var(--r-lg);padding:16px;display:flex;align-items:center;gap:12px">
+                <div style="font-size:1.3rem;color:var(--c-accent)"><i class="fa-solid fa-calendar-check"></i></div>
+                <div><div style="font-family:var(--font-head);font-size:.84rem;font-weight:700;color:var(--c-text)">Next Kickoff — RetailChain Group</div><div style="font-size:.75rem;color:var(--c-text-2)">Tomorrow, 10:00 AM EST · Zoom</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginId = localStorage.getItem('loginId');
+      if (loginId) {
+        // Simple extraction: use the part before the @ symbol if it's an email
+        const rawName = loginId.includes('@') ? loginId.split('@')[0] : loginId;
+        // Capitalize the first letter
+        const formattedName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
+        
+        const sidebarName = document.getElementById('profileNameSidebar');
+        if (sidebarName) sidebarName.textContent = formattedName;
+        
+        const topbarName = document.getElementById('profileNameTopbar');
+        if (topbarName) topbarName.innerHTML = `Welcome back, Admin ${formattedName} &mdash; STACKLY Command Center`;
+      }
+    });
+  </script>
+  <script>
+    const toggle = document.getElementById('dashToggle');
+    const sidebar = document.getElementById('dashSidebar');
+    const overlay = document.getElementById('dashOverlay');
+    if(toggle&&sidebar&&overlay){
+      toggle.addEventListener('click',()=>{sidebar.classList.toggle('open');overlay.classList.toggle('active');document.body.style.overflow=sidebar.classList.contains('open')?'hidden':'';});
+      overlay.addEventListener('click',()=>{sidebar.classList.remove('open');overlay.classList.remove('active');document.body.style.overflow='';});
+    }
+    // Progress bars animate on load
+    setTimeout(()=>{
+      document.querySelectorAll('.dash-progress-fill').forEach(bar=>{
+        const w=bar.style.width;bar.style.width='0';
+        setTimeout(()=>{bar.style.width=w;},200);
+      });
+    },300);
+    // Scroll reveal
+    const obs=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(!e.isIntersecting)return;
+        const el=e.target;
+        const delay=parseFloat(el.dataset.wowDelay||0)*1000;
+        setTimeout(()=>{el.style.animation='fadeInUp .6s cubic-bezier(0.16,1,0.3,1) both';},delay);
+        obs.unobserve(el);
+      });
+    },{threshold:.1});
+    document.querySelectorAll('.wow').forEach(el=>{el.style.opacity='0';obs.observe(el);});
+  </script>
+</body>
+</html>

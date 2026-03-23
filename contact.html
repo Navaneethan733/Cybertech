@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Contact — STACKLY Cyber Security</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.1.4/swiper-bundle.min.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/pages.css"/>
+  <style>
+    .office-card{background:#fff;border:1.5px solid var(--c-border);border-radius:var(--r-xl);padding:28px;height:100%;transition:border-color .3s,transform .3s var(--ease-out),box-shadow .3s}
+    .office-card:hover{border-color:var(--c-accent);transform:translateY(-5px);box-shadow:var(--shadow-md)}
+    .office-flag{font-size:2rem;margin-bottom:12px;display:block}
+    .office-city{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--c-text);margin-bottom:4px}
+    .office-role{font-family:var(--font-head);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--c-accent);margin-bottom:14px}
+    .office-detail{display:flex;align-items:flex-start;gap:10px;font-size:.83rem;color:var(--c-text-2);margin-bottom:8px}
+    .office-detail i{color:var(--c-accent);margin-top:2px;flex-shrink:0;font-size:.8rem}
+    .form-submit-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;background:var(--c-accent);border:2px solid var(--c-accent);border-radius:var(--r-pill);font-family:var(--font-head);font-size:.9rem;font-weight:700;color:#fff;cursor:pointer;position:relative;overflow:hidden;transition:transform .25s var(--ease-spring),box-shadow .25s;width:100%;justify-content:center}
+    .form-submit-btn::before{content:'';position:absolute;inset:0;background:var(--c-accent-dk);transform:translateX(-101%);transition:transform .35s var(--ease-out);z-index:0}
+    .form-submit-btn:hover::before{transform:translateX(0)}
+    .form-submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(42,157,143,.35);color:#fff}
+    .form-submit-btn span{position:relative;z-index:1}
+    .soc-highlight{background:var(--c-accent);border-radius:var(--r-xl);padding:36px;color:#fff}
+    .soc-highlight-title{font-family:var(--font-display);font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:10px}
+    .soc-highlight-desc{font-size:.9rem;color:rgba(255,255,255,.85);margin-bottom:20px;line-height:1.72}
+    .soc-stat{text-align:center}
+    .soc-stat-num{font-family:var(--font-display);font-size:2rem;font-weight:800;color:#fff}
+    .soc-stat-label{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.7);margin-top:2px}
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+<body>
+  
+  
+  
+  <div id="cyber-preloader" class="cyber-preloader">
+    <div class="loader-content">
+      <div class="cyber-logo-glitch" data-text="STACKLY">STACKLY</div>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar"></div>
+      </div>
+      <div class="loader-text">INITIALIZING SECURE CONNECTION... <span class="loader-pct">0%</span></div>
+    </div>
+  </div>
+  <div class="creative-scroll-progress"></div>
+  <div class="creative-cursor"></div>
+  <div class="creative-cursor-ring"></div>
+  <div id="tj-back-to-top" style="opacity:0;transform:scale(0.7);pointer-events:none;"><span id="tj-back-to-top-percentage">↑</span></div>
+  
+  <div class="body-overlay"></div>
+
+  
+  <div class="tj-offcanvas-area d-none d-lg-block">
+    <div class="hamburger_bg"></div>
+    <div class="hamburger_wrapper">
+      <div class="hamburger_inner">
+        <div class="hamburger_top d-flex align-items-center justify-content-between">
+          <div class="hamburger_logo">
+            <a class="mobile_logo" href="/"><img src="/images/logos/logo-2.webp" alt="STACKLY Logo" /></a>
+          </div>
+          <div class="hamburger_close">
+            <button class="hamburger_close_btn" aria-label="Close menu"><i class="fa-solid fa-times"></i></button>
+          </div>
+        </div>
+
+        <div class="offcanvas-text">
+          <p>Developing personalized customer journeys to increase satisfaction &amp; loyalty — recognized by industry leaders.</p>
+        </div>
+
+        <div class="hamburger-search-area">
+          <h5 class="hamburger-title">Search Now!</h5>
+          <div class="hamburger_search">
+            <form action="/" method="get">
+              <button type="submit"><i class="fa-solid fa-search"></i></button>
+              <input type="search" autocomplete="off" placeholder="Search here..." name="s" />
+            </form>
+          </div>
+        </div>
+
+        <div class="hamburger-infos">
+          <h5 class="hamburger-title">Contact Info</h5>
+          <div class="contact-info">
+            <div class="contact-item"><span class="subtitle">Phone</span><a class="contact-link" href="tel:9876543210">9876543210</a></div>
+            <div class="contact-item"><span class="subtitle">Email</span><a class="contact-link" href="mailto:info@stackly.com">info@stackly.com</a></div>
+            <div class="contact-item"><span class="subtitle">Location</span><span class="contact-link">Salem, Tamilnadu, India</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hamburger-socials">
+        <h5 class="hamburger-title">Follow Us</h5>
+        <div class="social-links style-3">
+          <ul>
+            <li><a href="https://www.facebook.com/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="https://x.com/" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a></li>
+            <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="hamburger-area d-lg-none">
+    <div class="hamburger_bg"></div>
+    <div class="hamburger_wrapper">
+      <div class="hamburger_inner">
+        <div class="hamburger_top d-flex align-items-center justify-content-between">
+          <div class="hamburger_logo">
+            <a class="mobile_logo" href="/"><img src="/images/logos/logo-2.webp" alt="STACKLY Logo" /></a>
+          </div>
+          <div class="hamburger_close">
+            <button class="hamburger_close_btn" aria-label="Close menu"><i class="fa-solid fa-times"></i></button>
+          </div>
+        </div>
+
+        <nav class="hamburger_menu">
+          <ul class="mean-nav-list" style="list-style:none;padding:0;">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about.html">About</a></li>
+            <li><a href="/services.html">Services</a></li>
+            <li><a href="/blog.html">Blog</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="hamburger-infos">
+          <h5 class="hamburger-title">Contact Info</h5>
+          <div class="contact-info">
+            <div class="contact-item"><span class="subtitle">Phone</span><a class="contact-link" href="tel:9876543210">9876543210</a></div>
+            <div class="contact-item"><span class="subtitle">Email</span><a class="contact-link" href="mailto:info@stackly.com">info@stackly.com</a></div>
+            <div class="contact-item"><span class="subtitle">Location</span><span class="contact-link">Salem, Tamilnadu, India</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hamburger-socials">
+        <h5 class="hamburger-title">Follow Us</h5>
+        <div class="social-links style-3">
+          <ul>
+            <li><a href="https://www.facebook.com/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="https://x.com/" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a></li>
+            <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  
+  <header class="header-area header-3 section-gap-x header-absolute">
+
+    
+    <div class="header-top">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="header-top-content">
+              <p class="topbar-text">
+                <i class="fa-solid fa-shield-halved"></i>
+                Recognized for Excellence —
+                <a href="login.html">Login</a>
+              </p>
+              <div class="header-info">
+                <div class="info-item">
+                  <span><i class="fa-solid fa-location-dot"></i></span>
+                  <a href="#">Find a Location!</a>
+                </div>
+                <div class="info-item">
+                  <span><i class="fa-solid fa-phone"></i></span>
+                  <a href="tel:9876543210">9876543210</a>
+                </div>
+                <div class="info-item">
+                  <div class="social-links style-2">
+                    <ul>
+                      <li><a href="https://www.facebook.com/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>
+                      <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></li>
+                      <li><a href="https://x.com/" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a></li>
+                      <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="header-wrapper">
+
+            
+            <div class="site_logo">
+              <a class="logo" href="/"><img src="/images/logos/logo.webp" alt="STACKLY" width="544" height="152" /></a>
+            </div>
+
+            
+            <div class="menu-area d-none d-lg-inline-flex align-items-center">
+              <nav class="mainmenu">
+                <ul>
+                  <li>
+                    <a href="/">Home</a>
+                  </li>
+                  <li>
+                    <a href="about.html">About</a>
+                  </li>
+                  <li>
+                    <a href="services.html">Services</a>
+                  </li>
+                  <li>
+                    <a href="blog.html">Blog</a>
+                  </li>
+                  <li><a href="contact.html">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+
+            
+            <div class="header-right-item d-none d-lg-inline-flex">
+              <div class="header-button">
+                <a class="tj-primary-btn" href="login.html">
+                  <span class="btn-text"><span>Login</span></span>
+                  <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+              </div>
+            </div>
+
+            
+            <div class="menu_bar mobile_menu_bar d-lg-none" aria-label="Open mobile menu">
+              <span></span><span></span><span></span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  
+  <header class="header-area header-3 section-gap-x header-duplicate header-sticky">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="header-wrapper">
+            <div class="site_logo">
+              <a class="logo" href="/"><img src="/images/logos/logo.webp" alt="STACKLY" width="544" height="152" /></a>
+            </div>
+            <div class="menu-area d-none d-lg-inline-flex align-items-center">
+              <nav class="mainmenu">
+                <ul>
+                  <li>
+                    <a href="/">Home</a></li>
+                  <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class="header-right-item d-none d-lg-inline-flex">
+              <div class="header-button">
+                <a class="tj-primary-btn" href="contact.html">
+                  <span class="btn-text"><span>Let's Talk</span></span>
+                  <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+              </div>
+            </div>
+            <div class="menu_bar mobile_menu_bar d-lg-none"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+    <section class="page-hero">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-7 wow fadeInUp" data-wow-delay=".1s">
+            <div class="page-hero-badge"><i class="fa-solid fa-envelope"></i> Get in Touch</div>
+            <h1 class="page-hero-title"><span class="title-anim">Let's Talk About Securing Your Organization</span></h1>
+            <p class="page-hero-desc">Whether you need an urgent incident response, a security assessment quote, or just want to explore how we can help — our team responds within 2 hours during business hours.</p>
+            <div class="breadcrumb-bar"><a href="index.html">Home</a><span class="sep">/</span><span class="current">Contact</span></div>
+          </div>
+          <div class="col-lg-5 wow fadeInRight" data-wow-delay=".2s">
+            <div class="soc-highlight">
+              <div class="soc-highlight-title"><i class="fa-solid fa-tower-broadcast" style="margin-right:8px"></i>Our SOC is Always On</div>
+              <p class="soc-highlight-desc">For active incidents and emergencies, our Security Operations Center is staffed 24/7/365 with guaranteed 15-minute response.</p>
+              <div class="row g-3">
+                <div class="col-4"><div class="soc-stat"><div class="soc-stat-num">24/7</div><div class="soc-stat-label">Coverage</div></div></div>
+                <div class="col-4"><div class="soc-stat"><div class="soc-stat-num">15m</div><div class="soc-stat-label">Response</div></div></div>
+                <div class="col-4"><div class="soc-stat"><div class="soc-stat-num">99.9%</div><div class="soc-stat-label">SLA</div></div></div>
+              </div>
+              <a href="tel:9876543210" style="display:inline-flex;align-items:center;gap:8px;margin-top:20px;background:rgba(255,255,255,.2);color:#fff;font-family:var(--font-head);font-size:.85rem;font-weight:700;padding:10px 20px;border-radius:var(--r-pill);transition:background .25s" onmouseover="this.style.background='rgba(255,255,255,.35)'" onmouseout="this.style.background='rgba(255,255,255,.2)'"><i class="fa-solid fa-phone"></i> 9876543210 (Emergency)</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section-gap section-alt">
+      <div class="container">
+        <div class="row gy-5">
+          <div class="col-lg-7 wow fadeInLeft" data-wow-delay=".2s">
+            <div class="contact-form-wrap">
+              <h2 style="font-family:var(--font-display);font-size:1.6rem;font-weight:800;color:var(--c-text);margin-bottom:6px">Send Us a Message</h2>
+              <p style="font-size:.86rem;color:var(--c-text-2);margin-bottom:28px">We'll get back to you within 2 business hours.</p>
+              <form novalidate>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <div class="form-field"><label class="form-label">First Name *</label><input class="form-control-custom" type="text" placeholder="John"/></div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-field"><label class="form-label">Last Name *</label><input class="form-control-custom" type="text" placeholder="Doe"/></div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-field"><label class="form-label">Work Email *</label><input class="form-control-custom" type="email" placeholder="john@company.com"/></div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-field"><label class="form-label">Phone Number</label><input class="form-control-custom" type="tel" placeholder="+1 (555) 000-0000"/></div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-field"><label class="form-label">Company Name *</label><input class="form-control-custom" type="text" placeholder="ACME Corporation"/></div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-field"><label class="form-label">Company Size</label>
+                      <select class="form-select-custom">
+                        <option value="">Select size…</option>
+                        <option>1–50 employees</option>
+                        <option>51–250 employees</option>
+                        <option>251–1,000 employees</option>
+                        <option>1,000+ employees</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-field"><label class="form-label">Service Needed</label>
+                      <select class="form-select-custom">
+                        <option value="">Select service…</option>
+                        <option>Penetration Testing</option>
+                        <option>Managed SOC</option>
+                        <option>Cloud Security</option>
+                        <option>Digital Forensics & IR</option>
+                        <option>Compliance & GRC</option>
+                        <option>Threat Intelligence</option>
+                        <option>Emergency Incident Response</option>
+                        <option>General Inquiry</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-field"><label class="form-label">Message *</label><textarea class="form-control-custom" placeholder="Tell us about your security challenge or what you're looking to achieve…" style="min-height:140px"></textarea></div>
+                  </div>
+                  <div class="col-12">
+                    <button type="submit" class="form-submit-btn"><span>Send Message</span><span><i class="fa-solid fa-paper-plane"></i></span></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-lg-5 wow fadeInRight" data-wow-delay=".2s">
+            <h3 style="font-family:var(--font-display);font-size:1.3rem;font-weight:700;color:var(--c-text);margin-bottom:22px">Contact Information</h3>
+            <div class="info-card"><div class="info-card-icon"><i class="fa-solid fa-phone"></i></div><div><div class="info-card-label">Phone</div><div class="info-card-value"><a href="tel:9876543210">9876543210</a></div></div></div>
+            <div class="info-card"><div class="info-card-icon"><i class="fa-solid fa-envelope"></i></div><div><div class="info-card-label">Email</div><div class="info-card-value"><a href="mailto:info@stackly.com">info@stackly.com</a></div></div></div>
+            <div class="info-card"><div class="info-card-icon"><i class="fa-solid fa-location-dot"></i></div><div><div class="info-card-label">HQ Address</div><div class="info-card-value">Salem, Tamilnadu<br/>India</div></div></div>
+            <div class="info-card"><div class="info-card-icon"><i class="fa-solid fa-clock"></i></div><div><div class="info-card-label">Business Hours</div><div class="info-card-value">Mon–Fri 8am–8pm EST<br/><span style="font-size:.8rem;font-weight:500;color:var(--c-text-3)">SOC: 24/7/365 for incidents</span></div></div></div>
+            <div class="info-card"><div class="info-card-icon"><i class="fa-solid fa-triangle-exclamation"></i></div><div><div class="info-card-label">Emergency Incident</div><div class="info-card-value"><a href="tel:9876543210">9876543210</a><br/><span style="font-size:.8rem;font-weight:500;color:var(--c-text-3)">Guaranteed 15-minute response</span></div></div></div>
+            <div class="map-wrap mt-4">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3907.1616097152896!2d78.1739798!3d11.682956599999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3babefef7fd970bb%3A0xe11aef1a71994f9!2sStackly!5e0!3m2!1sen!2sin!4v1774213249514!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section-gap section-light">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-12 text-center wow fadeInUp" data-wow-delay=".1s">
+            <span class="sub-title"><i class="fa-solid fa-box"></i> Global Presence</span>
+            <h2 class="sec-title">We're Where You Are</h2>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay=".1s"><div class="office-card"><span class="office-flag">🇺🇸</span><div class="office-city">San Francisco</div><div class="office-role">Global HQ</div><div class="office-detail"><i class="fa-solid fa-location-dot"></i><span>Salem, Tamilnadu, India</span></div><div class="office-detail"><i class="fa-solid fa-phone"></i><a href="tel:9876543210" style="color:inherit">9876543210</a></div><div class="office-detail"><i class="fa-regular fa-clock"></i><span>Mon–Fri 8am–8pm EST</span></div></div></div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay=".15s"><div class="office-card"><span class="office-flag">🇬🇧</span><div class="office-city">London</div><div class="office-role">EMEA Hub</div><div class="office-detail"><i class="fa-solid fa-location-dot"></i><span>22 Bishopsgate, EC2N 4AJ</span></div><div class="office-detail"><i class="fa-solid fa-phone"></i><span>+44 20 7123 4567</span></div><div class="office-detail"><i class="fa-regular fa-clock"></i><span>Mon–Fri 9am–6pm GMT</span></div></div></div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay=".2s"><div class="office-card"><span class="office-flag">🇸🇬</span><div class="office-city">Singapore</div><div class="office-role">APAC Hub</div><div class="office-detail"><i class="fa-solid fa-location-dot"></i><span>1 Raffles Place, 048616</span></div><div class="office-detail"><i class="fa-solid fa-phone"></i><span>+65 6123 4567</span></div><div class="office-detail"><i class="fa-regular fa-clock"></i><span>Mon–Fri 9am–6pm SGT</span></div></div></div>
+          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay=".25s"><div class="office-card"><span class="office-flag">🇦🇪</span><div class="office-city">Dubai</div><div class="office-role">MEA Office</div><div class="office-detail"><i class="fa-solid fa-location-dot"></i><span>DIFC, Gate Village 8</span></div><div class="office-detail"><i class="fa-solid fa-phone"></i><span>+971 4 123 4567</span></div><div class="office-detail"><i class="fa-regular fa-clock"></i><span>Mon–Fri 9am–6pm GST</span></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section-gap section-alt">
+      <div class="container">
+        <div class="row gy-5">
+          <div class="col-lg-4 wow fadeInLeft" data-wow-delay=".2s">
+            <span class="sub-title"><i class="fa-solid fa-box"></i> Common Questions</span>
+            <h2 class="sec-title" style="margin-bottom:18px">Before You Reach Out</h2>
+            <p style="color:var(--c-text-2);line-height:1.78">Quick answers to the questions we receive most often. Can't find what you need? Just send us a message above.</p>
+          </div>
+          <div class="col-lg-8 wow fadeInRight" data-wow-delay=".2s">
+            <div class="accordion tj-faq style-2" id="contactFAQ">
+              <div class="accordion-item"><button class="faq-title" type="button" data-bs-toggle="collapse" data-bs-target="#cf1" aria-expanded="true">How quickly can you respond to an active incident?</button><div id="cf1" class="collapse show" data-bs-parent="#contactFAQ"><div class="faq-text">Our Elite Response Team (ERT) is on standby 24/7. We guarantee a 15-minute response for critical alerts. Call our emergency line: 9876543210 for immediate escalation.</div></div></div>
+              <div class="accordion-item"><button class="faq-title collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cf2" aria-expanded="false">What information do you need for a pentest quote?</button><div id="cf2" class="collapse" data-bs-parent="#contactFAQ"><div class="faq-text">We need a rough scope — number of IP addresses, web applications, or employee count for phishing simulations. A 30-minute scoping call is usually enough to provide an accurate fixed-price quote.</div></div></div>
+              <div class="accordion-item"><button class="faq-title collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cf3" aria-expanded="false">Do you work with SMBs or only enterprise clients?</button><div id="cf3" class="collapse" data-bs-parent="#contactFAQ"><div class="faq-text">We work with organizations of all sizes. Our Starter plan starts at $2,400/month, and we offer project-based engagements for one-off penetration tests — no long-term commitment required.</div></div></div>
+              <div class="accordion-item"><button class="faq-title collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cf4" aria-expanded="false">How do I get a free security health check?</button><div id="cf4" class="collapse" data-bs-parent="#contactFAQ"><div class="faq-text">Fill in the contact form above, selecting "General Inquiry" and mention you'd like a free health check. We'll schedule a 30-minute call to assess your current posture and identify quick wins at no cost.</div></div></div>
+              <div class="accordion-item"><button class="faq-title collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cf5" aria-expanded="false">What certifications do your analysts hold?</button><div id="cf5" class="collapse" data-bs-parent="#contactFAQ"><div class="faq-text">Our team holds OSCP, CEH, CISSP, CISM, GPEN, GWAPT, AWS Security Specialty, and other leading certifications. All senior analysts have 5+ years of hands-on offensive or defensive experience before joining STACKLY.</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="tj-footer-section footer-3 section-gap-x">
+
+    
+    <div class="footer-main-area">
+      <div class="container">
+        <div class="row justify-content-between gy-5">
+
+          
+          <div class="col-xl-3 col-md-6">
+            <div class="footer-widget footer-col-1 wow fadeInUp" data-wow-delay=".1s">
+              <div class="footer-logo">
+                <a href="/"><img src="/images/logos/logo-2.webp" alt="STACKLY" /></a>
+              </div>
+              <div class="footer-text">
+                <p>STACKLY provides elite cybersecurity solutions, protecting global enterprises with advanced threat intelligence and proactive defense.</p>
+              </div>
+              <div class="social-links style-3">
+                <ul>
+                  <li><a href="https://www.facebook.com/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>
+                  <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></li>
+                  <li><a href="https://x.com/" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a></li>
+                  <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          
+          <div class="col-xl-3 col-md-6">
+            <div class="footer-widget footer-col-2 widget-nav-menu wow fadeInUp" data-wow-delay=".3s">
+              <h5 class="title">Services</h5>
+              <ul>
+                <li><a href="404.html">Pentesting</a></li>
+                <li><a href="404.html">SOC Monitoring</a></li>
+                <li><a href="404.html">Cloud Security</a></li>
+                <li><a href="404.html">Forensics</a></li>
+                <li><a href="404.html">Infrastructure</a></li>
+                <li><a href="404.html">Customer Experience</a></li>
+              </ul>
+            </div>
+          </div>
+
+          
+          <div class="col-xl-3 col-md-6">
+            <div class="footer-widget footer-col-3 widget-nav-menu wow fadeInUp" data-wow-delay=".5s">
+              <h5 class="title">Resources</h5>
+              <ul>
+                <li><a href="contact.html">Contact us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html">About us</a></li>
+                <li><a href="blog.html">Blog</a></li>
+              </ul>
+            </div>
+          </div>
+
+          
+          <div class="col-xl-3 col-md-6">
+            <div class="footer-widget widget-contact wow fadeInUp" data-wow-delay=".7s">
+              <h5 class="title">Our Office</h5>
+              <div class="footer-contact-info">
+                <div class="contact-item">
+                  <span>Salem, Tamilnadu, India.</span>
+                </div>
+                <div class="contact-item">
+                  <a href="tel:9876543210">P: 9876543210</a>
+                  <a href="mailto:info@stackly.com">M: info@stackly.com</a>
+                </div>
+                <div class="contact-item">
+                  <span><i class="fa-regular fa-clock"></i> Mon–Fri 10am–10pm</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="footer-bottom-area">
+      <div class="container">
+        <div class="row align-items-end gy-4">
+
+          <div class="col-lg-3">
+            <div class="award-logo-area wow fadeInUp" data-wow-delay=".3s">
+              <div class="award-logo"><img src="/images/footer/award-logo-white-1.webp" alt="Award 1" /></div>
+              <div class="award-logo"><img src="/images/footer/award-logo-white-2.webp" alt="Award 2" /></div>
+            </div>
+          </div>
+
+          <div class="col-lg-9">
+            <div class="footer-widget widget-subscribe-2 wow fadeInUp" data-wow-delay=".5s">
+              <h3 class="title">Subscribe to Our Newsletter.</h3>
+              <div class="subscribe-form">
+                <form action="#" novalidate>
+                  <input type="email" placeholder="Enter your email" name="email" required />
+                  <button type="submit" aria-label="Subscribe"><i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+                <label for="footer-agree">
+                  <input id="footer-agree" type="checkbox" required />
+                  Agree to our <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="tj-copyright-area-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="copyright-content-area">
+              <div class="copyright-text">
+                <p>© 2025 STACKLY. All rights reserved.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

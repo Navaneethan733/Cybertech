@@ -1,0 +1,162 @@
+
+:root {
+  --creative-primary: #00f2ff; 
+  --creative-secondary: #080a12; 
+  --creative-accent: #0044ff; 
+  --creative-glass-bg: rgba(0, 242, 255, 0.03);
+  --creative-glass-border: rgba(0, 242, 255, 0.15);
+  --creative-glass-blur: blur(15px);
+  --creative-glow: 0 0 15px rgba(0, 242, 255, 0.4);
+  --cyber-grid: radial-gradient(circle, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
+}
+
+
+.creative-cursor {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: var(--creative-primary);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease-out;
+}
+
+.creative-cursor-ring {
+  position: fixed;
+  width: 35px;
+  height: 35px;
+  border: 1.5px solid var(--creative-primary);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.creative-cursor-ring.active {
+  transform: scale(2);
+  background: rgba(0, 212, 255, 0.1);
+  border-color: transparent;
+}
+
+
+.header-area.header-3 {
+  background: var(--creative-glass-bg) !important;
+  backdrop-filter: var(--creative-glass-blur) !important;
+  border-bottom: 1px solid var(--creative-glass-border) !important;
+}
+
+.hamburger_wrapper {
+  background: var(--creative-secondary) !important;
+  backdrop-filter: var(--creative-glass-blur);
+}
+
+.choose-box.style-2, .service-item.style-3 {
+  background: var(--creative-glass-bg) !important;
+  backdrop-filter: var(--creative-glass-blur);
+  border: 1px solid var(--creative-glass-border) !important;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.choose-box.style-2::before, .service-item.style-3::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: var(--cyber-grid);
+  background-size: 20px 20px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.choose-box.style-2:hover, .service-item.style-3:hover {
+  border-color: var(--creative-primary) !important;
+  box-shadow: var(--creative-glow), inset 0 0 20px rgba(0, 242, 255, 0.1);
+  transform: translateY(-8px) scale(1.02);
+}
+
+
+.sec-title, .banner-title {
+  background: linear-gradient(135deg, #fff 30%, var(--creative-primary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sub-title {
+  color: var(--creative-primary) !important;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700 !important;
+}
+
+
+.tj-primary-btn {
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.tj-primary-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: 0.5s;
+}
+
+.tj-primary-btn:hover::before {
+  left: 100%;
+}
+
+.tj-primary-btn:hover {
+  box-shadow: var(--creative-glow);
+  transform: scale(1.05);
+}
+
+
+@keyframes cyber-pulse {
+  0% { filter: drop-shadow(0 0 2px var(--creative-primary)); }
+  50% { filter: drop-shadow(0 0 10px var(--creative-primary)); }
+  100% { filter: drop-shadow(0 0 2px var(--creative-primary)); }
+}
+
+.choose-icon i, .service-icon i {
+  animation: cyber-pulse 2s infinite ease-in-out;
+  color: var(--creative-primary) !important;
+}
+
+.tj-banner-section-2 {
+  position: relative;
+}
+
+.tj-banner-section-2::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  background-size: 100% 4px, 3px 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+
+.creative-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--creative-primary), var(--creative-accent));
+  box-shadow: 0 0 10px var(--creative-primary);
+  z-index: 10000;
+  width: 0%;
+}
+
+
+a, button, .scroll-down {
+  cursor: none !important;
+}

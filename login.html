@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Login & Signup — STACKLY</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/pages.css"/>
+  <style>
+    .auth-section { padding: 120px 0; background-color: var(--c-bg-light); min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; }
+    .auth-section::before { content:''; position:absolute; top:-20%; left:-10%; width:50%; height:50%; background:radial-gradient(circle, rgba(42,157,143,0.1) 0%, rgba(255,255,255,0) 70%); z-index:0; }
+    .auth-section::after { content:''; position:absolute; bottom:-20%; right:-10%; width:50%; height:50%; background:radial-gradient(circle, rgba(42,157,143,0.1) 0%, rgba(255,255,255,0) 70%); z-index:0; }
+    .auth-card { position: relative; z-index: 1; background: #fff; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.08); overflow: hidden; display: flex; flex-direction: column; }
+    @media (min-width: 768px) { .auth-card { flex-direction: row; } }
+    .auth-side { background: linear-gradient(135deg, var(--c-bg), var(--c-bg-light)); padding: 60px 40px; display: flex; align-items: center; justify-content: center; position: relative; border-right: 1px solid var(--c-border); }
+    .auth-side::before { content:''; position:absolute; inset:0; background: url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="1.5" fill="%238b5cf6" fill-opacity="0.15"/></svg>') repeat; z-index:0; }
+    .auth-side-content { position: relative; z-index: 1; max-width: 320px; text-align: center; }
+    .auth-logo { margin-bottom: 30px; display:inline-block; }
+    .auth-logo img { width: 160px; height: auto; }
+    .auth-title { font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: var(--c-text); margin-bottom: 16px; }
+    .auth-desc { font-size: 0.95rem; color: var(--c-text-2); line-height: 1.6; }
+    .auth-form-wrap { padding: 50px 40px; background: #fff; width: 100%; }
+    .auth-tabs { display: flex; border-bottom: 2px solid var(--c-border); margin-bottom: 30px; }
+    .auth-tab { flex: 1; background: none; border: none; padding: 15px 0; font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; color: var(--c-text-2); cursor: pointer; transition: all 0.3s; position: relative; text-align: center; }
+    .auth-tab::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background: var(--c-accent); transform: scaleX(0); transition: transform 0.3s var(--ease-out); transform-origin: center; }
+    .auth-tab.active { color: var(--c-accent); }
+    .auth-tab.active::after { transform: scaleX(1); }
+    .auth-form-content { display: none; animation: fadeIn 0.4s ease; }
+    .auth-form-content.active { display: block; }
+    .form-heading { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--c-text); margin-bottom: 24px; }
+    .form-field { margin-bottom: 20px; }
+    .form-label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--c-text); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .form-control-custom { width: 100%; padding: 14px 20px; border: 1.5px solid var(--c-border); border-radius: 8px; background: #f8f9fa; font-size: 0.95rem; color: var(--c-text); transition: all 0.3s; }
+    .form-control-custom:focus { border-color: var(--c-accent); background: #fff; outline: none; box-shadow: 0 0 0 4px rgba(42,157,143,0.1); }
+    
+    /* CUSTOM SELECT FOR MOBILE RESPONSIVENESS */
+    .form-select-custom { 
+        width: 100%; padding: 14px 20px; border: 1.5px solid var(--c-border); border-radius: 8px; 
+        background: #f8f9fa url('data:image/svg+xml;utf8,<svg fill="%238b5cf6" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 15px center; 
+        background-size: 18px; font-size: 0.95rem; color: var(--c-text); transition: all 0.3s; 
+        -webkit-appearance: none; -moz-appearance: none; appearance: none; cursor: pointer;
+    }
+    .form-select-custom:focus { border-color: var(--c-accent); background-color: #fff; outline: none; box-shadow: 0 0 0 4px rgba(42,157,143,0.1); }
+    
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 767px) {
+        .auth-section { padding: 100px 0 60px; align-items: flex-start; }
+        .auth-side { padding: 40px 20px; border-right: none; border-bottom: 1px solid var(--c-border); }
+        .auth-form-wrap { padding: 40px 20px; }
+    }
+  </style>
+</head>
+<body>
+  
+  
+  
+  <div id="cyber-preloader" class="cyber-preloader">
+    <div class="loader-content">
+      <div class="cyber-logo-glitch" data-text="STACKLY">STACKLY</div>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar"></div>
+      </div>
+      <div class="loader-text">INITIALIZING SECURE CONNECTION... <span class="loader-pct">0%</span></div>
+    </div>
+  </div>
+  <div class="creative-scroll-progress"></div>
+  <div id="tj-back-to-top" style="opacity:0;transform:scale(0.7);pointer-events:none;"><span id="tj-back-to-top-percentage">↑</span></div>
+  
+  <div class="body-overlay"></div>
+
+  <div class="tj-offcanvas-area d-none d-lg-block">
+    <div class="hamburger_bg"></div>
+    <div class="hamburger_wrapper">
+      <div class="hamburger_inner">
+        <div class="hamburger_top d-flex align-items-center justify-content-between">
+          <div class="hamburger_logo">
+            <a class="mobile_logo" href="/"><img src="/images/logos/logo-2.webp" alt="STACKLY Logo" /></a>
+          </div>
+          <div class="hamburger_close">
+            <button class="hamburger_close_btn" aria-label="Close menu"><i class="fa-solid fa-times"></i></button>
+          </div>
+        </div>
+        <div class="offcanvas-text">
+          <p>Developing personalized customer journeys to increase satisfaction &amp; loyalty — recognized by industry leaders.</p>
+        </div>
+        <div class="hamburger-infos">
+          <h5 class="hamburger-title">Contact Info</h5>
+          <div class="contact-info">
+            <div class="contact-item"><span class="subtitle">Phone</span><a class="contact-link" href="tel:9876543210">9876543210</a></div>
+            <div class="contact-item"><span class="subtitle">Email</span><a class="contact-link" href="mailto:info@stackly.com">info@stackly.com</a></div>
+            <div class="contact-item"><span class="subtitle">Location</span><span class="contact-link">Salem, Tamilnadu, India</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hamburger-area d-lg-none">
+    <div class="hamburger_bg"></div>
+    <div class="hamburger_wrapper">
+      <div class="hamburger_inner">
+        <div class="hamburger_top d-flex align-items-center justify-content-between">
+          <div class="hamburger_logo">
+            <a class="mobile_logo" href="/"><img src="/images/logos/logo-2.webp" alt="STACKLY Logo" /></a>
+          </div>
+          <div class="hamburger_close">
+            <button class="hamburger_close_btn" aria-label="Close menu"><i class="fa-solid fa-times"></i></button>
+          </div>
+        </div>
+        <nav class="hamburger_menu">
+          <ul class="mean-nav-list" style="list-style:none;padding:0;">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about.html">About</a></li>
+            <li><a href="/services.html">Services</a></li>
+            <li><a href="/blog.html">Blog</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="hamburger-infos">
+          <h5 class="hamburger-title">Contact Info</h5>
+          <div class="contact-info">
+            <div class="contact-item"><span class="subtitle">Phone</span><a class="contact-link" href="tel:9876543210">9876543210</a></div>
+            <div class="contact-item"><span class="subtitle">Email</span><a class="contact-link" href="mailto:info@stackly.com">info@stackly.com</a></div>
+            <div class="contact-item"><span class="subtitle">Location</span><span class="contact-link">Salem, Tamilnadu, India</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="header-area header-3 section-gap-x header-absolute">
+    <div class="header-top">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="header-top-content">
+              <p class="topbar-text">
+                <i class="fa-solid fa-shield-halved"></i>
+                Recognized for Excellence —
+                <a href="/login.html">Login</a>
+              </p>
+              <div class="header-info">
+                <div class="info-item">
+                  <span><i class="fa-solid fa-phone"></i></span>
+                  <a href="tel:9876543210">9876543210</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="header-wrapper">
+            <div class="site_logo">
+              <a class="logo" href="/"><img src="/images/logos/logo.webp" alt="STACKLY" width="544" height="152" /></a>
+            </div>
+            <div class="menu-area d-none d-lg-inline-flex align-items-center">
+              <nav class="mainmenu">
+                <ul>
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/about.html">About</a></li>
+                  <li><a href="/services.html">Services</a></li>
+                  <li><a href="/blog.html">Blog</a></li>
+                  <li><a href="/contact.html">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class="header-right-item d-none d-lg-inline-flex">
+              <div class="header-button">
+                <a class="tj-primary-btn" href="/contact.html">
+                  <span class="btn-text"><span>Let's Talk</span></span>
+                  <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+              </div>
+            </div>
+            <div class="menu_bar mobile_menu_bar d-lg-none" aria-label="Open mobile menu">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <header class="header-area header-3 section-gap-x header-duplicate header-sticky">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="header-wrapper">
+            <div class="site_logo">
+              <a class="logo" href="/"><img src="/images/logos/logo.webp" alt="STACKLY" width="544" height="152" /></a>
+            </div>
+            <div class="menu-area d-none d-lg-inline-flex align-items-center">
+              <nav class="mainmenu">
+                <ul>
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/about.html">About</a></li>
+                  <li><a href="/services.html">Services</a></li>
+                  <li><a href="/blog.html">Blog</a></li>
+                  <li><a href="/contact.html">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class="header-right-item d-none d-lg-inline-flex">
+              <div class="header-button">
+                <a class="tj-primary-btn" href="/contact.html">
+                  <span class="btn-text"><span>Let's Talk</span></span>
+                  <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+              </div>
+            </div>
+            <div class="menu_bar mobile_menu_bar d-lg-none" aria-label="Open mobile menu">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="auth-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xl-9 col-lg-10">
+            <div class="auth-card wow fadeInUp" data-wow-delay=".2s">
+              <div class="row g-0">
+                
+                <div class="col-md-5 auth-side">
+                  <div class="auth-side-content">
+                    <div class="auth-logo">
+                      <a href="/"><img src="/images/logos/logo.webp" alt="STACKLY" /></a>
+                    </div>
+                    <h2 class="auth-title">Secure Portal</h2>
+                    <p class="auth-desc">Log in to STACKLY to monitor your digital assets, analyze threat intelligence, and manage your cybersecurity posture.</p>
+                  </div>
+                </div>
+                
+                <div class="col-md-7 auth-form-wrap">
+                  <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">Log In</button>
+                    <button class="auth-tab" data-tab="signup">Sign Up</button>
+                  </div>
+                  
+                  
+                  <div id="login-tab" class="auth-form-content active">
+                    <h3 class="form-heading">Welcome Back</h3>
+                    <form onsubmit="event.preventDefault(); var type = this.querySelector('select').value; var id = this.querySelector('input[type=\'text\']').value; localStorage.setItem('loginId', id); window.location.href = type === 'admin' ? '/admin-dashboard.html' : '/user-dashboard.html';">
+                      <div class="form-field">
+                        <label class="form-label">Account Type</label>
+                        <select class="form-select-custom" required>
+                          <option value="admin">Admin</option>
+                          <option value="user">User</option>
+                        </select>
+                      </div>
+                      <div class="form-field">
+                        <label class="form-label">User ID / Email</label>
+                        <input class="form-control-custom" type="text" placeholder="Enter your ID or Email" required />
+                      </div>
+                      <div class="form-field">
+                        <label class="form-label">Password</label>
+                        <input class="form-control-custom" type="password" placeholder="••••••••" required />
+                      </div>
+                      <div class="form-actions d-flex justify-content-between align-items-center mb-4 mt-2">
+                        <label class="d-flex align-items-center gap-2 m-0" style="cursor:pointer">
+                          <input type="checkbox" checked /> <span style="font-size: 0.85rem; color: var(--c-text-2);">Remember me</span>
+                        </label>
+                        <a href="#" class="forgot-link" style="font-size: 0.85rem; color: var(--c-accent); font-weight: 600; text-decoration: none;">Forgot Password?</a>
+                      </div>
+                      <button type="submit" class="tj-primary-btn w-100" style="border:none; cursor:pointer;">
+                        <span class="btn-text"><span>Secure Sign In</span></span>
+                        <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
+                      </button>
+                    </form>
+                  </div>
+
+                  
+                  <div id="signup-tab" class="auth-form-content">
+                    <h3 class="form-heading">Create Account</h3>
+                    <form onsubmit="event.preventDefault(); var fname = this.querySelector('input[placeholder=\'First Name\']').value; localStorage.setItem('loginId', fname); window.location.href='/user-dashboard.html';">
+                      <div class="row g-3">
+                        <div class="col-md-6 form-field">
+                          <label class="form-label">First Name</label>
+                          <input class="form-control-custom" type="text" placeholder="First Name" required />
+                        </div>
+                        <div class="col-md-6 form-field">
+                          <label class="form-label">Last Name</label>
+                          <input class="form-control-custom" type="text" placeholder="Last Name" required />
+                        </div>
+                      </div>
+                      <div class="form-field mt-3">
+                        <label class="form-label">Email Address</label>
+                        <input class="form-control-custom" type="email" placeholder="name@company.com" required />
+                      </div>
+                      <div class="form-field mt-3">
+                        <label class="form-label">Password</label>
+                        <input class="form-control-custom" type="password" placeholder="Create a secure password" required />
+                      </div>
+                      <button type="submit" class="tj-primary-btn w-100 mt-4" style="border:none; cursor:pointer;">
+                        <span class="btn-text"><span>Register Now</span></span>
+                        <span class="btn-icon"><i class="fa-solid fa-user-plus"></i></span>
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="tj-footer-section footer-3 section-gap-x" style="margin-top: 0; border-top: 1px solid var(--c-border)">
+    <div class="footer-main-area">
+      <div class="container">
+        <div class="row justify-content-between gy-5">
+          <div class="col-xl-3 col-md-6">
+            <div class="footer-widget footer-col-1">
+              <div class="footer-logo"><a href="/"><img src="/images/logos/logo-2.webp" alt="STACKLY" /></a></div>
+              <div class="footer-text"><p>STACKLY provides elite cybersecurity solutions, protecting global enterprises with advanced threat intelligence and proactive defense.</p></div>
+              <div class="social-links style-3">
+                <ul>
+                  <li><a href="https://www.facebook.com/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>
+                  <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></li>
+                  <li><a href="https://x.com/" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a></li>
+                  <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="footer-widget footer-col-2 widget-nav-menu">
+              <h5 class="title">Services</h5>
+              <ul>
+                <li><a href="404.html">Pentesting</a></li>
+                <li><a href="404.html">SOC Monitoring</a></li>
+                <li><a href="404.html">Cloud Security</a></li>
+                <li><a href="404.html">Forensics</a></li>
+                <li><a href="404.html">Infrastructure</a></li>
+                <li><a href="404.html">Customer Experience</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="footer-widget footer-col-3 widget-nav-menu">
+              <h5 class="title">Resources</h5>
+              <ul>
+                <li><a href="contact.html">Contact us</a></li>
+                <li><a href="about.html">Team Members</a></li>
+                <li><a href="about.html">Recognitions</a></li>
+                <li><a href="contact.html">Careers <span class="badge">New</span></a></li>
+                <li><a href="blog.html">News</a></li>
+                <li><a href="contact.html">Feedback</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="footer-widget widget-contact">
+              <h5 class="title">Our Office</h5>
+              <div class="footer-contact-info">
+                <div class="contact-item"><span>Salem, Tamilnadu, India.</span></div>
+                <div class="contact-item"><a href="tel:9876543210">P: 9876543210</a><a href="mailto:info@stackly.com">M: info@stackly.com</a></div>
+                <div class="contact-item"><span><i class="fa-regular fa-clock"></i> Mon–Fri 10am–10pm</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom-area">
+      <div class="container">
+        <div class="row align-items-end gy-4">
+          <div class="col-lg-3">
+            <div class="award-logo-area">
+              <div class="award-logo"><img src="/images/footer/award-logo-white-1.webp" alt="Award 1" /></div>
+              <div class="award-logo"><img src="/images/footer/award-logo-white-2.webp" alt="Award 2" /></div>
+            </div>
+          </div>
+          <div class="col-lg-9">
+            <div class="footer-widget widget-subscribe-2">
+              <h3 class="title">Subscribe to Our Newsletter.</h3>
+              <div class="subscribe-form">
+                <form action="#" novalidate>
+                  <input type="email" placeholder="Enter your email" name="email" required />
+                  <button type="submit" aria-label="Subscribe"><i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+                <label for="footer-agree">
+                  <input id="footer-agree" type="checkbox" required />
+                  Agree to our <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tj-copyright-area-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="copyright-content-area">
+              <div class="copyright-text">
+                <p>© 2025 STACKLY. All rights reserved.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabs = document.querySelectorAll('.auth-tab');
+      const contents = document.querySelectorAll('.auth-form-content');
+      
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          contents.forEach(c => c.classList.remove('active'));
+          
+          tab.classList.add('active');
+          document.getElementById(tab.dataset.tab + '-tab').classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
