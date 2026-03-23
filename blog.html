@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Blog — STACKLY Cyber Security</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -11,7 +12,9 @@
   <link rel="stylesheet" href="css/style.css"/>
   <link rel="stylesheet" href="css/pages.css"/>
   <style>
-    /* Featured post */
+    /* =============================================
+       FEATURED POST
+    ============================================= */
     .featured-post{background:#fff;border:1.5px solid var(--c-border);border-radius:var(--r-xl);overflow:hidden;display:grid;grid-template-columns:55% 45%;transition:border-color .35s,transform .35s var(--ease-out),box-shadow .35s}
     .featured-post:hover{border-color:var(--c-accent);transform:translateY(-4px);box-shadow:var(--shadow-md)}
     .featured-post-img{overflow:hidden}
@@ -22,22 +25,25 @@
     .featured-cat{font-family:var(--font-head);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--c-accent);background:var(--c-accent-bg);padding:3px 10px;border-radius:var(--r-pill);display:inline-block;margin-bottom:10px}
     .featured-title{font-family:var(--font-display);font-size:1.5rem;font-weight:800;color:var(--c-text);line-height:1.25;margin-bottom:12px}
     .featured-title a{color:inherit;transition:color .25s}.featured-title a:hover{color:var(--c-accent)}
-    .featured-meta{display:flex;align-items:center;gap:16px;font-family:var(--font-head);font-size:.75rem;font-weight:600;color:var(--c-text-3);margin-bottom:16px}
+    .featured-meta{display:flex;align-items:center;flex-wrap:wrap;gap:12px 16px;font-family:var(--font-head);font-size:.75rem;font-weight:600;color:var(--c-text-3);margin-bottom:16px}
     .featured-meta span{display:flex;align-items:center;gap:5px}
     .featured-excerpt{font-size:.875rem;color:var(--c-text-2);line-height:1.78;margin-bottom:20px}
-    /* Sidebar */
+
+    /* =============================================
+       SIDEBAR
+    ============================================= */
     .sidebar-widget{background:#fff;border:1.5px solid var(--c-border);border-radius:var(--r-xl);padding:24px;margin-bottom:20px}
     .sidebar-widget-title{font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--c-text);margin-bottom:18px;padding-bottom:12px;border-bottom:1.5px solid var(--c-border);position:relative}
     .sidebar-widget-title::after{content:'';position:absolute;bottom:-2px;left:0;width:28px;height:2px;background:var(--c-accent);border-radius:2px}
     .sidebar-search{display:flex;background:var(--c-bg);border:1.5px solid var(--c-border);border-radius:var(--r-lg);overflow:hidden;transition:border-color .25s}
     .sidebar-search:focus-within{border-color:var(--c-accent)}
     .sidebar-search input{flex:1;background:transparent;border:none;outline:none;padding:11px 14px;font-family:var(--font-body);font-size:.86rem;color:var(--c-text)}
-    .sidebar-search button{background:var(--c-accent);border:none;padding:0 16px;color:#fff;cursor:pointer;transition:background .25s}
+    .sidebar-search button{background:var(--c-accent);border:none;padding:0 16px;color:#fff;cursor:pointer;transition:background .25s;flex-shrink:0}
     .sidebar-search button:hover{background:var(--c-accent-dk)}
     .cat-item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:var(--r-md);font-family:var(--font-head);font-size:.84rem;font-weight:600;color:var(--c-text-2);cursor:pointer;transition:background .22s,color .22s}
     .cat-item:hover{background:var(--c-accent-bg);color:var(--c-accent)}
     .cat-item.active{background:var(--c-accent);color:#fff}
-    .cat-count{font-size:.7rem;font-weight:700;background:var(--c-border);color:var(--c-text-3);padding:2px 8px;border-radius:var(--r-pill);transition:background .22s,color .22s}
+    .cat-count{font-size:.7rem;font-weight:700;background:var(--c-border);color:var(--c-text-3);padding:2px 8px;border-radius:var(--r-pill);transition:background .22s,color .22s;white-space:nowrap}
     .cat-item:hover .cat-count{background:var(--c-accent-lt);color:var(--c-accent)}
     .cat-item.active .cat-count{background:rgba(255,255,255,.25);color:#fff}
     .recent-post{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--c-border)}
@@ -48,7 +54,10 @@
     .recent-post-title a{color:inherit;transition:color .22s}.recent-post-title a:hover{color:var(--c-accent)}
     .recent-post-date{font-family:var(--font-head);font-size:.68rem;font-weight:600;color:var(--c-text-3);display:flex;align-items:center;gap:4px}
     .tag-cloud{display:flex;flex-wrap:wrap;gap:8px}
-    /* Newsletter box */
+
+    /* =============================================
+       NEWSLETTER WIDGET
+    ============================================= */
     .nl-widget{background:var(--c-accent);border-radius:var(--r-xl);padding:24px;text-align:center}
     .nl-widget-title{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:8px}
     .nl-widget-desc{font-size:.82rem;color:rgba(255,255,255,.82);margin-bottom:16px}
@@ -57,19 +66,135 @@
     .nl-input:focus{border-color:#fff}.nl-input::placeholder{color:rgba(255,255,255,.5)}
     .nl-btn{background:#fff;border:none;border-radius:var(--r-lg);padding:11px;font-family:var(--font-head);font-size:.82rem;font-weight:700;color:var(--c-accent);cursor:pointer;transition:background .25s,color .25s}
     .nl-btn:hover{background:var(--c-accent-dk);color:#fff}
-    /* Filter tabs */
+
+    /* =============================================
+       FILTER TABS
+    ============================================= */
     .filter-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
-    .filter-tab{font-family:var(--font-head);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:7px 18px;border-radius:var(--r-pill);border:1.5px solid var(--c-border);background:#fff;color:var(--c-text-2);cursor:pointer;transition:background .25s,border-color .25s,color .25s}
+    .filter-tab{font-family:var(--font-head);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:7px 18px;border-radius:var(--r-pill);border:1.5px solid var(--c-border);background:#fff;color:var(--c-text-2);cursor:pointer;transition:background .25s,border-color .25s,color .25s;white-space:nowrap}
     .filter-tab:hover,.filter-tab.active{background:var(--c-accent);border-color:var(--c-accent);color:#fff}
-    @media(max-width:991px){.featured-post{grid-template-columns:1fr}}
-    @media(max-width:767px){.featured-post-body{padding:22px 18px}.featured-title{font-size:1.2rem}}
+
+    /* =============================================
+       PAGINATION
+    ============================================= */
+    .pagination-wrap{display:flex;gap:8px;flex-wrap:wrap;margin-top:36px}
+    .page-btn{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:var(--r-md);border:1.5px solid var(--c-border);background:#fff;font-family:var(--font-head);font-size:.86rem;font-weight:700;color:var(--c-text-2);cursor:pointer;transition:background .25s,border-color .25s,color .25s}
+    .page-btn:hover,.page-btn.active{background:var(--c-accent);border-color:var(--c-accent);color:#fff}
+
+    /* =============================================
+       MOBILE — ≤ 991px (tablet)
+    ============================================= */
+    @media(max-width:991px){
+      /* Featured post: stack image above body */
+      .featured-post{grid-template-columns:1fr}
+      .featured-post-img img{min-height:240px;max-height:300px}
+
+      /* Hero stat cards: keep 2-col grid but reduce padding */
+      .hero-stat-card{padding:16px 12px}
+      .hero-stat-num{font-size:1.6rem}
+
+      /* Page hero: reduce padding */
+      .page-hero{padding:100px 0 48px}
+
+      /* Sidebar moves below on mobile — Bootstrap handles col-lg-4 → col-12
+         but we give it top spacing */
+      .col-lg-4 > .wow{margin-top:0}
+    }
+
+    /* =============================================
+       MOBILE — ≤ 767px (large phone / small tablet)
+    ============================================= */
+    @media(max-width:767px){
+      /* Featured post body */
+      .featured-post-body{padding:22px 18px}
+      .featured-title{font-size:1.2rem}
+      .featured-excerpt{font-size:.84rem}
+      .featured-meta{gap:8px 12px;font-size:.72rem}
+
+      /* Filter tabs: allow horizontal scroll so they don't wrap badly */
+      .filter-tabs{
+        flex-wrap:nowrap;
+        overflow-x:auto;
+        -webkit-overflow-scrolling:touch;
+        padding-bottom:6px;
+        scrollbar-width:none;
+        margin-right:-16px; /* bleed to edge */
+        padding-right:16px;
+      }
+      .filter-tabs::-webkit-scrollbar{display:none}
+      .filter-tab{flex-shrink:0;padding:6px 14px;font-size:.72rem}
+
+      /* Blog cards: full width on small phones */
+      .col-md-6{width:100%}
+
+      /* Pagination */
+      .pagination-wrap{gap:6px}
+      .page-btn{width:36px;height:36px;font-size:.8rem}
+
+      /* Page hero */
+      .page-hero{padding:90px 0 40px}
+      .page-hero-title{font-size:clamp(1.6rem,6vw,2.4rem) !important}
+      .page-hero-desc{font-size:.9rem}
+
+      /* Hero stat grid: 2 cols but tighter */
+      .hero-stat-card{padding:14px 10px;border-radius:var(--r-lg)}
+      .hero-stat-num{font-size:1.5rem}
+      .hero-stat-label{font-size:.72rem}
+
+      /* Section headings */
+      .sec-title{font-size:clamp(1.4rem,5vw,2rem)}
+
+      /* Feature cards in "Trending Topics" section */
+      .feature-card{padding:20px 18px}
+
+      /* Author cards */
+      .col-lg-3.col-md-6{width:50%}
+    }
+
+    /* =============================================
+       MOBILE — ≤ 480px (small phone)
+    ============================================= */
+    @media(max-width:480px){
+      /* Featured post image shorter on tiny screens */
+      .featured-post-img img{min-height:180px}
+      .featured-post-body{padding:18px 16px}
+      .featured-title{font-size:1.1rem}
+
+      /* Hero stat cards: 2×2 stays but even tighter */
+      .hero-stat-num{font-size:1.3rem}
+      .hero-stat-label{font-size:.65rem}
+
+      /* Author cards: full width */
+      .col-lg-3.col-md-6{width:100%}
+
+      /* CTA strip */
+      .cta-strip-title{font-size:clamp(1.3rem,5vw,1.8rem)}
+      .cta-strip-desc{font-size:.85rem}
+
+      /* Sidebar widgets: reduce padding */
+      .sidebar-widget{padding:18px 16px}
+
+      /* Filter tabs: smaller */
+      .filter-tab{padding:5px 12px;font-size:.68rem}
+
+      /* Blog card body */
+      .blog-card-body{padding:16px}
+      .blog-card-title a{font-size:.9rem}
+
+      /* Recent posts: slightly compact */
+      .recent-post-img{width:50px;height:50px}
+
+      /* Page hero */
+      .page-hero{padding:80px 0 32px}
+      .page-hero-badge{font-size:.7rem}
+    }
   </style>
 </head>
 <body>
 
   
-  
-  
+
+
   <div id="cyber-preloader" class="cyber-preloader">
     <div class="loader-content">
       <div class="cyber-logo-glitch" data-text="STACKLY">STACKLY</div>
@@ -118,7 +243,7 @@
           <h5 class="hamburger-title">Contact Info</h5>
           <div class="contact-info">
             <div class="contact-item"><span class="subtitle">Phone</span><a class="contact-link" href="tel:9876543210">9876543210</a></div>
-            <div class="contact-item"><span class="subtitle">Email</span><a class="contact-link" href="mailto:info@stackly.com">info@stackly.com</a></div>
+            <div class="contact-item"><span class="subtitle">Email</span><a class="contact-link" href="/cdn-cgi/l/email-protection#563f38303916252237353d3a2f7835393b"><span class="__cf_email__" data-cfemail="86efe8e0e9c6f5f2e7e5edeaffa8e5e9eb">[email&#160;protected]</span></a></div>
             <div class="contact-item"><span class="subtitle">Location</span><span class="contact-link">Salem, Tamilnadu, India</span></div>
           </div>
         </div>
@@ -167,7 +292,7 @@
           <h5 class="hamburger-title">Contact Info</h5>
           <div class="contact-info">
             <div class="contact-item"><span class="subtitle">Phone</span><a class="contact-link" href="tel:9876543210">9876543210</a></div>
-            <div class="contact-item"><span class="subtitle">Email</span><a class="contact-link" href="mailto:info@stackly.com">info@stackly.com</a></div>
+            <div class="contact-item"><span class="subtitle">Email</span><a class="contact-link" href="/cdn-cgi/l/email-protection#bfd6d1d9d0ffcccbdedcd4d3c691dcd0d2"><span class="__cf_email__" data-cfemail="0f666169604f7c7b6e6c646376216c6062">[email&#160;protected]</span></a></div>
             <div class="contact-item"><span class="subtitle">Location</span><span class="contact-link">Salem, Tamilnadu, India</span></div>
           </div>
         </div>
@@ -372,7 +497,7 @@
       <div class="container">
         <div class="row gy-5">
           
-          <div class="col-lg-8">
+          <div class="col-lg-8 order-1">
             <div class="wow fadeInUp" data-wow-delay=".1s">
               <div class="filter-tabs">
                 <button class="filter-tab active">All Posts</button>
@@ -400,7 +525,7 @@
             </div>
           </div>
           
-          <div class="col-lg-4">
+          <div class="col-lg-4 order-2">
             <div class="wow fadeInRight" data-wow-delay=".2s">
               <div class="sidebar-widget">
                 <div class="sidebar-widget-title">Search</div>
@@ -556,7 +681,7 @@
                 </div>
                 <div class="contact-item">
                   <a href="tel:9876543210">P: 9876543210</a>
-                  <a href="mailto:info@stackly.com">M: info@stackly.com</a>
+                  <a href="/cdn-cgi/l/email-protection#1d74737b725d6e697c7e767164337e7270">M: <span class="__cf_email__" data-cfemail="046d6a626b44777065676f687d2a676b69">[email&#160;protected]</span></a>
                 </div>
                 <div class="contact-item">
                   <span><i class="fa-regular fa-clock"></i> Mon–Fri 10am–10pm</span>
@@ -608,7 +733,7 @@
           <div class="col-12">
             <div class="copyright-content-area">
               <div class="copyright-text">
-                <p>© 2025 STACKLY. All rights reserved.</p>
+                <p>© 2025 STACKLY. All right                <p>© 2025 STACKLY. All rights reserved.</p>
               </div>
             </div>
           </div>
@@ -617,8 +742,149 @@
     </div>
 
   </footer>
+
+  <!-- Scripts — same stack as index.html -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.1.4/swiper-bundle.min.js"></script>
-  <script src="js/script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <script>
+    /* =============================================
+       PRELOADER — matches blog's own IDs/classes:
+       #cyber-preloader  .loader-bar  .loader-pct
+    ============================================= */
+    (function () {
+      const pre = document.getElementById('cyber-preloader');
+      if (!pre) return;
+      const bar = pre.querySelector('.loader-bar');
+      const pct = pre.querySelector('.loader-pct');
+      let p = 0;
+      const iv = setInterval(function () {
+        p += Math.random() * 20;
+        if (p >= 100) { p = 100; clearInterval(iv); }
+        if (bar) bar.style.width = p + '%';
+        if (pct) pct.textContent = Math.floor(p) + '%';
+        if (p >= 100) {
+          setTimeout(function () {
+            pre.style.opacity = '0';
+            pre.style.transition = 'opacity 0.5s ease';
+            setTimeout(function () {
+              pre.style.display = 'none';
+            }, 500);
+          }, 200);
+        }
+      }, 50);
+
+      /* Safety net: force-dismiss after 4s no matter what */
+      setTimeout(function () {
+        pre.style.opacity = '0';
+        pre.style.transition = 'opacity 0.5s ease';
+        setTimeout(function () { pre.style.display = 'none'; }, 500);
+      }, 4000);
+    })();
+
+    /* =============================================
+       WOW.JS — scroll animations
+    ============================================= */
+    new WOW({ offset: 80, mobile: false }).init();
+
+    /* =============================================
+       BACK TO TOP
+    ============================================= */
+    (function () {
+      var btn = document.getElementById('tj-back-to-top');
+      if (!btn) return;
+      window.addEventListener('scroll', function () {
+        if (window.scrollY > 400) {
+          btn.style.opacity = '1';
+          btn.style.transform = 'scale(1)';
+          btn.style.pointerEvents = 'auto';
+        } else {
+          btn.style.opacity = '0';
+          btn.style.transform = 'scale(0.7)';
+          btn.style.pointerEvents = 'none';
+        }
+      });
+      btn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    })();
+
+    /* =============================================
+       SCROLL PROGRESS BAR
+    ============================================= */
+    (function () {
+      var bar = document.querySelector('.creative-scroll-progress');
+      if (!bar) return;
+      window.addEventListener('scroll', function () {
+        var pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+        bar.style.width = pct + '%';
+      });
+    })();
+
+    /* =============================================
+       MOBILE MENU (hamburger)
+    ============================================= */
+    (function () {
+      var bars   = document.querySelectorAll('.menu_bar, .mobile_menu_bar');
+      var closes = document.querySelectorAll('.hamburger_close_btn');
+      var area   = document.querySelector('.hamburger-area');
+      var overlay= document.querySelector('.body-overlay');
+
+      function openMenu() {
+        if (area) area.classList.add('open');
+        if (overlay) overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeMenu() {
+        if (area) area.classList.remove('open');
+        if (overlay) overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      bars.forEach(function (b) { b.addEventListener('click', openMenu); });
+      closes.forEach(function (c) { c.addEventListener('click', closeMenu); });
+      if (overlay) overlay.addEventListener('click', closeMenu);
+    })();
+
+    /* =============================================
+       FILTER TABS (blog posts)
+    ============================================= */
+    (function () {
+      var tabs = document.querySelectorAll('.filter-tab');
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          tabs.forEach(function (t) { t.classList.remove('active'); });
+          tab.classList.add('active');
+        });
+      });
+    })();
+
+    /* =============================================
+       PAGINATION BUTTONS
+    ============================================= */
+    (function () {
+      var btns = document.querySelectorAll('.page-btn');
+      btns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          btns.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+        });
+      });
+    })();
+
+    /* =============================================
+       STICKY HEADER on scroll
+    ============================================= */
+    (function () {
+      var sticky = document.querySelector('.header-sticky');
+      if (!sticky) return;
+      window.addEventListener('scroll', function () {
+        sticky.classList.toggle('header-fixed', window.scrollY > 100);
+      });
+    })();
+  </script>
+
 </body>
 </html>
