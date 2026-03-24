@@ -1715,7 +1715,7 @@ a.tj-primary-btn {
 .page-hero::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(-45deg,transparent,transparent 28px,rgba(42,157,143,.04) 28px,rgba(42,157,143,.04) 29px);pointer-events:none;z-index:0}
 .page-hero .container{position:relative;z-index:1}
 .page-hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--c-accent-bg);border:1.5px solid var(--c-accent-lt);border-radius:var(--r-pill);padding:6px 16px;font-family:var(--font-head);font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--c-accent);margin-bottom:20px}
-.page-hero-title{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;color:var(--c-text);letter-spacing:-.03em;margin-bottom:18px;line-height:1.1}
+.page-hero-title{font-family:var(--font-display);font-size:clamp(1.75rem,5vw,3.8rem);font-weight:800;color:var(--c-text);letter-spacing:-.03em;margin-bottom:18px;line-height:1.25}
 .page-hero-desc{font-size:1rem;color:var(--c-text-2);max-width:580px;line-height:1.78;margin-bottom:0}
 .breadcrumb-bar{display:flex;align-items:center;gap:8px;margin-top:22px;font-family:var(--font-head);font-size:.78rem;font-weight:600}
 .breadcrumb-bar a{color:var(--c-accent);transition:color .2s}.breadcrumb-bar a:hover{color:var(--c-accent-dk)}
@@ -1732,7 +1732,7 @@ a.tj-primary-btn {
 
 .cta-strip{background:var(--c-accent);padding:80px 0}
 .cta-strip-inner{background:var(--c-accent);border-radius:var(--r-xl);padding:60px 48px}
-.cta-strip-title{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;color:#fff;margin-bottom:14px;line-height:1.15}
+.cta-strip-title{font-family:var(--font-display);font-size:clamp(1.6rem,3.5vw,2.6rem);font-weight:800;color:#fff;margin-bottom:14px;line-height:1.25}
 .cta-strip-desc{font-size:.95rem;color:rgba(255,255,255,.82);line-height:1.72;margin-bottom:0}
 .btn-white{background:#fff!important;border-color:#fff!important;color:var(--c-accent)!important}
 .btn-white::before{background:var(--c-accent-dk)!important}

@@ -60,13 +60,18 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
 body {
   background: var(--c-bg);
   color: var(--c-text);
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.65;
-  overflow-x: hidden;
 }
 
 img { max-width: 100%; display: block; }
@@ -95,7 +100,7 @@ ul  { list-style: none; padding: 0; margin: 0; }
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   color: var(--c-text);
-  line-height: 1.1;
+  line-height: 1.25;
   letter-spacing: -0.02em;
 }
 
