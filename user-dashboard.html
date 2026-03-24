@@ -42,6 +42,8 @@
       --shadow-glow: 0 0 28px rgba(42,157,143,0.12);
       --shadow-md:   0 16px 48px rgba(0,0,0,0.12);
       --sidebar-w:   258px;
+      --c-text-3:    #8986a8;
+      --font-head:    'Exo 2', sans-serif;
     }
 
     /* ============================================================
@@ -117,6 +119,7 @@
 
     /* ---- SIDEBAR ---- */
     .dash-sidebar {
+      
       width: var(--sidebar-w); flex-shrink: 0;
       background: var(--c-bg2);
       border-right: 1px solid var(--c-border);
@@ -237,6 +240,7 @@
       font-family: var(--font-display);
       font-size: 1rem; font-weight: 800; color: var(--c-text);
     }
+    .dash-topbar-logo img { height: 28px; width: auto; display: block; }
     .dash-topbar-actions { display: flex; align-items: center; gap: 10px; }
 
     .dash-icon-btn {
@@ -588,18 +592,19 @@
       .dash-stat-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 1023px) {
-      .dash-sidebar { transform: translateX(-100%); }
+      .dash-sidebar {
+       transform: translateX(-100%); }
       .dash-sidebar.open { transform: translateX(0); }
       .dash-main { margin-left: 0; }
-      .dash-sidebar-toggle { display: flex; }
-      .dash-topbar { padding: 14px 20px 14px 60px; }
+      .dash-sidebar-toggle { display: none; }
+      .dash-topbar { padding: 14px 20px; }
       .dash-content { padding: 20px; }
     }
     @media (max-width: 767px) {
       .dash-stat-grid { grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
       .dash-stat-value { font-size: 1.6rem; }
       .dash-content { padding: 16px; }
-      .dash-topbar { padding: 12px 16px 12px 56px; }
+      .dash-topbar { padding: 12px 16px; }
       .dash-topbar-title { font-size: 0.9rem; }
       .dash-card-header { padding: 14px 16px; }
       .dash-table th, .dash-table td { padding: 10px 12px; }
@@ -712,8 +717,8 @@
     }
     .loader-pct { color: #2a9d8f; }
     @media (max-width: 767px) {
-      .dash-topbar { padding: 16px !important; flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; height: auto !important; }
-      .dash-topbar-actions { width: 100%; justify-content: flex-start !important; flex-wrap: wrap !important; }
+      .dash-topbar { padding: 12px 16px !important; flex-direction: row !important; align-items: center !important; justify-content: space-between !important; }
+      .dash-topbar-actions { width: auto !important; }
     }
   </style>
 </head>
@@ -729,257 +734,33 @@
   </div>
 
   <!-- ===================== MAIN ===================== -->
-  <div class="body-overlay"></div>
-
-  
-  <div class="tj-offcanvas-area d-none d-lg-block">
-    <div class="hamburger_bg"></div>
-    <div class="hamburger_wrapper">
-      <div class="hamburger_inner">
-        <div class="hamburger_top d-flex align-items-center justify-content-between">
-          <div class="hamburger_logo">
-            <a class="mobile_logo" href="index.html"><img src="images/logos/logo-2.webp" alt="STACKLY Logo" /></a>
-          </div>
-          <div class="hamburger_close">
-            <button class="hamburger_close_btn" aria-label="Close menu"><i class="fa-solid fa-times"></i></button>
-          </div>
-        </div>
-
-        <div class="offcanvas-text">
-          <p>Developing personalized customer journeys to increase satisfaction &amp; loyalty — recognized by industry leaders.</p>
-        </div>
-
-        <div class="hamburger-search-area">
-          <h5 class="hamburger-title">Search Now!</h5>
-          <div class="hamburger_search">
-            <form action="index.html" method="get">
-              <button type="submit"><i class="fa-solid fa-search"></i></button>
-              <input type="search" autocomplete="off" placeholder="Search here..." name="s" />
-            </form>
-          </div>
-        </div>
-
-        <div class="hamburger-infos">
-          <h5 class="hamburger-title">Contact Info</h5>
-          <div class="contact-info">
-            <div class="contact-item"><span class="subtitle">Phone</span><a class="contact-link" href="tel:9876543210">9876543210</a></div>
-            <div class="contact-item"><span class="subtitle">Email</span><a class="contact-link" href="mailto:info@stackly.com">info@stackly.com</a></div>
-            <div class="contact-item"><span class="subtitle">Location</span><span class="contact-link">Salem, Tamilnadu, India</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="hamburger-socials">
-        <h5 class="hamburger-title">Follow Us</h5>
-        <div class="social-links style-3">
-          <ul>
-            <li><a href="https://www.facebook.com/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>
-            <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></li>
-            <li><a href="https://x.com/" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a></li>
-            <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  
-  <div class="hamburger-area d-lg-none">
-    <div class="hamburger_bg"></div>
-    <div class="hamburger_wrapper">
-      <div class="hamburger_inner">
-        <div class="hamburger_top d-flex align-items-center justify-content-between">
-          <div class="hamburger_logo">
-            <a class="mobile_logo" href="index.html"><img src="images/logos/logo-2.webp" alt="STACKLY Logo" /></a>
-          </div>
-          <div class="hamburger_close">
-            <button class="hamburger_close_btn" aria-label="Close menu"><i class="fa-solid fa-times"></i></button>
-          </div>
-        </div>
-
-        <nav class="hamburger_menu">
-          <ul class="mean-nav-list" style="list-style:none;padding:0;">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="login.html">Login</a></li>
-          </ul>
-        </nav>
-
-        <div class="hamburger-infos">
-          <h5 class="hamburger-title">Contact Info</h5>
-          <div class="contact-info">
-            <div class="contact-item"><span class="subtitle">Phone</span><a class="contact-link" href="tel:9876543210">9876543210</a></div>
-            <div class="contact-item"><span class="subtitle">Email</span><a class="contact-link" href="mailto:info@stackly.com">info@stackly.com</a></div>
-            <div class="contact-item"><span class="subtitle">Location</span><span class="contact-link">Salem, Tamilnadu, India</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="hamburger-socials">
-        <h5 class="hamburger-title">Follow Us</h5>
-        <div class="social-links style-3">
-          <ul>
-            <li><a href="https://www.facebook.com/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>
-            <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></li>
-            <li><a href="https://x.com/" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a></li>
-            <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  
-
-  
-  <header class="header-area header-3 section-gap-x ">
-
-    
-    <div class="header-top">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <div class="header-top-content">
-              <p class="topbar-text">
-                <i class="fa-solid fa-shield-halved"></i>
-                Recognized for Excellence —
-                <a href="login.html">Login</a>
-              </p>
-              <div class="header-info">
-                <div class="info-item">
-                  <span><i class="fa-solid fa-location-dot"></i></span>
-                  <a href="#">Find a Location!</a>
-                </div>
-                <div class="info-item">
-                  <span><i class="fa-solid fa-phone"></i></span>
-                  <a href="tel:9876543210">9876543210</a>
-                </div>
-                <div class="info-item">
-                  <div class="social-links style-2">
-                    <ul>
-                      <li><a href="https://www.facebook.com/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></li>
-                      <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></li>
-                      <li><a href="https://x.com/" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a></li>
-                      <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12">
-          <div class="header-wrapper">
-
-            
-            <div class="site_logo">
-              <a class="logo" href="index.html"><img src="images/logos/logo.webp" alt="STACKLY" width="544" height="152" /></a>
-            </div>
-
-            
-            <div class="menu-area d-none d-lg-inline-flex align-items-center">
-              <nav class="mainmenu">
-                <ul>
-                  <li class="current-menu-ancestor">
-                    <a href="index.html">Home</a>
-                  </li>
-                  <li>
-                    <a href="about.html">About</a>
-                  </li>
-                  <li>
-                    <a href="services.html">Services</a>
-                  </li>
-                  <li>
-                    <a href="blog.html">Blog</a>
-                  </li>
-                  <li><a href="contact.html">Contact</a></li>
-                </ul>
-              </nav>
-            </div>
-
-            
-            <div class="header-right-item d-none d-lg-inline-flex">
-              <div class="header-button">
-                <a class="tj-primary-btn" href="login.html">
-                  <span class="btn-text"><span>Login</span></span>
-                  <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
-                </a>
-              </div>
-            </div>
-
-            
-            <div class="menu_bar mobile_menu_bar d-lg-none" aria-label="Open mobile menu">
-              <span></span><span></span><span></span>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  
-  <header class="header-area header-3 section-gap-x header-duplicate header-sticky">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12">
-          <div class="header-wrapper">
-            <div class="site_logo">
-              <a class="logo" href="index.html"><img src="images/logos/logo.webp" alt="STACKLY" width="544" height="152" /></a>
-            </div>
-            <div class="menu-area d-none d-lg-inline-flex align-items-center">
-              <nav class="mainmenu">
-                <ul>
-                  <li class="current-menu-ancestor"><a href="index.html">Home</a></li>
-                  <li><a href="about.html">About</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="contact.html">Contact</a></li>
-                </ul>
-              </nav>
-            </div>
-            <div class="header-right-item d-none d-lg-inline-flex">
-              <div class="header-button">
-                <a class="tj-primary-btn" href="contact.html">
-                  <span class="btn-text"><span>Let's Talk</span></span>
-                  <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
-                </a>
-              </div>
-            </div>
-            <div class="menu_bar mobile_menu_bar d-lg-none"><span></span><span></span><span></span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
+  <div class="body-overlay" id="dashOverlay"></div>
   <div class="dash-main" style="margin-left: 0;">
 
     <!-- TOPBAR -->
     <header class="dash-topbar">
-      <div>
-        <div class="dash-topbar-title">Security Dashboard</div>
-        <div style="font-size:.72rem;color:var(--c-text3);font-family:var(--font-mono);margin-top:2px"
-             id="profileNameTopbar">Welcome back, John — Last login: Today 09:14 AM</div>
+      <div class="d-flex align-items-center gap-3">
+        <a href="index.html" class="dash-topbar-logo">
+          <img src="images/logos/logo.webp" alt="STACKLY">
+        </a>
+        <div>
+          <div class="dash-topbar-title">Security Dashboard</div>
+          <div style="font-size:.75rem;color:var(--c-text-3);font-family:var(--font-head)" id="profileNameTopbar">
+            Welcome back, Admin John &mdash; STACKLY Command Center
+          </div>
+        </div>
       </div>
       <div class="dash-topbar-actions">
+        <a class="tj-primary-btn" href="admin-dashboard.html" style="padding:8px 16px;font-size:.78rem">
+          <span class="btn-text"><span>Admin View</span></span>
+          <span class="btn-icon"><i class="fa-solid fa-user-shield"></i></span>
+        </a>
         <button class="dash-icon-btn" aria-label="Notifications">
           <i class="fa-solid fa-bell"></i><div class="notif-dot"></div>
         </button>
-        <button class="dash-icon-btn" aria-label="Messages">
-          <i class="fa-solid fa-envelope"></i><div class="notif-dot"></div>
-        </button>
-        <img src="images/testimonial/client-1.webp"
-             style="width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid var(--c-border2);cursor:pointer"
-             alt="Profile" onerror="this.style.display='none'"/>
+        <img src="images/team/team-1-big.webp"
+             style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--c-border);cursor:pointer;object-position:top"
+             alt="Admin" onerror="this.src='images/testimonial/client-1.webp'"/>
       </div>
     </header>
 

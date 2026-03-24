@@ -884,6 +884,29 @@
         sticky.classList.toggle('header-fixed', window.scrollY > 100);
       });
     })();
+
+    /* =============================================
+       TYPED HEADLINE ANIMATION
+    ============================================= */
+    (function () {
+      var elements = document.querySelectorAll('.title-anim');
+      elements.forEach(function (el) {
+        var original = el.textContent.trim();
+        var chars    = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*';
+        var iteration  = 0;
+        var interval = setInterval(function () {
+          el.textContent = original.split('').map(function (letter, idx) {
+            if (idx < iteration) return letter;
+            return letter === ' ' ? ' ' : chars[Math.floor(Math.random() * chars.length)];
+          }).join('');
+          if (iteration >= original.length) {
+            el.textContent = original; // Ensure final exact text
+            clearInterval(interval);
+          }
+          iteration += 1 / 2.5;
+        }, 35);
+      });
+    })();
   </script>
 
 </body>
